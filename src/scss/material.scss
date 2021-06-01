@@ -1,0 +1,17 @@
+@use '~@angular/material' as mat;
+@include mat.core();
+
+$uranus-pm-front-primary: mat.define-palette(mat.$blue-palette);
+$uranus-pm-front-accent: mat.define-palette(mat.$blue-palette, A200, A100, A400);
+$uranus-pm-front-warn: mat.define-palette(mat.$red-palette);
+
+$primary: mat.get-color-from-palette($uranus-pm-front-primary, A100);
+
+$uranus-pm-front-theme: mat.define-light-theme((
+  color: (
+    primary: $uranus-pm-front-primary,
+    accent: $uranus-pm-front-accent,
+    warn: $uranus-pm-front-warn,
+  )
+));
+@include mat.all-component-themes($uranus-pm-front-theme);
