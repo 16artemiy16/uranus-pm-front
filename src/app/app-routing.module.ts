@@ -5,6 +5,10 @@ const routes: Routes = [
   {
     path: 'guest',
     loadChildren: () => import('./modules/guest-user/guest-user.module').then((m) => m.GuestUserModule)
+  },
+  {
+    path: '**',
+    redirectTo: 'guest'
   }
 ];
 
