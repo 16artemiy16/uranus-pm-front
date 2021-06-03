@@ -1,25 +1,33 @@
-<form>
+<form [formGroup]="signUpForm">
   <h1>Sign Up</h1>
 
   <mat-form-field>
     <mat-label>Email</mat-label>
     <mat-icon matSuffix>alternate_email</mat-icon>
-    <input matInput type="text">
+    <input matInput type="text" formControlName="email">
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Password</mat-label>
     <mat-icon matSuffix>password</mat-icon>
-    <input matInput type="password">
+    <input matInput type="password" formControlName="password">
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Password again</mat-label>
     <mat-icon matSuffix>password</mat-icon>
-    <input matInput type="password">
+    <input matInput type="password" formControlName="passwordAgain">
   </mat-form-field>
 
-  <button mat-raised-button color="primary">Sign Up</button>
+  <mat-checkbox formControlName="termsOfService">I am agree with the <a routerLink="">Terms of Service</a></mat-checkbox>
+
+  <ul class="validation-steps">
+    <li *ngFor="let step of steps" [class.success]="step.isSuccess$ | async">
+      <span class="checkmark">✓</span> {{ step.title }}
+    </li>
+  </ul>
+
+  <button mat-raised-button color="primary" [disabled]="!(areStepsPassed$ | async)">Sign Up</button>
   <div class="or">or</div>
   <a routerLink="../sign-in">
     <button mat-raised-button color="primary">Sign In</button>

@@ -1,3 +1,5 @@
+@import "~src/scss/material";
+
 :host {
   height: 100vh;
   display: flex;
@@ -11,13 +13,31 @@ form {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  width: 250px;
+  width: 300px;
 
-  mat-form-field, button, a {
+  mat-form-field, button, a, mat-checkbox {
     width: 100%;
   }
 
-  .or {
-    margin: 0.5em;
+  button {
+    margin: 1em 0;
+  }
+
+  .validation-steps {
+    width: 100%;
+    color: $grey;
+    list-style: none;
+    padding: 0;
+    li {
+      .checkmark {
+        visibility: hidden;
+      }
+      &.success {
+        .checkmark {
+          visibility: visible;
+        }
+        color: $success;
+      }
+    }
   }
 }
