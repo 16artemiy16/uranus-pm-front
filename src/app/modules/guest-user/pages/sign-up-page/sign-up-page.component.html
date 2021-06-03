@@ -27,7 +27,14 @@
     </li>
   </ul>
 
-  <button mat-raised-button color="primary" [disabled]="!(areStepsPassed$ | async)">Sign Up</button>
+  <button
+    mat-raised-button
+    color="primary"
+    [disabled]="!(areStepsPassed$ | async)"
+    (click)="signUp()"
+  >
+    Sign Up
+  </button>
   <div class="or">or</div>
   <a routerLink="../sign-in">
     <button mat-raised-button color="primary">Sign In</button>

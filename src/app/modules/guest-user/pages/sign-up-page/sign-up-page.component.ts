@@ -1,7 +1,13 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { distinctUntilChanged, map } from 'rxjs/operators';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  map,
+  switchMap,
+} from 'rxjs/operators';
 import { combineLatest, Observable, of } from 'rxjs';
+import { UserService } from '../../../../services/user.service';
 
 @Component({
   selector: 'app-sign-up-page',
@@ -34,8 +40,12 @@ export class SignUpPageComponent {
       title: 'Email is not occupied',
       isSuccess$: this.signUpForm.controls.email.statusChanges
         .pipe(
-          distinctUntilChanged(),
-          map((a) => a === 'VALID')
+          debounceTime(500),
+          switchMap((validity) => {
+            return validity === 'INVALID'
+              ? of(false)
+              : this.userService.isEmailFree(this.signUpForm.controls.email.value)
+          })
         )
     },
     {
@@ -64,6 +74,11 @@ export class SignUpPageComponent {
   );
 
   constructor(
-    private readonly fb: FormBuilder
+    private readonly fb: FormBuilder,
+    private readonly userService: UserService
   ) { }
+
+  signUp() {
+    this.userService.isEmailFree(this.signUpForm.get('email')?.value).subscribe(a => console.log('isFree', a));
+  }
 }
