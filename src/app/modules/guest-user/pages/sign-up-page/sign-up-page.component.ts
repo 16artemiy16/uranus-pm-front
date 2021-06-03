@@ -2,9 +2,9 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import {
   debounceTime,
-  distinctUntilChanged,
+  distinctUntilChanged, filter,
   map,
-  switchMap,
+  switchMap, take,
 } from 'rxjs/operators';
 import { combineLatest, Observable, of } from 'rxjs';
 import { UserService } from '../../../../services/user.service';
@@ -79,6 +79,19 @@ export class SignUpPageComponent {
   ) { }
 
   signUp() {
-    this.userService.isEmailFree(this.signUpForm.get('email')?.value).subscribe(a => console.log('isFree', a));
+    this.userService
+      .isEmailFree(this.signUpForm.get('email')?.value)
+      .pipe(
+        take(1),
+        filter(Boolean),
+        switchMap(() => {
+          const { email: emailControl, password: passwordControl } = this.signUpForm.controls;
+          return this.userService.signUp({
+            email: emailControl.value,
+            password: passwordControl.value
+          });
+        })
+      )
+      .subscribe();
   }
 }

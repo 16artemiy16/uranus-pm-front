@@ -17,4 +17,9 @@ export class UserService {
     const url = `${this.URL}/users/email_is_free/${email}`;
     return this.http.get<boolean>(url);
   }
+
+  signUp(data: { email: string, password: string }) {
+    const url = `${this.URL}/users`;
+    return this.http.post(url, data);
+  }
 }
