@@ -1,6 +1,5 @@
 <form [formGroup]="signInForm">
-  <h1>Sign In</h1>
-
+  <h1 transloco="guest.SignIn"></h1>
   <mat-form-field>
     <mat-label>Email</mat-label>
     <mat-icon matSuffix>alternate_email</mat-icon>
@@ -8,11 +7,15 @@
   </mat-form-field>
 
   <mat-form-field>
-    <mat-label>Password</mat-label>
+    <mat-label transloco="guest.Password"></mat-label>
     <mat-icon matSuffix>password</mat-icon>
     <input matInput type="password" formControlName="password">
   </mat-form-field>
 
-  <button mat-raised-button color="primary" (click)="signIn()">Sign In</button>
-  <i>Or <a routerLink="../sign-up">Sign Up</a> if you have no an account!</i>
+  <button mat-raised-button color="primary" (click)="signIn()" transloco="guest.SignIn"></button>
+  <span>
+    {{ 'guest.textOrSignUp.or' | transloco }}
+    <a routerLink="../sign-up">{{ 'guest.textOrSignUp.SignUp' | transloco }}</a>
+    {{ 'guest.textOrSignUp.ifYou' | transloco }}
+  </span>
 </form>

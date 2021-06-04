@@ -27,11 +27,11 @@ export class SignUpPageComponent {
 
   readonly steps: { title: string, isSuccess$: Observable<boolean> }[] = [
     {
-      title: 'Terms of Service accepted',
+      title: 'guest.steps.TermsAccepted',
       isSuccess$: this.signUpForm.controls.termsOfService.valueChanges,
     },
     {
-      title: 'Email is filled',
+      title: 'guest.steps.EmailFilled',
       isSuccess$: this.signUpForm.controls.email.statusChanges
         .pipe(
           distinctUntilChanged(),
@@ -39,7 +39,7 @@ export class SignUpPageComponent {
         )
     },
     {
-      title: 'Email is not occupied',
+      title: 'guest.steps.EmailFree',
       isSuccess$: this.signUpForm.controls.email.statusChanges
         .pipe(
           debounceTime(500),
@@ -51,7 +51,7 @@ export class SignUpPageComponent {
         )
     },
     {
-      title: 'Password contains at least 6 characters',
+      title: 'guest.steps.PasswordChars',
       isSuccess$: this.signUpForm.controls.password.statusChanges
         .pipe(
           distinctUntilChanged(),
@@ -59,7 +59,7 @@ export class SignUpPageComponent {
         )
     },
     {
-      title: 'Password is repeated',
+      title: 'guest.steps.PasswordsMatch',
       isSuccess$: combineLatest([
         this.signUpForm.controls.password.valueChanges,
         this.signUpForm.controls.passwordAgain.valueChanges

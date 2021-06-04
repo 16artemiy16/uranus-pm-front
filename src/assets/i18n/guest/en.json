@@ -1,0 +1,24 @@
+{
+  "hello": "hello",
+  "OR": "OR",
+  "SignUp": "Sign Up",
+  "SignIn": "Sign In",
+  "Password": "Password",
+  "PasswordAgain": "Password again",
+  "textOrSignUp": {
+    "or": "Or",
+    "SignUp": "Sign Up",
+    "ifYou": "if you already have an account"
+  },
+  "textTermsAgreement": {
+    "Iam": "I am agree with the",
+    "TermsOfService": "Terms of Service"
+  },
+  "steps": {
+    "TermsAccepted": "Terms of Service accepted",
+    "EmailFilled": "Email is filled",
+    "EmailFree": "Email is not occupied",
+    "PasswordChars": "Password contains at least 6 characters",
+    "PasswordsMatch": "Passwords match"
+  }
+}

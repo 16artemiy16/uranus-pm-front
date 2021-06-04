@@ -1,0 +1,24 @@
+{
+  "hello": "здравствуйте",
+  "OR": "ИЛИ",
+  "SignUp": "Регистрация",
+  "SignIn": "Вход",
+  "Password": "Пароль",
+  "PasswordAgain": "Пароль ещё раз",
+  "textOrSignUp": {
+    "or": "Или",
+    "SignUp": "Войдите",
+    "ifYou": "если у вас уже есть аккаунт"
+  },
+  "textTermsAgreement": {
+    "Iam": "Я согласен с ",
+    "TermsOfService": "Правилами Сервиса"
+  },
+  "steps": {
+    "TermsAccepted": "Правила сервиса приняты",
+    "EmailFilled": "Email заполнен",
+    "EmailFree": "Email не занят",
+    "PasswordChars": "Пароль содержит как минимум 6 символов",
+    "PasswordsMatch": "Пароли совпадают"
+  }
+}

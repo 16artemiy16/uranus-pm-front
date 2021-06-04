@@ -10,6 +10,7 @@ import { SignUpPageComponent } from './pages/sign-up-page/sign-up-page.component
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SnackModule } from '../common/snack/snack.module';
+import { TRANSLOCO_SCOPE, TranslocoModule } from '@ngneat/transloco';
 
 
 
@@ -30,7 +31,14 @@ import { SnackModule } from '../common/snack/snack.module';
       { path: 'sign-in', component: SignInPageComponent },
       { path: 'sign-up', component: SignUpPageComponent },
       { path: '**', redirectTo: 'sign-in' },
-    ])
+    ]),
+    TranslocoModule
+  ],
+  providers: [
+    {
+      provide: TRANSLOCO_SCOPE,
+      useValue: 'guest'
+    }
   ]
 })
 export class GuestUserModule { }

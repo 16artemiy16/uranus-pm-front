@@ -1,5 +1,5 @@
 <form [formGroup]="signUpForm">
-  <h1>Sign Up</h1>
+  <h1 transloco="guest.SignUp"></h1>
 
   <mat-form-field>
     <mat-label>Email</mat-label>
@@ -8,35 +8,37 @@
   </mat-form-field>
 
   <mat-form-field>
-    <mat-label>Password</mat-label>
+    <mat-label transloco="guest.Password">Password</mat-label>
     <mat-icon matSuffix>password</mat-icon>
     <input matInput type="password" formControlName="password">
   </mat-form-field>
 
   <mat-form-field>
-    <mat-label>Password again</mat-label>
+    <mat-label transloco="guest.PasswordAgain"></mat-label>
     <mat-icon matSuffix>password</mat-icon>
     <input matInput type="password" formControlName="passwordAgain">
   </mat-form-field>
 
-  <mat-checkbox formControlName="termsOfService">I am agree with the <a routerLink="">Terms of Service</a></mat-checkbox>
+  <mat-checkbox formControlName="termsOfService">
+    {{ 'guest.textTermsAgreement.Iam' | transloco}}
+    <a routerLink="">{{ 'guest.textTermsAgreement.TermsOfService' | transloco }}</a>
+  </mat-checkbox>
 
   <ul class="validation-steps">
     <li *ngFor="let step of steps" [class.success]="step.isSuccess$ | async">
-      <span class="checkmark">✓</span> {{ step.title }}
+      <span class="checkmark">✓</span> {{ step.title | transloco }}
     </li>
   </ul>
 
   <button
+    transloco="guest.SignUp"
     mat-raised-button
     color="primary"
     [disabled]="!(areStepsPassed$ | async)"
     (click)="signUp()"
-  >
-    Sign Up
-  </button>
-  <div class="or">or</div>
+  ></button>
+  <div class="or" transloco="guest.OR"></div>
   <a routerLink="../sign-in">
-    <button mat-raised-button color="primary">Sign In</button>
+    <button mat-raised-button color="primary" transloco="guest.SignIn"></button>
   </a>
 </form>

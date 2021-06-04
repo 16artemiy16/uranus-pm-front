@@ -11,13 +11,13 @@ form {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  width: 250px;
+  width: 300px;
 
   mat-form-field, button {
     width: 100%;
   }
 
-  i {
+  span {
     margin-top: 0.5em;
   }
 }
