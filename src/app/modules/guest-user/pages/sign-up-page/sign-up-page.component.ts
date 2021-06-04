@@ -8,6 +8,8 @@ import {
 } from 'rxjs/operators';
 import { combineLatest, Observable, of } from 'rxjs';
 import { UserService } from '../../../../services/user.service';
+import { SnackService } from '../../../common/snack/snack.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up-page',
@@ -75,14 +77,15 @@ export class SignUpPageComponent {
 
   constructor(
     private readonly fb: FormBuilder,
-    private readonly userService: UserService
+    private readonly userService: UserService,
+    private readonly snack: SnackService,
+    private readonly router: Router
   ) { }
 
   signUp() {
     this.userService
       .isEmailFree(this.signUpForm.get('email')?.value)
       .pipe(
-        take(1),
         filter(Boolean),
         switchMap(() => {
           const { email: emailControl, password: passwordControl } = this.signUpForm.controls;
@@ -90,8 +93,12 @@ export class SignUpPageComponent {
             email: emailControl.value,
             password: passwordControl.value
           });
-        })
+        }),
+        take(1),
       )
-      .subscribe();
+      .subscribe(() => {
+        this.snack.success('The user successfully created!');
+        this.router.navigate(['..', 'sign-in'])
+      });
   }
 }
