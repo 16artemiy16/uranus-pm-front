@@ -6,8 +6,8 @@
   "PasswordAgain": "Пароль ещё раз",
   "textOrSignUp": {
     "or": "Или",
-    "SignUp": "Войдите",
-    "ifYou": "если у вас уже есть аккаунт"
+    "SignUp": "Зарегистрируйтесь",
+    "ifYou": "если у вас нет аккаунта"
   },
   "textTermsAgreement": {
     "Iam": "Я согласен с ",
