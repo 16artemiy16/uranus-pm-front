@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../../../services/user.service';
 import { Router } from '@angular/router';
-import { SnackService } from '../../../common/snack/snack.service';
 
 @Component({
   selector: 'app-sign-in-page',
@@ -18,20 +17,14 @@ export class SignInPageComponent {
   constructor(
     private readonly fb: FormBuilder,
     private readonly userService: UserService,
-    private readonly router: Router,
-    private readonly snack: SnackService
+    private readonly router: Router
   ) { }
 
   signIn() {
     const { email, password } = this.signInForm.getRawValue();
     this.userService.signIn(email, password)
-      .subscribe(
-        () => {
+      .subscribe(() => {
           this.router.navigate(['..', 'sign-up'])
-        },
-        () => {
-          this.snack.error('The user does not exist or password incorrect!')
-        });
+      });
   }
-
 }
