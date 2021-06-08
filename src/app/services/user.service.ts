@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import jwtDecode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,15 @@ export class UserService {
   constructor(
     private readonly http: HttpClient
   ) { }
+
+  get currentUser(): any {
+    const token = localStorage.getItem('token');
+    return token ? jwtDecode(token) : null;
+  }
+
+  get isAuthed(): boolean {
+    return !!this.currentUser;
+  }
 
   isEmailFree(email: string): Observable<boolean> {
     const url = `${this.URL}/users/email_is_free/${email}`;

@@ -24,7 +24,7 @@ export class SignInPageComponent {
     const { email, password } = this.signInForm.getRawValue();
     this.userService.signIn(email, password)
       .subscribe(() => {
-          this.router.navigate(['..', 'sign-up'])
+          this.router.navigate(['auth'])
       });
   }
 }
