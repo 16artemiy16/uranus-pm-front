@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import jwtDecode from 'jwt-decode';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ export class UserService {
   private readonly URL = 'http://localhost:3000';
 
   constructor(
-    private readonly http: HttpClient
+    private readonly http: HttpClient,
+    private readonly router: Router
   ) { }
 
   get currentUser(): any {
@@ -42,5 +44,10 @@ export class UserService {
           localStorage.setItem('token', token);
         })
       );
+  }
+
+  logOut() {
+    localStorage.removeItem('token');
+    this.router.navigate(['guest'])
   }
 }

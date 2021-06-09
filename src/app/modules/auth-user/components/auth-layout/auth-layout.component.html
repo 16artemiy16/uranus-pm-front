@@ -1,1 +1,34 @@
-<p>auth-layout works!</p>
+<mat-toolbar color="primary">
+  <span class="spacer"></span>
+
+  <div class="language" [matMenuTriggerFor]="langMenu">
+    {{ currentLang$ | async }}
+  </div>
+
+  <div class="profile-icon" [matMenuTriggerFor]="profileMenu">
+    <img
+      src="https://s3.amazonaws.com/assets.saam.media/files/styles/x_large/s3/files/images/1966/SAAM-1966.48.26_1.jpg?itok=_g0Ompts"
+      width="40"
+      height="40"
+    />
+    <mat-icon>expand_more</mat-icon>
+  </div>
+</mat-toolbar>
+
+
+<mat-menu #langMenu="matMenu">
+  <button
+    mat-menu-item
+    *ngFor="let lang of (langList$ | async)"
+    (click)="changeLang(lang)"
+  >
+    {{ lang }}
+  </button>
+</mat-menu>
+
+<mat-menu #profileMenu="matMenu">
+  <button mat-menu-item (click)="logOut()">
+    <mat-icon>logout</mat-icon>
+    <span>Log Out</span>
+  </button>
+</mat-menu>
