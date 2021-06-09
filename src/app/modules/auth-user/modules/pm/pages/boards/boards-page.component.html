@@ -1,0 +1,32 @@
+<mat-card *ngFor="let board of (boards$ | async)" class="board">
+  <mat-card-header>
+    <mat-card-title>{{ board.name }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="board__image"></div>
+    <div class="board__description">{{ board.description }}</div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button mat-stroked-button color="primary">Join</button>
+
+    <span class="flex-spacer"></span>
+
+    <button mat-icon-button>
+      <mat-icon>settings</mat-icon>
+    </button>
+    <button mat-icon-button>
+      <mat-icon>info</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>
+
+<button
+  class="add-board"
+  mat-fab
+  aria-label="Add a board"
+  matTooltip="Add a new board"
+  matTooltipPosition="left"
+  (click)="createBoard()"
+>
+  <mat-icon>add</mat-icon>
+</button>

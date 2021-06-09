@@ -1,5 +1,5 @@
 <mat-toolbar color="primary">
-  <span class="spacer"></span>
+  <span class="flex-spacer"></span>
 
   <div class="language" [matMenuTriggerFor]="langMenu">
     {{ currentLang$ | async }}
@@ -32,3 +32,5 @@
     <span>Log Out</span>
   </button>
 </mat-menu>
+
+<router-outlet></router-outlet>

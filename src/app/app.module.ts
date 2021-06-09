@@ -10,6 +10,7 @@ import { TranslocoRootModule } from './transloco/transloco-root.module';
 import { LangSwitcherComponent } from './components/lang-switcher/lang-switcher.component';
 import { InternalizationInterceptor } from './interceptors/internalization.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,11 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
       multi: true
     }
   ],

@@ -13,7 +13,12 @@ import { MatMenuModule } from '@angular/material/menu';
   imports: [
     CommonModule,
     RouterModule.forChild([
-      { path: '**', component: AuthLayoutComponent }
+      {
+        path: '', component: AuthLayoutComponent, children: [
+          { path: 'pm', loadChildren: () => import('./modules/pm/pm.module').then(m => m.PmModule) },
+          { path: '**', redirectTo: 'pm' }
+        ]
+      }
     ]),
     MatToolbarModule,
     MatIconModule,

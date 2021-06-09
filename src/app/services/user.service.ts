@@ -17,6 +17,10 @@ export class UserService {
     private readonly router: Router
   ) { }
 
+  get token(): string | null {
+    return localStorage.getItem('token');
+  }
+
   get currentUser(): any {
     const token = localStorage.getItem('token');
     return token ? jwtDecode(token) : null;
