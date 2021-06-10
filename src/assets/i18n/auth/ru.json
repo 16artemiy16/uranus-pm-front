@@ -1,0 +1,15 @@
+{
+  "LogOut": "Выйти",
+  "Join": "Войти",
+  "Info": "Инфо",
+  "Settings": "Настройки",
+  "AddBoard": "Добавить доску",
+  "boardModal": {
+    "NewBoard": "Новая доска",
+    "Name": "Имя",
+    "Description": "Описание",
+    "descriptionHint": "Дополнительно: короткое описание",
+    "Create": "Создать",
+    "Cancel": "Отмена"
+  }
+}

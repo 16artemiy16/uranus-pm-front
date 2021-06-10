@@ -1,0 +1,15 @@
+{
+  "LogOut": "Log Out",
+  "Join": "Join",
+  "Info": "Info",
+  "Settings": "Settings",
+  "AddBoard": "Add a new board",
+  "boardModal": {
+    "NewBoard": "New board",
+    "Name": "Name",
+    "Description": "Description",
+    "descriptionHint": "Optional: short description",
+    "Create": "Create",
+    "Cancel": "Cancel"
+  }
+}

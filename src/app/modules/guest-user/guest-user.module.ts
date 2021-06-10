@@ -9,7 +9,6 @@ import { SignInPageComponent } from './pages/sign-in-page/sign-in-page.component
 import { SignUpPageComponent } from './pages/sign-up-page/sign-up-page.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ReactiveFormsModule } from '@angular/forms';
-import { SnackModule } from '../common/snack/snack.module';
 import { TRANSLOCO_SCOPE, TranslocoModule } from '@ngneat/transloco';
 
 

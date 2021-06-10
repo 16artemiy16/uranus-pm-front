@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import { TRANSLOCO_SCOPE, TranslocoModule } from '@ngneat/transloco';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,14 @@ import { MatMenuModule } from '@angular/material/menu';
     ]),
     MatToolbarModule,
     MatIconModule,
-    MatMenuModule
+    MatMenuModule,
+    TranslocoModule
+  ],
+  providers: [
+    {
+      provide: TRANSLOCO_SCOPE,
+      useValue: 'auth'
+    }
   ]
 })
 export class AuthUserModule { }

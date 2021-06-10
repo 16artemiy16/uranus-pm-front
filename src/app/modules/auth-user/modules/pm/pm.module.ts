@@ -11,6 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
+import { TRANSLOCO_SCOPE, TranslocoModule } from '@ngneat/transloco';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,14 @@ import { MatCardModule } from '@angular/material/card';
     RouterModule.forChild([
       { path: 'boards', component: BoardsPageComponent },
       { path: '**', redirectTo: 'boards' }
-    ])
+    ]),
+    TranslocoModule
+  ],
+  providers: [
+    {
+      provide: TRANSLOCO_SCOPE,
+      useValue: 'auth'
+    }
   ]
 })
 export class PmModule { }

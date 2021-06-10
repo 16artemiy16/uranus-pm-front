@@ -1,16 +1,16 @@
-<h1 mat-dialog-title>New board</h1>
+<h1 mat-dialog-title>{{ 'auth.boardModal.NewBoard' | transloco }}</h1>
 
 <div mat-dialog-content class="dialog-content">
   <form [formGroup]="boardForm">
     <mat-form-field appearance="legacy">
-      <mat-label>Name *</mat-label>
+      <mat-label>{{ 'auth.boardModal.Name' | transloco }} *</mat-label>
       <input matInput formControlName="name">
     </mat-form-field>
 
     <mat-form-field appearance="legacy">
-      <mat-label>Description</mat-label>
+      <mat-label>{{ 'auth.boardModal.Description' | transloco }}</mat-label>
       <textarea matInput formControlName="description"></textarea>
-      <mat-hint>Optional: short description</mat-hint>
+      <mat-hint>{{ 'auth.boardModal.descriptionHint' | transloco }}</mat-hint>
     </mat-form-field>
   </form>
 </div>
@@ -23,8 +23,8 @@
     (click)="create()"
     [disabled]="boardForm.invalid"
   >
-    Create
+    {{ 'auth.boardModal.Create' | transloco }}
   </button>
-  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button mat-dialog-close>{{ 'auth.boardModal.Cancel' | transloco }}</button>
 </div>
 

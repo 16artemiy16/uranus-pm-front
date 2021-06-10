@@ -21,7 +21,6 @@ export class CreateBoardComponent {
   ) { }
 
   create() {
-    console.log(this.boardForm.getRawValue());
     this.boardService
       .create(this.boardForm.getRawValue())
       .subscribe((board) => {

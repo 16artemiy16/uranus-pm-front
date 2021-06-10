@@ -7,14 +7,14 @@
     <div class="board__description">{{ board.description }}</div>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button mat-stroked-button color="primary">Join</button>
+    <button mat-button mat-stroked-button color="primary">{{ 'auth.Join' | transloco }}</button>
 
     <span class="flex-spacer"></span>
 
-    <button mat-icon-button>
+    <button mat-icon-button [matTooltip]="'auth.Settings' | transloco">
       <mat-icon>settings</mat-icon>
     </button>
-    <button mat-icon-button>
+    <button mat-icon-button [matTooltip]="'auth.Info' | transloco">
       <mat-icon>info</mat-icon>
     </button>
   </mat-card-actions>
@@ -24,7 +24,7 @@
   class="add-board"
   mat-fab
   aria-label="Add a board"
-  matTooltip="Add a new board"
+  [matTooltip]="'auth.AddBoard' | transloco"
   matTooltipPosition="left"
   (click)="createBoard()"
 >
