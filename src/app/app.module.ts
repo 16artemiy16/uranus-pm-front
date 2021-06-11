@@ -6,16 +6,14 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { SnackModule } from './modules/common/snack/snack.module';
-import { TranslocoRootModule } from './transloco/transloco-root.module';
-import { LangSwitcherComponent } from './components/lang-switcher/lang-switcher.component';
+import { TranslocoRootModule } from './transloco-root.module';
 import { InternalizationInterceptor } from './interceptors/internalization.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    LangSwitcherComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,

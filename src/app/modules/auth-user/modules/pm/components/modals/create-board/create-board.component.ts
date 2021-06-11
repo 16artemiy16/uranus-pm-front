@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { BoardService } from '../../../../../../../services/board.service';
 import { SnackService } from '../../../../../../common/snack/snack.service';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
   selector: 'app-create-board',
@@ -17,14 +18,16 @@ export class CreateBoardComponent {
   constructor(
     private readonly fb: FormBuilder,
     private readonly boardService: BoardService,
-    private readonly snack: SnackService
+    private readonly snack: SnackService,
+    private readonly transloco: TranslocoService
   ) { }
 
   create() {
     this.boardService
       .create(this.boardForm.getRawValue())
-      .subscribe((board) => {
-        this.snack.success(`The board ${board.name} successfully created!`);
+      .subscribe(() => {
+        const msg = this.transloco.translate('auth.BoardCreated');
+        this.snack.success(msg);
       });
   }
 }

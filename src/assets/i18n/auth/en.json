@@ -11,5 +11,6 @@
     "descriptionHint": "Optional: short description",
     "Create": "Create",
     "Cancel": "Cancel"
-  }
+  },
+  "BoardCreated": "The board successfully created!"
 }
