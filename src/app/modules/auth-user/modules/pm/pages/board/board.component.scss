@@ -1,0 +1,32 @@
+@import "~src/scss/material";
+:host {
+  padding: 2em;
+}
+
+.back-btn {
+  margin: 2em 0;
+}
+
+.columns-list {
+  display: flex;
+
+  .column {
+    width: 400px;
+    border: 1px black solid;
+    min-height: 300px;
+    margin: 0 2em;
+    padding: 1.25em;
+    background: $column-background;
+
+    &__title {
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+
+    &__tasks {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+}

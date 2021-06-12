@@ -1,0 +1,10 @@
+<a mat-button mat-stroked-button color="primary" routerLink=".." class="back-btn"><--</a>
+
+<div class="columns-list">
+  <div *ngFor="let col of columns" class="column">
+    <p class="column__title">{{ col.name }}</p>
+    <div class="column__tasks">
+      <mat-card *ngFor="let task of col.tasks">{{ task.title }}</mat-card>
+    </div>
+  </div>
+</div>

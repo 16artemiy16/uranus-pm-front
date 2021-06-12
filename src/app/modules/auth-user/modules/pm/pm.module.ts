@@ -12,11 +12,13 @@ import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { TRANSLOCO_SCOPE, TranslocoModule } from '@ngneat/transloco';
+import { BoardComponent } from './pages/board/board.component';
 
 @NgModule({
   declarations: [
     BoardsPageComponent,
-    CreateBoardComponent
+    CreateBoardComponent,
+    BoardComponent
   ],
   imports: [
     CommonModule,
@@ -30,6 +32,7 @@ import { TRANSLOCO_SCOPE, TranslocoModule } from '@ngneat/transloco';
     ReactiveFormsModule,
     RouterModule.forChild([
       { path: 'boards', component: BoardsPageComponent },
+      { path: 'boards/:id', component: BoardComponent },
       { path: '**', redirectTo: 'boards' }
     ]),
     TranslocoModule
