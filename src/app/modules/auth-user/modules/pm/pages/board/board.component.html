@@ -1,10 +1,22 @@
 <a mat-button mat-stroked-button color="primary" routerLink=".." class="back-btn"><--</a>
 
-<div class="columns-list">
+<div class="columns-list" cdkDropListGroup>
   <div *ngFor="let col of columns" class="column">
     <p class="column__title">{{ col.name }}</p>
-    <div class="column__tasks">
-      <mat-card *ngFor="let task of col.tasks">{{ task.title }}</mat-card>
+    <div
+      class="column__tasks"
+      cdkDropList
+      [cdkDropListData]="col.tasks"
+      (cdkDropListDropped)="onDropTask($event)"
+    >
+      <mat-card
+        *ngFor="let task of col.tasks"
+        cdkDrag
+        (cdkDragStarted)="onDragToggle(true)"
+        (cdkDragReleased)="onDragToggle(false)"
+      >
+        {{ task.title }}
+      </mat-card>
     </div>
   </div>
 </div>

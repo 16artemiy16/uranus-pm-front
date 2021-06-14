@@ -3,6 +3,8 @@ import { BoardService } from '../../../../../../services/board.service';
 import { ActivatedRoute } from '@angular/router';
 import { ColumnI } from '../../interfaces/column.interface';
 import { switchMap, take } from 'rxjs/operators';
+import { CdkDragDrop, transferArrayItem, moveItemInArray } from '@angular/cdk/drag-drop';
+import { TaskI } from '../../interfaces/task.interface';
 
 @Component({
   selector: 'app-board',
@@ -31,5 +33,22 @@ export class BoardComponent implements OnInit {
         this.columns = columns.sort((a, b) => a.order - b.order);
         this.changeDetectorRef.markForCheck();
       });
+  }
+
+  onDragToggle(flag: boolean) {
+    document.body.style.setProperty('cursor', flag ? 'grabbing' : '', 'important');
+  }
+
+  onDropTask(event: CdkDragDrop<TaskI[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex)
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    }
   }
 }

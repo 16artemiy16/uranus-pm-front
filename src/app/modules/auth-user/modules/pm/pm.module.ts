@@ -13,6 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { TRANSLOCO_SCOPE, TranslocoModule } from '@ngneat/transloco';
 import { BoardComponent } from './pages/board/board.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { BoardComponent } from './pages/board/board.component';
     MatInputModule,
     MatCardModule,
     ReactiveFormsModule,
+    DragDropModule,
     RouterModule.forChild([
       { path: 'boards', component: BoardsPageComponent },
       { path: 'boards/:id', component: BoardComponent },
