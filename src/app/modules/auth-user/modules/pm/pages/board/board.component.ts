@@ -41,7 +41,10 @@ export class BoardComponent implements OnInit {
 
   onDropTask(event: CdkDragDrop<TaskI[]>) {
     if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex)
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      this.boardService
+        .moveTask(event.container.data[event.currentIndex]._id, event.currentIndex)
+        .subscribe();
     } else {
       transferArrayItem(
         event.previousContainer.data,

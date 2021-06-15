@@ -36,4 +36,9 @@ export class BoardService {
     const url = `${this.URL}/boards/${boardId}/columns`;
     return this.http.get<ColumnI[]>(url);
   }
+
+  moveTask(taskId: string, toIndex: number): Observable<boolean> {
+    const url = `${this.URL}/boards/task/${taskId}/move`;
+    return this.http.put<boolean>(url, { toIndex });
+  }
 }
