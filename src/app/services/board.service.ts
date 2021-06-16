@@ -4,8 +4,6 @@ import { UserService } from './user.service';
 import { Observable } from 'rxjs';
 import { BoardI } from '../modules/auth-user/modules/pm/interfaces/board.interface';
 import { ColumnI } from '../modules/auth-user/modules/pm/interfaces/column.interface';
-import { map, switchMap, take } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
 
 interface CreateBoardDto {
   name: string;
@@ -44,8 +42,8 @@ export class BoardService {
     return this.http.post<boolean>(url, { title, body });
   }
 
-  moveTask(taskId: string, toIndex: number): Observable<boolean> {
+  moveTask(taskId: string, toIndex: number, targetColumnId?: string): Observable<boolean> {
     const url = `${this.URL}/boards/task/${taskId}/move`;
-    return this.http.put<boolean>(url, { toIndex });
+    return this.http.put<boolean>(url, { toIndex, targetColumnId });
   }
 }

@@ -7,7 +7,7 @@
       class="column__tasks"
       cdkDropList
       [cdkDropListData]="col.tasks"
-      (cdkDropListDropped)="onDropTask($event)"
+      (cdkDropListDropped)="onDropTask($event, col._id)"
     >
       <mat-card
         *ngFor="let task of col.tasks"

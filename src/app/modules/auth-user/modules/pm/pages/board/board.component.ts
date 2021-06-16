@@ -32,7 +32,7 @@ export class BoardComponent implements OnInit {
     document.body.style.setProperty('cursor', flag ? 'grabbing' : '', 'important');
   }
 
-  onDropTask(event: CdkDragDrop<TaskI[]>) {
+  onDropTask(event: CdkDragDrop<TaskI[]>, targetColumnId: string) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
       this.boardService
@@ -45,6 +45,10 @@ export class BoardComponent implements OnInit {
         event.previousIndex,
         event.currentIndex
       );
+
+      this.boardService
+        .moveTask(event.container.data[event.currentIndex]._id, event.currentIndex, targetColumnId)
+        .subscribe();
     }
   }
 
