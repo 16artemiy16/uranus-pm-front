@@ -14,12 +14,14 @@ import { MatCardModule } from '@angular/material/card';
 import { TRANSLOCO_SCOPE, TranslocoModule } from '@ngneat/transloco';
 import { BoardComponent } from './pages/board/board.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { CreateTaskComponent } from './components/modals/create-task/create-task.component';
 
 @NgModule({
   declarations: [
     BoardsPageComponent,
     CreateBoardComponent,
-    BoardComponent
+    BoardComponent,
+    CreateTaskComponent
   ],
   imports: [
     CommonModule,

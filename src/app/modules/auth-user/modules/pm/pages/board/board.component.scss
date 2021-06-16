@@ -59,3 +59,13 @@ mat-card {
   margin-bottom: 1.5em;
   cursor: default;
 }
+
+.actions {
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+
+  .add-task {
+    background-color: $success !important;
+  }
+}

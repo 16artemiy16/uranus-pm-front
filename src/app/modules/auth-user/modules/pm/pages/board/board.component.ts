@@ -5,6 +5,8 @@ import { ColumnI } from '../../interfaces/column.interface';
 import { switchMap, take } from 'rxjs/operators';
 import { CdkDragDrop, transferArrayItem, moveItemInArray } from '@angular/cdk/drag-drop';
 import { TaskI } from '../../interfaces/task.interface';
+import { MatDialog } from '@angular/material/dialog';
+import { CreateTaskComponent } from '../../components/modals/create-task/create-task.component';
 
 @Component({
   selector: 'app-board',
@@ -18,21 +20,12 @@ export class BoardComponent implements OnInit {
   constructor(
     private readonly boardService: BoardService,
     private readonly activatedRoute: ActivatedRoute,
-    private readonly changeDetectorRef: ChangeDetectorRef
+    private readonly changeDetectorRef: ChangeDetectorRef,
+    private readonly dialog: MatDialog
   ) { }
 
   ngOnInit() {
-    this.activatedRoute.params
-      .pipe(
-        take(1),
-        switchMap((params) => {
-          return this.boardService.getBoardColumns(params.id);
-        })
-      )
-      .subscribe((columns) => {
-        this.columns = columns.sort((a, b) => a.order - b.order);
-        this.changeDetectorRef.markForCheck();
-      });
+    this.updateTasks();
   }
 
   onDragToggle(flag: boolean) {
@@ -53,5 +46,33 @@ export class BoardComponent implements OnInit {
         event.currentIndex
       );
     }
+  }
+
+  createTask() {
+    const dialogRef = this.dialog.open(CreateTaskComponent, {
+      width: '800px',
+      data: {
+        boardId: this.activatedRoute.snapshot.params.id
+      }
+    });
+    dialogRef.componentInstance.onCreate
+      .pipe(take(1))
+      .subscribe(() => {
+        this.updateTasks();
+      })
+  }
+
+  updateTasks() {
+    this.activatedRoute.params
+      .pipe(
+        take(1),
+        switchMap((params) => {
+          return this.boardService.getBoardColumns(params.id);
+        })
+      )
+      .subscribe((columns) => {
+        this.columns = columns.sort((a, b) => a.order - b.order);
+        this.changeDetectorRef.markForCheck();
+      });
   }
 }

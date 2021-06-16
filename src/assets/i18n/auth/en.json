@@ -12,5 +12,13 @@
     "Create": "Create",
     "Cancel": "Cancel"
   },
-  "BoardCreated": "The board successfully created!"
+  "BoardCreated": "The board successfully created!",
+  "CreateTask": "Create a Task",
+  "taskModal": {
+    "NewTask": "New Task",
+    "Title": "Title",
+    "Body": "Body",
+    "Create": "Create",
+    "Cancel": "Cancel"
+  }
 }

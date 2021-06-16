@@ -21,6 +21,6 @@ export class BoardsPageComponent {
   createBoard() {
     this.dialog.open(CreateBoardComponent, {
       width: '600px'
-    })
+    });
   }
 }
