@@ -1,11 +1,14 @@
 @import "~src/scss/material";
 
 :host {
-  padding: 2em;
+  height: 100vh;
+  background: beige;
+  display: flex;
+  flex-direction: column;
 }
 
 .back-btn {
-  margin: 2em 0;
+  margin: 2em 0 2em 2em;
 }
 
 .columns-list {
@@ -30,6 +33,9 @@
       display: flex;
       flex-direction: column;
       flex: 1;
+      mat-card {
+        cursor: pointer;
+      }
     }
   }
 
@@ -67,5 +73,23 @@ mat-card {
 
   .add-task {
     background-color: $success !important;
+  }
+}
+
+mat-sidenav-container {
+  height: 100%;
+}
+
+.task-sidebar {
+  width: 500px;
+  padding: 2em;
+
+  h1 {
+    text-align: center;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
   }
 }

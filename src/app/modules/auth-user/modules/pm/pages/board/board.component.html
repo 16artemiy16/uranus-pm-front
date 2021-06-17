@@ -1,36 +1,66 @@
-<a mat-button mat-stroked-button color="primary" routerLink=".." class="back-btn"><--</a>
+<mat-sidenav-container [hasBackdrop]="false" autosize scrollable>
+  <mat-sidenav-content>
+    <a mat-button mat-stroked-button color="primary" routerLink=".." class="back-btn"><--</a>
 
-<div class="columns-list" cdkDropListGroup>
-  <div *ngFor="let col of columns" class="column">
-    <p class="column__title">{{ col.name }}</p>
-    <div
-      class="column__tasks"
-      cdkDropList
-      [cdkDropListData]="col.tasks"
-      (cdkDropListDropped)="onDropTask($event, col._id)"
-    >
-      <mat-card
-        *ngFor="let task of col.tasks"
-        cdkDrag
-        (cdkDragStarted)="onDragToggle(true)"
-        (cdkDragReleased)="onDragToggle(false)"
-      >
-        {{ task.title }}
-      </mat-card>
+    <div class="columns-list" cdkDropListGroup>
+      <div *ngFor="let col of columns" class="column">
+        <p class="column__title">{{ col.name }}</p>
+        <div
+          class="column__tasks"
+          cdkDropList
+          [cdkDropListData]="col.tasks"
+          (cdkDropListDropped)="onDropTask($event, col._id)"
+        >
+          <mat-card
+            *ngFor="let task of col.tasks"
+            cdkDrag
+            (cdkDragStarted)="onDragToggle(true)"
+            (cdkDragReleased)="onDragToggle(false)"
+            (click)="toggleTaskSidebar(true, task);"
+          >
+            {{ task.title }}
+          </mat-card>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
+
+    <div class="actions">
+      <button
+        class="add-task"
+        mat-fab
+        aria-label="Add a board"
+        [matTooltip]="'auth.CreateTask' | transloco"
+        matTooltipPosition="left"
+        (click)="createTask()"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </mat-sidenav-content>
 
 
-<div class="actions">
-  <button
-    class="add-task"
-    mat-fab
-    aria-label="Add a board"
-    [matTooltip]="'auth.CreateTask' | transloco"
-    matTooltipPosition="left"
-    (click)="createTask()"
-  >
-    <mat-icon>add</mat-icon>
-  </button>
-</div>
+  <mat-sidenav #drawer mode="over" position="end" class="task-sidebar">
+    <div class="task-sidebar__actions">
+      <button mat-icon-button aria-label="Open in new tab">
+        <mat-icon>open_in_new</mat-icon>
+      </button>
+
+      <button mat-icon-button aria-label="Close task sidebar" (click)="toggleTaskSidebar(false)">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <h1>{{ selectedTask?.title }}</h1>
+    <hr/>
+    <div class="task-sidebar__dates">
+      <p>Created at: <i>{{ selectedTask?.createdAt | date }}</i></p>
+      <p>Updated at: <i>{{ selectedTask?.updatedAt | date }}</i></p>
+    </div>
+    <hr/>
+    <div>
+      {{ selectedTask?.body }}
+      <i *ngIf="!selectedTask?.body">Here is no description...</i>
+    </div>
+  </mat-sidenav>
+
+</mat-sidenav-container>
+

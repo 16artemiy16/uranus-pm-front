@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { BoardService } from '../../../../../../services/board.service';
 import { ActivatedRoute } from '@angular/router';
 import { ColumnI } from '../../interfaces/column.interface';
@@ -7,6 +7,7 @@ import { CdkDragDrop, transferArrayItem, moveItemInArray } from '@angular/cdk/dr
 import { TaskI } from '../../interfaces/task.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateTaskComponent } from '../../components/modals/create-task/create-task.component';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-board',
@@ -15,7 +16,10 @@ import { CreateTaskComponent } from '../../components/modals/create-task/create-
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BoardComponent implements OnInit {
+  @ViewChild(MatSidenav) private readonly matSidenav!: MatSidenav;
+
   columns: ColumnI[] = [];
+  selectedTask: TaskI | null = null;
 
   constructor(
     private readonly boardService: BoardService,
@@ -78,5 +82,15 @@ export class BoardComponent implements OnInit {
         this.columns = columns.sort((a, b) => a.order - b.order);
         this.changeDetectorRef.markForCheck();
       });
+  }
+
+  toggleTaskSidebar(isOpen: boolean, task?: TaskI) {
+    if (isOpen) {
+      this.selectedTask = <TaskI>task;
+      this.matSidenav.open();
+    } else {
+      this.selectedTask = null;
+      this.matSidenav.close();
+    }
   }
 }

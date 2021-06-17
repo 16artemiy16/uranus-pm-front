@@ -15,6 +15,7 @@ import { TRANSLOCO_SCOPE, TranslocoModule } from '@ngneat/transloco';
 import { BoardComponent } from './pages/board/board.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CreateTaskComponent } from './components/modals/create-task/create-task.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { CreateTaskComponent } from './components/modals/create-task/create-task
     MatFormFieldModule,
     MatInputModule,
     MatCardModule,
+    MatSidenavModule,
     ReactiveFormsModule,
     DragDropModule,
     RouterModule.forChild([
