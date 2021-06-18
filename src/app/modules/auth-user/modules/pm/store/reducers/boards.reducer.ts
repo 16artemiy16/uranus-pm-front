@@ -1,4 +1,4 @@
-import { Action, createReducer, on, State } from '@ngrx/store';
+import { Action, createReducer, on } from '@ngrx/store';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { BoardI } from '../../interfaces/board.interface';
 import { fetchBoardsSuccess } from '../actions/boards.actions';
