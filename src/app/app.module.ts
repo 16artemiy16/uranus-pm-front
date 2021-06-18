@@ -10,6 +10,8 @@ import { TranslocoRootModule } from './transloco-root.module';
 import { InternalizationInterceptor } from './interceptors/internalization.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     BrowserAnimationsModule,
     HttpClientModule,
     SnackModule,
-    TranslocoRootModule
+    TranslocoRootModule,
+    StoreModule.forRoot({}, {}),
+    EffectsModule.forRoot()
   ],
   providers: [
     {
