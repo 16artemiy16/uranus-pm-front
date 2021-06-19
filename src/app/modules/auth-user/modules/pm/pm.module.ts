@@ -17,9 +17,10 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CreateTaskComponent } from './components/modals/create-task/create-task.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { StoreModule } from '@ngrx/store';
-import * as fromBoards from './store/reducers/boards.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { BoardsEffects } from './store/effects/boards.effects';
+import { FEATURE_NAME, reducers } from './store';
+import { ColumnsEffects } from './store/effects/columns.effects';
 
 @NgModule({
   declarations: [
@@ -46,8 +47,8 @@ import { BoardsEffects } from './store/effects/boards.effects';
       { path: '**', redirectTo: 'boards' }
     ]),
     TranslocoModule,
-    StoreModule.forFeature({ name: 'boards', reducer: fromBoards.reducer }),
-    EffectsModule.forFeature([BoardsEffects])
+    StoreModule.forFeature(FEATURE_NAME, reducers),
+    EffectsModule.forFeature([BoardsEffects, ColumnsEffects])
   ],
   providers: [
     {

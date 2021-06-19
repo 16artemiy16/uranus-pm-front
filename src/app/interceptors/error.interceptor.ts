@@ -21,7 +21,11 @@ export class ErrorInterceptor implements HttpInterceptor {
       .handle(request)
       .pipe(
         catchError((error) => {
-          this.snack.error(JSON.parse(error.error).message);
+          const msg = typeof error.error === 'string'
+            ? JSON.parse(error.error).message
+            : error.error.message;
+
+          this.snack.error(msg);
           throw error;
         })
       );

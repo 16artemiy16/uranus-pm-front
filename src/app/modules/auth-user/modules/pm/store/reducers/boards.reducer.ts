@@ -19,4 +19,3 @@ const boardsReducer = createReducer(
 export function reducer(state: BoardsStateI | undefined, action: Action) {
   return boardsReducer(state, action);
 }
-
