@@ -6,7 +6,33 @@ const {
   selectAll,
 } = adapterColumns.getSelectors();
 
+export const getFilter = createSelector(
+  selectColumnsState,
+  (state) => state.filter
+);
+
 export const getAll = createSelector(
   selectColumnsState,
-  (state) => selectAll(state)
+  getFilter,
+  (state, filter) => {
+    const columns = selectAll(state);
+
+    const filterText = filter.text.trim().toLowerCase();
+
+    // If filter is empty, then just return without filtering
+    if (!filterText) {
+      return columns;
+    }
+
+    return columns.map((column) => {
+      const filteredTasks = column.tasks.filter((task) => {
+        return task.title.toLowerCase().includes(filterText);
+      });
+
+      return {
+        ...column,
+        tasks: filteredTasks
+      };
+    });
+  }
 );

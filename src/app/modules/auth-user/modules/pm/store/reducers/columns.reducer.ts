@@ -1,17 +1,25 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { ColumnI } from '../../interfaces/column.interface';
 import { Action, createReducer, on } from '@ngrx/store';
-import { fetchColumns, fetchColumnsSuccess, moveTask } from '../actions/columns.actions';
+import { fetchColumns, fetchColumnsSuccess, moveTask, setTaskFilterText } from '../actions/columns.actions';
 import { moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
-export interface ColumnsStateI extends EntityState<ColumnI> {}
+export interface ColumnsStateI extends EntityState<ColumnI> {
+  filter: {
+    text: string;
+  }
+}
 
 export const adapterColumns: EntityAdapter<ColumnI> = createEntityAdapter<ColumnI>({
   selectId: (model) => model._id,
   sortComparer: (a, b) => a.order - b.order
 });
 
-const initialState: ColumnsStateI = adapterColumns.getInitialState({});
+const initialState: ColumnsStateI = adapterColumns.getInitialState({
+  filter: {
+    text: ''
+  }
+});
 
 const {
   selectAll,
@@ -76,7 +84,11 @@ const columnsReducer = createReducer(
     });
 
     return adapterColumns.setAll(updatedColumns, state);
-  })
+  }),
+  on(setTaskFilterText, (state, { text }) => ({
+    ...state,
+    filter: { ...state.filter, text }
+  }))
 );
 
 export function reducer(state: ColumnsStateI | undefined, action: Action) {

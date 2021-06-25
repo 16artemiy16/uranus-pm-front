@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { getAll } from '../selectors/columns.selector';
-import { fetchColumns, moveTask } from '../actions/columns.actions';
+import { fetchColumns, moveTask, setTaskFilterText } from '../actions/columns.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -19,5 +19,9 @@ export class ColumnsSandbox {
 
   fetchColumns(boardId: string) {
     this.store.dispatch(fetchColumns({ boardId }));
+  }
+
+  setTaskFilterText(text: string) {
+    this.store.dispatch(setTaskFilterText({ text }));
   }
 }

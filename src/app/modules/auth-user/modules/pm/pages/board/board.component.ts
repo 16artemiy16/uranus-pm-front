@@ -1,15 +1,16 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { BoardService } from '../../../../../../services/board.service';
 import { ActivatedRoute } from '@angular/router';
 import { ColumnI } from '../../interfaces/column.interface';
-import { take } from 'rxjs/operators';
+import { debounceTime, take, takeUntil } from 'rxjs/operators';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { TaskI } from '../../interfaces/task.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateTaskComponent } from '../../components/modals/create-task/create-task.component';
 import { MatSidenav } from '@angular/material/sidenav';
 import { ColumnsSandbox } from '../../store/sandboxes/columns.sandbox';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-board',
@@ -17,10 +18,11 @@ import { Observable } from 'rxjs';
   styleUrls: ['./board.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BoardComponent implements OnInit {
+export class BoardComponent implements OnInit, OnDestroy {
   @ViewChild(MatSidenav) private readonly matSidenav!: MatSidenav;
 
   columns$: Observable<ColumnI[]> = this.columnsSandbox.columns$;
+  filterTextControl = this.fb.control('');
   selectedTask: TaskI | null = null;
 
   users: { img?: string, email: string }[] = [
@@ -37,13 +39,25 @@ export class BoardComponent implements OnInit {
     }
   ];
 
+  private readonly unsubscribe$: Subject<void> = new Subject<void>();
+
   constructor(
     private readonly boardService: BoardService,
     private readonly activatedRoute: ActivatedRoute,
     private readonly changeDetectorRef: ChangeDetectorRef,
     private readonly dialog: MatDialog,
-    private readonly columnsSandbox: ColumnsSandbox
-  ) { }
+    private readonly columnsSandbox: ColumnsSandbox,
+    private readonly fb: FormBuilder
+  ) {
+    this.filterTextControl.valueChanges
+      .pipe(
+        debounceTime(500),
+        takeUntil(this.unsubscribe$)
+      )
+      .subscribe((text) => {
+        this.columnsSandbox.setTaskFilterText(text);
+      });
+  }
 
   ngOnInit() {
     this.activatedRoute.params
@@ -92,5 +106,11 @@ export class BoardComponent implements OnInit {
       this.selectedTask = null;
       this.matSidenav.close();
     }
+  }
+
+  ngOnDestroy() {
+    this.columnsSandbox.setTaskFilterText('')
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }

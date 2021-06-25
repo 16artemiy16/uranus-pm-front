@@ -15,4 +15,9 @@ export const moveTask = createAction(
 export const moveTaskError = createAction(
   '[Columns] Move Task Error',
   props<{ taskId: string, toIndex: number, columnId?: string }>()
-)
+);
+
+export const setTaskFilterText = createAction(
+  '[Columns] Set Task Filter Text',
+  props<{ text: string }>()
+);
