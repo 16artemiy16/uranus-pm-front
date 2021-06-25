@@ -21,6 +21,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { BoardsEffects } from './store/effects/boards.effects';
 import { FEATURE_NAME, reducers } from './store';
 import { ColumnsEffects } from './store/effects/columns.effects';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { ColumnsEffects } from './store/effects/columns.effects';
     MatInputModule,
     MatCardModule,
     MatSidenavModule,
+    MatMenuModule,
     ReactiveFormsModule,
     DragDropModule,
     RouterModule.forChild([

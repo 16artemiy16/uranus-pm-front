@@ -4,7 +4,7 @@
       <a mat-button mat-stroked-button color="primary" routerLink=".." class="back-btn"><--</a>
       <div class="board-name">{{ (selectedBoard$ | async)?.name }}</div>
       <span class="flex-spacer"></span>
-      <button mat-icon-button aria-label="More board options" class="more-btn">
+      <button mat-icon-button aria-label="More board options" class="more-btn" [matMenuTriggerFor]="boardMenu">
         <mat-icon [inline]="true">more_horiz</mat-icon>
       </button>
     </div>
@@ -13,7 +13,7 @@
       <div class="tasks-search">
         <form class="example-form" (keydown.enter)="$event.preventDefault()">
           <mat-form-field appearance="outline">
-            <mat-label>Search task</mat-label>
+            <mat-label>{{ 'auth.SearchTask' | transloco }}</mat-label>
             <input type="text" matInput [formControl]="filterTextControl">
             <mat-icon matSuffix>search</mat-icon>
           </mat-form-field>
@@ -92,3 +92,9 @@
 
 </mat-sidenav-container>
 
+<mat-menu #boardMenu="matMenu">
+  <button mat-menu-item>
+    <mat-icon>group</mat-icon>
+    <span>{{ 'auth.TeamManagement' | transloco }}</span>
+  </button>
+</mat-menu>

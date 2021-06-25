@@ -20,5 +20,7 @@
     "Body": "Body",
     "Create": "Create",
     "Cancel": "Cancel"
-  }
+  },
+  "TeamManagement": "Team management",
+  "SearchTask": "Search task"
 }
