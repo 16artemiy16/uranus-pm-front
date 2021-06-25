@@ -2,6 +2,27 @@
   <mat-sidenav-content>
     <a mat-button mat-stroked-button color="primary" routerLink=".." class="back-btn"><--</a>
 
+    <div class="top-bar">
+      <div class="tasks-search">
+        <form class="example-form" (keydown.enter)="$event.preventDefault()">
+          <mat-form-field appearance="outline">
+            <mat-label>Search task</mat-label>
+            <input type="text" matInput>
+            <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
+        </form>
+      </div>
+      <div class="users-list">
+        <div
+          class="users-list__item"
+          *ngFor="let user of users"
+          [style.background-image]="getUserImgStyle(user)"
+          [matTooltip]="user.email"
+        >
+        </div>
+      </div>
+    </div>
+
     <div class="columns-list" cdkDropListGroup>
       <div *ngFor="let col of columns$ | async" class="column">
         <p class="column__title">{{ col.name }}</p>
