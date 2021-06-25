@@ -22,13 +22,17 @@ import { BoardsEffects } from './store/effects/boards.effects';
 import { FEATURE_NAME, reducers } from './store';
 import { ColumnsEffects } from './store/effects/columns.effects';
 import { MatMenuModule } from '@angular/material/menu';
+import { BoardPageHeaderComponent } from './pages/board/components/board-page-header/board-page-header.component';
+import { BoardPageTopBarComponent } from './pages/board/components/board-page-top-bar/board-page-top-bar.component';
 
 @NgModule({
   declarations: [
     BoardsPageComponent,
     CreateBoardComponent,
     BoardComponent,
-    CreateTaskComponent
+    CreateTaskComponent,
+    BoardPageHeaderComponent,
+    BoardPageTopBarComponent
   ],
   imports: [
     CommonModule,
