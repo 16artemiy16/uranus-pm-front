@@ -1,13 +1,20 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { ColumnI } from '../../interfaces/column.interface';
 import { Action, createReducer, on } from '@ngrx/store';
-import { fetchColumns, fetchColumnsSuccess, moveTask, setTaskFilterText } from '../actions/columns.actions';
+import {
+  fetchColumns,
+  fetchColumnsSuccess,
+  moveTask,
+  setActiveTaskId,
+  setTaskFilterText
+} from '../actions/columns.actions';
 import { moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 export interface ColumnsStateI extends EntityState<ColumnI> {
   filter: {
     text: string;
-  }
+  },
+  activeTaskId: string | null;
 }
 
 export const adapterColumns: EntityAdapter<ColumnI> = createEntityAdapter<ColumnI>({
@@ -18,7 +25,8 @@ export const adapterColumns: EntityAdapter<ColumnI> = createEntityAdapter<Column
 const initialState: ColumnsStateI = adapterColumns.getInitialState({
   filter: {
     text: ''
-  }
+  },
+  activeTaskId: null
 });
 
 const {
@@ -32,6 +40,10 @@ const columnsReducer = createReducer(
     activeBoardId: boardId
   })),
   on(fetchColumnsSuccess, (state, { columns }) => adapterColumns.setAll(columns, state)),
+  on(setActiveTaskId, (state, { taskId }) => ({
+    ...state,
+    activeTaskId: taskId
+  })),
   on(moveTask, (state, { taskId, toIndex, columnId }) => {
     const columns = selectAll(state);
 

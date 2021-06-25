@@ -1,10 +1,26 @@
 import { adapterColumns } from '../reducers/columns.reducer';
 import { createSelector } from '@ngrx/store';
 import { selectColumnsState } from '../index';
+import { TaskI } from '../../interfaces/task.interface';
 
 const {
   selectAll,
 } = adapterColumns.getSelectors();
+
+export const getActiveTask = createSelector(
+  selectColumnsState,
+  (state) => {
+    const { activeTaskId } = state;
+
+    return !activeTaskId
+      ? null
+      : selectAll(state)
+          .reduce((tasks, column) => {
+            return [ ...tasks, ...column.tasks ];
+          }, [] as TaskI[])
+          .find((task) => task._id === activeTaskId) || null;
+  }
+)
 
 export const getFilter = createSelector(
   selectColumnsState,

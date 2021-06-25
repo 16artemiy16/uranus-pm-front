@@ -3,29 +3,7 @@
 
     <app-board-page-header></app-board-page-header>
     <app-board-page-top-bar></app-board-page-top-bar>
-
-
-    <div class="columns-list" cdkDropListGroup>
-      <div *ngFor="let col of columns$ | async" class="column">
-        <p class="column__title">{{ col.name }}</p>
-        <div
-          class="column__tasks"
-          cdkDropList
-          [cdkDropListData]="col.tasks"
-          (cdkDropListDropped)="onDropTask($event, col._id)"
-        >
-          <mat-card
-            *ngFor="let task of col.tasks"
-            cdkDrag
-            (cdkDragStarted)="onDragToggle(true)"
-            (cdkDragReleased)="onDragToggle(false)"
-            (click)="toggleTaskSidebar(true, task);"
-          >
-            {{ task.title }}
-          </mat-card>
-        </div>
-      </div>
-    </div>
+    <app-board-page-columns></app-board-page-columns>
 
     <div class="actions">
       <button
@@ -48,7 +26,7 @@
         <mat-icon>open_in_new</mat-icon>
       </button>
 
-      <button mat-icon-button aria-label="Close task sidebar" (click)="toggleTaskSidebar(false)">
+      <button mat-icon-button aria-label="Close task sidebar" (click)="unselectTask()">
         <mat-icon>close</mat-icon>
       </button>
     </div>

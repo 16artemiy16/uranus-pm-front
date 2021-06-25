@@ -1,0 +1,21 @@
+<div class="columns-list" cdkDropListGroup>
+  <div *ngFor="let col of columns$ | async" class="column">
+    <p class="column__title">{{ col.name }}</p>
+    <div
+      class="column__tasks"
+      cdkDropList
+      [cdkDropListData]="col.tasks"
+      (cdkDropListDropped)="onDropTask($event, col._id)"
+    >
+      <mat-card
+        *ngFor="let task of col.tasks"
+        cdkDrag
+        (cdkDragStarted)="onDragToggle(true)"
+        (cdkDragReleased)="onDragToggle(false)"
+        (click)="selectTask(task._id);"
+      >
+        {{ task.title }}
+      </mat-card>
+    </div>
+  </div>
+</div>

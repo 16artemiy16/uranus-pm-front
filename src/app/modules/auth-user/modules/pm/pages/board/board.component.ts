@@ -1,14 +1,19 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ColumnI } from '../../interfaces/column.interface';
-import { debounceTime, take, takeUntil } from 'rxjs/operators';
-import { CdkDragDrop } from '@angular/cdk/drag-drop';
+import { take } from 'rxjs/operators';
 import { TaskI } from '../../interfaces/task.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateTaskComponent } from '../../components/modals/create-task/create-task.component';
 import { MatSidenav } from '@angular/material/sidenav';
 import { ColumnsSandbox } from '../../store/sandboxes/columns.sandbox';
-import { Observable, Subject } from 'rxjs';
 import { BoardsSandbox } from '../../store/sandboxes/boards.sandbox';
 
 @Component({
@@ -17,9 +22,8 @@ import { BoardsSandbox } from '../../store/sandboxes/boards.sandbox';
   styleUrls: ['./board.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BoardComponent implements OnInit, OnDestroy {
+export class BoardComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatSidenav) private readonly matSidenav!: MatSidenav;
-  columns$: Observable<ColumnI[]> = this.columnsSandbox.columns$;
   selectedTask: TaskI | null = null;
 
   constructor(
@@ -28,9 +32,7 @@ export class BoardComponent implements OnInit, OnDestroy {
     private readonly changeDetectorRef: ChangeDetectorRef,
     private readonly dialog: MatDialog,
     private readonly columnsSandbox: ColumnsSandbox
-  ) {
-
-  }
+  ) {}
 
   ngOnInit() {
     this.activatedRoute.params
@@ -43,19 +45,12 @@ export class BoardComponent implements OnInit, OnDestroy {
       });
   }
 
-  onDragToggle(flag: boolean) {
-    document.body.style.setProperty('cursor', flag ? 'grabbing' : '', 'important');
-  }
-
-  onDropTask(event: CdkDragDrop<TaskI[]>, targetColumnId?: string) {
-    const isBetweenColumns = event.previousContainer !== event.container;
-    const task = event.previousContainer.data[event.previousIndex];
-
-    this.columnsSandbox.moveTask(
-      task._id,
-      event.currentIndex,
-      isBetweenColumns ? targetColumnId : undefined
-    )
+  ngAfterViewInit() {
+    this.columnsSandbox.activeTask$.subscribe((activeTask) => {
+      activeTask
+        ? this.toggleTaskSidebar(true, activeTask)
+        : this.toggleTaskSidebar(false)
+    })
   }
 
   // TODO: move to store
@@ -79,6 +74,10 @@ export class BoardComponent implements OnInit, OnDestroy {
       this.selectedTask = null;
       this.matSidenav.close();
     }
+  }
+
+  unselectTask() {
+    this.columnsSandbox.setActiveTask(null);
   }
 
   ngOnDestroy() {

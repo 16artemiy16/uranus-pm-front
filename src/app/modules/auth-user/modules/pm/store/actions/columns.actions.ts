@@ -21,3 +21,8 @@ export const setTaskFilterText = createAction(
   '[Columns] Set Task Filter Text',
   props<{ text: string }>()
 );
+
+export const setActiveTaskId = createAction(
+  '[Columns] Set Active Task',
+  props<{ taskId: string | null }>()
+);

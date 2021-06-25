@@ -24,6 +24,7 @@ import { ColumnsEffects } from './store/effects/columns.effects';
 import { MatMenuModule } from '@angular/material/menu';
 import { BoardPageHeaderComponent } from './pages/board/components/board-page-header/board-page-header.component';
 import { BoardPageTopBarComponent } from './pages/board/components/board-page-top-bar/board-page-top-bar.component';
+import { BoardPageColumnsComponent } from './pages/board/components/board-page-columns/board-page-columns.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { BoardPageTopBarComponent } from './pages/board/components/board-page-to
     BoardComponent,
     CreateTaskComponent,
     BoardPageHeaderComponent,
-    BoardPageTopBarComponent
+    BoardPageTopBarComponent,
+    BoardPageColumnsComponent
   ],
   imports: [
     CommonModule,
