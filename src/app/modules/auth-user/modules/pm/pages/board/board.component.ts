@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { BoardService } from '../../../../../../services/board.service';
 import { ActivatedRoute } from '@angular/router';
 import { ColumnI } from '../../interfaces/column.interface';
 import { debounceTime, take, takeUntil } from 'rxjs/operators';
@@ -11,6 +10,8 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { ColumnsSandbox } from '../../store/sandboxes/columns.sandbox';
 import { Observable, Subject } from 'rxjs';
 import { FormBuilder } from '@angular/forms';
+import { BoardsSandbox } from '../../store/sandboxes/boards.sandbox';
+import { BoardI } from '../../interfaces/board.interface';
 
 @Component({
   selector: 'app-board',
@@ -21,6 +22,7 @@ import { FormBuilder } from '@angular/forms';
 export class BoardComponent implements OnInit, OnDestroy {
   @ViewChild(MatSidenav) private readonly matSidenav!: MatSidenav;
 
+  selectedBoard$: Observable<BoardI> = this.boardsSandbox.selectedBoard$ as Observable<BoardI>;
   columns$: Observable<ColumnI[]> = this.columnsSandbox.columns$;
   filterTextControl = this.fb.control('');
   selectedTask: TaskI | null = null;
@@ -42,7 +44,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   private readonly unsubscribe$: Subject<void> = new Subject<void>();
 
   constructor(
-    private readonly boardService: BoardService,
+    private readonly boardsSandbox: BoardsSandbox,
     private readonly activatedRoute: ActivatedRoute,
     private readonly changeDetectorRef: ChangeDetectorRef,
     private readonly dialog: MatDialog,
@@ -62,7 +64,12 @@ export class BoardComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.activatedRoute.params
       .pipe(take(1),)
-      .subscribe((params) => this.columnsSandbox.fetchColumns(params.id));
+      .subscribe(({ id }) => {
+        // TODO: This is a workaround! Change in future on fetchBoardsById()
+        this.boardsSandbox.fetchBoards();
+        this.boardsSandbox.setSelectedBoardId(id);
+        this.columnsSandbox.fetchColumns(id);
+      });
   }
 
   getUserImgStyle(user: any): string {

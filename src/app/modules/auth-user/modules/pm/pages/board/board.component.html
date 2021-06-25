@@ -1,6 +1,13 @@
 <mat-sidenav-container [hasBackdrop]="false" autosize scrollable>
   <mat-sidenav-content>
-    <a mat-button mat-stroked-button color="primary" routerLink=".." class="back-btn"><--</a>
+    <div class="board-header">
+      <a mat-button mat-stroked-button color="primary" routerLink=".." class="back-btn"><--</a>
+      <div class="board-name">{{ (selectedBoard$ | async)?.name }}</div>
+      <span class="flex-spacer"></span>
+      <button mat-icon-button aria-label="More board options" class="more-btn">
+        <mat-icon [inline]="true">more_horiz</mat-icon>
+      </button>
+    </div>
 
     <div class="top-bar">
       <div class="tasks-search">

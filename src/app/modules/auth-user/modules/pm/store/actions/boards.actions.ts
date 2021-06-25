@@ -6,3 +6,5 @@ export const fetchBoardsSuccess = createAction('[Boards] Fetch Boards Success', 
 
 export const createBoard = createAction('[Boards] Create Board', props<{ name: string, description?: string }>());
 export const createBoardSuccess = createAction('[Boards] Create Board Success');
+
+export const setSelectedBoardId = createAction('[Boards] Set Selected Board Id', props<{ boardId: string }>());

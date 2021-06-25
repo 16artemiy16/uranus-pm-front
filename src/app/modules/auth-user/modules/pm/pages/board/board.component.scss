@@ -7,6 +7,20 @@
   flex-direction: column;
 }
 
+.board-header {
+  padding-right: 2em;
+  display: flex;
+  align-items: center;
+  .board-name {
+    font-size: 2em;
+    margin-left: 1.25em;
+  }
+
+  .more-btn {
+    font-size: 2.5em;
+  }
+}
+
 .back-btn {
   margin: 2em 0 2em 2em;
 }
