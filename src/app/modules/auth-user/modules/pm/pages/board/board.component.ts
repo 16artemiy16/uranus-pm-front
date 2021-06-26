@@ -22,9 +22,8 @@ import { BoardsSandbox } from '../../store/sandboxes/boards.sandbox';
   styleUrls: ['./board.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BoardComponent implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild(MatSidenav) private readonly matSidenav!: MatSidenav;
-  selectedTask: TaskI | null = null;
+export class BoardComponent implements OnInit, OnDestroy {
+  selectedTask$ = this.columnsSandbox.activeTask$;
 
   constructor(
     private readonly boardsSandbox: BoardsSandbox,
@@ -45,14 +44,6 @@ export class BoardComponent implements OnInit, AfterViewInit, OnDestroy {
       });
   }
 
-  ngAfterViewInit() {
-    this.columnsSandbox.activeTask$.subscribe((activeTask) => {
-      activeTask
-        ? this.toggleTaskSidebar(true, activeTask)
-        : this.toggleTaskSidebar(false)
-    })
-  }
-
   // TODO: move to store
   createTask() {
     const dialogRef = this.dialog.open(CreateTaskComponent, {
@@ -64,20 +55,6 @@ export class BoardComponent implements OnInit, AfterViewInit, OnDestroy {
     dialogRef.componentInstance.onCreate
       .pipe(take(1))
       .subscribe(() => null)
-  }
-
-  toggleTaskSidebar(isOpen: boolean, task?: TaskI) {
-    if (isOpen) {
-      this.selectedTask = <TaskI>task;
-      this.matSidenav.open();
-    } else {
-      this.selectedTask = null;
-      this.matSidenav.close();
-    }
-  }
-
-  unselectTask() {
-    this.columnsSandbox.setActiveTask(null);
   }
 
   ngOnDestroy() {

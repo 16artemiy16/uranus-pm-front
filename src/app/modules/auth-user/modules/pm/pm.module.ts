@@ -25,6 +25,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { BoardPageHeaderComponent } from './pages/board/components/board-page-header/board-page-header.component';
 import { BoardPageTopBarComponent } from './pages/board/components/board-page-top-bar/board-page-top-bar.component';
 import { BoardPageColumnsComponent } from './pages/board/components/board-page-columns/board-page-columns.component';
+import { BoardPageSidebarComponent } from './pages/board/components/board-page-sidebar/board-page-sidebar.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { BoardPageColumnsComponent } from './pages/board/components/board-page-c
     CreateTaskComponent,
     BoardPageHeaderComponent,
     BoardPageTopBarComponent,
-    BoardPageColumnsComponent
+    BoardPageColumnsComponent,
+    BoardPageSidebarComponent
   ],
   imports: [
     CommonModule,

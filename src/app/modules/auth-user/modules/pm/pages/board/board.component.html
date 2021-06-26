@@ -19,28 +19,8 @@
     </div>
   </mat-sidenav-content>
 
-
-  <mat-sidenav #drawer mode="over" position="end" class="task-sidebar">
-    <div class="task-sidebar__actions">
-      <button mat-icon-button aria-label="Open in new tab">
-        <mat-icon>open_in_new</mat-icon>
-      </button>
-
-      <button mat-icon-button aria-label="Close task sidebar" (click)="unselectTask()">
-        <mat-icon>close</mat-icon>
-      </button>
-    </div>
-    <h1>{{ selectedTask?.title }}</h1>
-    <hr/>
-    <div class="task-sidebar__dates">
-      <p>Created at: <i>{{ selectedTask?.createdAt | date }}</i></p>
-      <p>Updated at: <i>{{ selectedTask?.updatedAt | date }}</i></p>
-    </div>
-    <hr/>
-    <div>
-      {{ selectedTask?.body }}
-      <i *ngIf="!selectedTask?.body">Here is no description...</i>
-    </div>
+  <mat-sidenav #drawer mode="over" position="end" class="task-sidebar" [opened]="!!(selectedTask$ | async)">
+    <app-board-page-sidebar></app-board-page-sidebar>
   </mat-sidenav>
 
 </mat-sidenav-container>

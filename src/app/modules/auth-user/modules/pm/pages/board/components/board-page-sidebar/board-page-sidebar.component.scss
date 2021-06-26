@@ -1,0 +1,13 @@
+.task-sidebar {
+  width: 500px;
+  padding: 2em;
+
+  h1 {
+    text-align: center;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

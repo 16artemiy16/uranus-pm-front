@@ -1,0 +1,23 @@
+<div class="task-sidebar">
+  <div class="task-sidebar__actions">
+    <button mat-icon-button aria-label="Open in new tab">
+      <mat-icon>open_in_new</mat-icon>
+    </button>
+
+    <button mat-icon-button aria-label="Close task sidebar" (click)="unselectTask()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <h1>{{ (selectedTask$ | async)?.title }}</h1>
+  <hr/>
+  <div class="task-sidebar__dates">
+    <p>Created at: <i>{{ (selectedTask$ | async)?.createdAt | date }}</i></p>
+    <p>Updated at: <i>{{ (selectedTask$ | async)?.updatedAt | date }}</i></p>
+  </div>
+  <hr/>
+  <div>
+    {{ (selectedTask$ | async)?.body }}
+    <i *ngIf="!(selectedTask$ | async)?.body">Here is no description...</i>
+  </div>
+</div>
+
