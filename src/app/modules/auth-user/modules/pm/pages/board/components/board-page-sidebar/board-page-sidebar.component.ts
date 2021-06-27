@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { ColumnsSandbox } from '../../../../store/sandboxes/columns.sandbox';
 import { TaskI } from '../../../../interfaces/task.interface';
 

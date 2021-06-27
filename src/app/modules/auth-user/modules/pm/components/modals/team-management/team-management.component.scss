@@ -1,0 +1,47 @@
+.header {
+  font-size: 2em;
+  margin: 2em 0;
+}
+
+.invitation {
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+  }
+}
+
+:host {
+  ::ng-deep .mat-form-field-wrapper {
+    padding: 0 !important;
+  }
+}
+
+table.users-table {
+  width: 100%;
+
+
+  tr {
+    &:hover {
+      background: #e4f6ff;
+    }
+  }
+
+
+  td.email-col {
+    display: flex;
+    align-items: center;
+    padding: 1em;
+
+    .user-img {
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 1em;
+    }
+  }
+
+}

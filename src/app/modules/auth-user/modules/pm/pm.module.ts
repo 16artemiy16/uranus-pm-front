@@ -26,6 +26,9 @@ import { BoardPageHeaderComponent } from './pages/board/components/board-page-he
 import { BoardPageTopBarComponent } from './pages/board/components/board-page-top-bar/board-page-top-bar.component';
 import { BoardPageColumnsComponent } from './pages/board/components/board-page-columns/board-page-columns.component';
 import { BoardPageSidebarComponent } from './pages/board/components/board-page-sidebar/board-page-sidebar.component';
+import { TeamManagementComponent } from './components/modals/team-management/team-management.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -36,7 +39,8 @@ import { BoardPageSidebarComponent } from './pages/board/components/board-page-s
     BoardPageHeaderComponent,
     BoardPageTopBarComponent,
     BoardPageColumnsComponent,
-    BoardPageSidebarComponent
+    BoardPageSidebarComponent,
+    TeamManagementComponent
   ],
   imports: [
     CommonModule,
@@ -50,6 +54,8 @@ import { BoardPageSidebarComponent } from './pages/board/components/board-page-s
     MatSidenavModule,
     MatMenuModule,
     ReactiveFormsModule,
+    MatAutocompleteModule,
+    MatTableModule,
     DragDropModule,
     RouterModule.forChild([
       { path: 'boards', component: BoardsPageComponent },

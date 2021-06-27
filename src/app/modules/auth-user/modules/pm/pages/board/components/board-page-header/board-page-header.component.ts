@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BoardsSandbox } from '../../../../store/sandboxes/boards.sandbox';
 import { map } from 'rxjs/operators';
+import { TeamManagementComponent } from '../../../../components/modals/team-management/team-management.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-board-page-header',
@@ -19,7 +21,7 @@ import { map } from 'rxjs/operators';
     </button>
 
     <mat-menu #boardMenu="matMenu">
-      <button mat-menu-item>
+      <button mat-menu-item (click)="openTeamManagement()">
         <mat-icon>group</mat-icon>
         <span>{{ 'auth.TeamManagement' | transloco }}</span>
       </button>
@@ -50,6 +52,14 @@ export class BoardPageHeaderComponent {
     );
 
   constructor(
-    private readonly boardsSandbox: BoardsSandbox
+    private readonly boardsSandbox: BoardsSandbox,
+    private readonly dialog: MatDialog
   ) { }
+
+  openTeamManagement() {
+    this.dialog.open(TeamManagementComponent, {
+      width: '900px',
+      height: '90vh'
+    });
+  }
 }

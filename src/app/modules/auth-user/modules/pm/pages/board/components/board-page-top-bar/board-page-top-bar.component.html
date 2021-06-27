@@ -1,5 +1,5 @@
 <div class="tasks-search">
-  <form class="example-form" (keydown.enter)="$event.preventDefault()">
+  <form (keydown.enter)="$event.preventDefault()">
     <mat-form-field appearance="outline">
       <mat-label>{{ 'auth.SearchTask' | transloco }}</mat-label>
       <input type="text" matInput [formControl]="filterTextControl">
