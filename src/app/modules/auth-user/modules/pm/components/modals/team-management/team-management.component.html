@@ -6,10 +6,13 @@
              placeholder="User email..."
              aria-label="Number"
              matInput
-             [matAutocomplete]="auto">
+             [matAutocomplete]="auto"
+             [formControl]="userSearchControl"
+      >
       <mat-autocomplete #auto="matAutocomplete">
-        <mat-option [value]="1">griboedov@gmail.com</mat-option>
-        <mat-option [value]="1">lil.wayne@gmail.com</mat-option>
+        <mat-option [value]="user.email" *ngFor="let user of (inviteUsersList$ | async)">
+          {{ user.email }}
+        </mat-option>
       </mat-autocomplete>
     </mat-form-field>
     <button mat-button mat-stroked-button color="primary">Invite user</button>

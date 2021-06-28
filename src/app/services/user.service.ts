@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import jwtDecode from 'jwt-decode';
 import { Router } from '@angular/router';
+import { UserI } from '../interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -50,8 +51,17 @@ export class UserService {
       );
   }
 
-  logOut() {
+  logOut(): void {
     localStorage.removeItem('token');
     this.router.navigate(['guest'])
+  }
+
+  searchByEmail(email: string, projection = {}, options = {}): Observable<UserI[]> {
+    const url = `${this.URL}/users/get-custom`;
+    return this.http.post<UserI[]>(url, {
+      projection,
+      options,
+      query: { email: { $regex: email } }
+    });
   }
 }
