@@ -2,7 +2,13 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { BoardService } from '../../../../../../services/board.service';
 import { map, switchMap, tap } from 'rxjs/operators';
-import { createBoard, fetchBoards, fetchBoardsSuccess } from '../actions/boards.actions';
+import {
+  createBoard,
+  fetchBoardMembersSuccess,
+  fetchBoards,
+  fetchBoardsSuccess,
+  setSelectedBoardId
+} from '../actions/boards.actions';
 import { SnackService } from '../../../../../common/snack/snack.service';
 import { TranslocoService } from '@ngneat/transloco';
 
@@ -14,6 +20,16 @@ export class BoardsEffects {
     private readonly snack: SnackService,
     private readonly transloco: TranslocoService,
   ) {}
+
+  setSelectedBoardId$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(setSelectedBoardId),
+      switchMap(({ boardId }) => {
+        return this.boardService.getMembers(boardId);
+      }),
+      map((users) => fetchBoardMembersSuccess({ users }))
+    );
+  });
 
   fetchBoards$ = createEffect(() => {
     return this.actions$.pipe(

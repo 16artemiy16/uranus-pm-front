@@ -22,4 +22,9 @@ export const getSelected = createSelector(
       ? boards[selectedBoardId] as BoardI
       :  null;
   }
-)
+);
+
+export const getMembers = createSelector(
+  selectBoardsState,
+  ({ users }) => users
+);

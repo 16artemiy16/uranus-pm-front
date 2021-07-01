@@ -4,6 +4,7 @@ import { UserService } from './user.service';
 import { Observable } from 'rxjs';
 import { BoardI } from '../modules/auth-user/modules/pm/interfaces/board.interface';
 import { ColumnI } from '../modules/auth-user/modules/pm/interfaces/column.interface';
+import { BoardUserI } from '../interfaces/board-user.interface';
 
 interface CreateBoardDto {
   name: string;
@@ -45,5 +46,10 @@ export class BoardService {
   moveTask(taskId: string, toIndex: number, targetColumnId?: string): Observable<boolean> {
     const url = `${this.URL}/boards/task/${taskId}/move`;
     return this.http.put<boolean>(url, { toIndex, targetColumnId });
+  }
+
+  getMembers(boardId: string): Observable<BoardUserI[]> {
+    const url = `${this.URL}/boards/${boardId}/members`;
+    return this.http.get<BoardUserI[]>(url);
   }
 }

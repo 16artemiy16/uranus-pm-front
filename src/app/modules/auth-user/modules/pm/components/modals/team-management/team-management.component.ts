@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { UserService } from '../../../../../../../services/user.service';
 import { FormBuilder, FormControl } from '@angular/forms';
-import { debounceTime, startWith, switchMap, tap } from 'rxjs/operators';
+import { debounceTime, startWith, switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { UserI } from '../../../../../../../interfaces/user.interface';
 
