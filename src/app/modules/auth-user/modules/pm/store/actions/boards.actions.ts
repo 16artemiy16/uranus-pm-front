@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { BoardI } from '../../interfaces/board.interface';
-import { UserI } from '../../../../../../interfaces/user.interface';
+import { BoardUserI } from '../../../../../../interfaces/board-user.interface';
 
 export const fetchBoards = createAction('[Boards] Fetch Boards');
 export const fetchBoardsSuccess = createAction('[Boards] Fetch Boards Success', props<{ boards: BoardI[] }>());
@@ -12,5 +12,5 @@ export const setSelectedBoardId = createAction('[Boards] Set Selected Board Id',
 
 export const fetchBoardMembersSuccess = createAction(
   '[Boards] Fetch Board Members Success',
-  props<{ users: UserI[] }>()
+  props<{ users: BoardUserI[] }>()
 );

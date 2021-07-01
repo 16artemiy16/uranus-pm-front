@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { getAll, getMembers, getSelected } from '../selectors/boards.selectors';
 import { createBoard, fetchBoards, setSelectedBoardId } from '../actions/boards.actions';
+import { Observable } from 'rxjs';
+import { BoardUserI } from '../../../../../../interfaces/board-user.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +15,7 @@ export class BoardsSandbox {
 
   boards$ = this.store.select(getAll);
   selectedBoard$ = this.store.select(getSelected);
-  boardMembers$ = this.store.select(getMembers);
+  boardMembers$: Observable<BoardUserI[]> = this.store.select(getMembers);
 
   fetchBoards() {
     this.store.dispatch(fetchBoards());

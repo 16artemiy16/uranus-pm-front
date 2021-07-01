@@ -10,7 +10,7 @@
 <div class="users-list">
   <div
     class="users-list__item"
-    *ngFor="let user of users"
+    *ngFor="let user of users$ | async"
     [style.background-image]="getUserImgStyle(user)"
     [matTooltip]="user.email"
   >

@@ -2,11 +2,11 @@ import { Action, createReducer, on } from '@ngrx/store';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { BoardI } from '../../interfaces/board.interface';
 import { fetchBoardMembersSuccess, fetchBoardsSuccess, setSelectedBoardId } from '../actions/boards.actions';
-import { UserI } from '../../../../../../interfaces/user.interface';
+import { BoardUserI } from '../../../../../../interfaces/board-user.interface';
 
 export interface BoardsStateI extends EntityState<BoardI>{
   selectedBoardId: string | null;
-  users: UserI[];
+  users: BoardUserI[];
 }
 
 export const adapterBoards: EntityAdapter<BoardI> = createEntityAdapter<BoardI>({
