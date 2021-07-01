@@ -2,7 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { UserService } from '../../../../../../../services/user.service';
 import { FormBuilder, FormControl } from '@angular/forms';
-import { debounceTime, startWith, switchMap, takeUntil } from 'rxjs/operators';
+import { debounceTime, startWith, switchMap, takeUntil, withLatestFrom } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
 import { UserI } from '../../../../../../../interfaces/user.interface';
 import { BoardsSandbox } from '../../../store/sandboxes/boards.sandbox';
@@ -18,8 +18,10 @@ export class TeamManagementComponent implements OnDestroy {
   readonly inviteUsersList$: Observable<UserI[]> = this.userSearchControl.valueChanges
     .pipe(
       debounceTime(500),
-      switchMap((searchStr) => {
-        return this.userService.searchByEmail(searchStr, { email: 1 },{ limit: 3 });
+      withLatestFrom(this.boardsSandbox.boardMembers$),
+      switchMap(([searchStr, members]) => {
+        const emailsToExclude = members.map((member) => member.email);
+        return this.userService.searchByEmail(searchStr, { email: 1 },{ limit: 3 }, emailsToExclude);
       }),
       startWith([])
     );

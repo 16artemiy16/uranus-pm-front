@@ -56,12 +56,14 @@ export class UserService {
     this.router.navigate(['guest'])
   }
 
-  searchByEmail(email: string, projection = {}, options = {}): Observable<UserI[]> {
+  searchByEmail(email: string, projection = {}, options = {}, emailsToExclude: string[] = []): Observable<UserI[]> {
     const url = `${this.URL}/users/get-custom`;
     return this.http.post<UserI[]>(url, {
       projection,
       options,
-      query: { email: { $regex: email } }
+      query: {
+        $and: [{ email: { $regex: email } }, { email: { $nin: emailsToExclude } }]
+      }
     });
   }
 }
