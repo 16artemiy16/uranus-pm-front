@@ -7,6 +7,7 @@ import { Observable, Subject } from 'rxjs';
 import { UserI } from '../../../../../../../interfaces/user.interface';
 import { BoardsSandbox } from '../../../store/sandboxes/boards.sandbox';
 import { BoardUserI } from '../../../../../../../interfaces/board-user.interface';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
 @Component({
   selector: 'app-team-management',
@@ -15,17 +16,7 @@ import { BoardUserI } from '../../../../../../../interfaces/board-user.interface
 })
 export class TeamManagementComponent implements OnDestroy {
   readonly userSearchControl: FormControl = this.fb.control('');
-  readonly inviteUsersList$: Observable<UserI[]> = this.userSearchControl.valueChanges
-    .pipe(
-      debounceTime(500),
-      withLatestFrom(this.boardsSandbox.boardMembers$),
-      switchMap(([searchStr, members]) => {
-        const emailsToExclude = members.map((member) => member.email);
-        return this.userService.searchByEmail(searchStr, { email: 1 },{ limit: 3 }, emailsToExclude);
-      }),
-      startWith([])
-    );
-
+  inviteUsersList: UserI[] = [];
   usersSource: MatTableDataSource<BoardUserI> = new MatTableDataSource<BoardUserI>([]);
 
   private readonly unsubscribe$ = new Subject<void>();
@@ -40,11 +31,35 @@ export class TeamManagementComponent implements OnDestroy {
       .subscribe((members) => {
         this.usersSource.data = members;
       });
+
+    this.userSearchControl.valueChanges
+      .pipe(
+        debounceTime(500),
+        withLatestFrom(this.boardsSandbox.boardMembers$),
+        switchMap(([searchStr, members]) => {
+          const emailsToExclude = members.map((member) => member.email);
+          return this.userService.searchByEmail(searchStr, { email: 1 },{ limit: 3 }, emailsToExclude);
+        }),
+        startWith([]),
+        takeUntil(this.unsubscribe$)
+      ).subscribe((users) => {
+        this.inviteUsersList = users;
+    });
+  }
+
+  get isInviteBtnDisabled(): boolean {
+    return !this.inviteUsersList
+      .map(({ email }) => email)
+      .includes(this.userSearchControl.value);
   }
 
   getUserImgStyle(user: any): string {
     const src = user.img || '/assets/icons/anonymous.svg';
     return `url(${src})`;
+  }
+
+  getUserImgSrc(user: any): string {
+    return user.img || '/assets/icons/anonymous.svg';
   }
 
   ngOnDestroy() {

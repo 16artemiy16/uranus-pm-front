@@ -8,14 +8,26 @@
              matInput
              [matAutocomplete]="auto"
              [formControl]="userSearchControl"
+             (keyup.enter)="$event.preventDefault()"
       >
       <mat-autocomplete #auto="matAutocomplete">
-        <mat-option [value]="user.email" *ngFor="let user of (inviteUsersList$ | async)">
-          {{ user.email }}
+        <mat-option [value]="user.email" *ngFor="let user of inviteUsersList">
+          <div class="invite-item">
+            <img [src]="getUserImgSrc(user)" height="40" width="40" alt="User image" />
+            <span>{{ user.email }}</span>
+          </div>
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
-    <button mat-button mat-stroked-button color="primary">Invite user</button>
+    <button
+      mat-button
+      mat-stroked-button
+      color="primary"
+      type="button"
+      [disabled]="isInviteBtnDisabled"
+    >
+      Invite user
+    </button>
   </form>
 </div>
 
