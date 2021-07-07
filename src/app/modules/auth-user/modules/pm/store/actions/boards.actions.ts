@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { BoardI } from '../../interfaces/board.interface';
-import { BoardUserI } from '../../../../../../interfaces/board-user.interface';
+import { BoardUserI, BoardUserToInviteI } from '../../../../../../interfaces/board-user.interface';
 
 export const fetchBoards = createAction('[Boards] Fetch Boards');
 export const fetchBoardsSuccess = createAction('[Boards] Fetch Boards Success', props<{ boards: BoardI[] }>());
@@ -14,3 +14,6 @@ export const fetchBoardMembersSuccess = createAction(
   '[Boards] Fetch Board Members Success',
   props<{ users: BoardUserI[] }>()
 );
+
+export const inviteUsers = createAction('[Boards] Invite Users', props<{ users: BoardUserToInviteI[] }>());
+export const inviteUsersSuccess = createAction('[Boards] Invite Users Success');

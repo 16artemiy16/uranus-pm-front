@@ -56,7 +56,7 @@ export class UserService {
     this.router.navigate(['guest'])
   }
 
-  searchByEmail(email: string, projection = {}, options = {}, emailsToExclude: string[] = []): Observable<UserI[]> {
+  searchByEmail(email: string, projection = {}, options = {}, emailsToExclude: string[] = []): Observable<Partial<UserI>[]> {
     const url = `${this.URL}/users/get-custom`;
     return this.http.post<UserI[]>(url, {
       projection,

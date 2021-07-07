@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { getAll, getMembers, getSelected } from '../selectors/boards.selectors';
-import { createBoard, fetchBoards, setSelectedBoardId } from '../actions/boards.actions';
+import { createBoard, fetchBoards, inviteUsers, setSelectedBoardId } from '../actions/boards.actions';
 import { Observable } from 'rxjs';
-import { BoardUserI } from '../../../../../../interfaces/board-user.interface';
+import { BoardUserI, BoardUserToInviteI } from '../../../../../../interfaces/board-user.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -27,5 +27,9 @@ export class BoardsSandbox {
 
   setSelectedBoardId(boardId: string) {
     this.store.dispatch(setSelectedBoardId({ boardId }));
+  }
+
+  inviteUsers(users: BoardUserToInviteI[]) {
+    this.store.dispatch(inviteUsers({ users }));
   }
 }

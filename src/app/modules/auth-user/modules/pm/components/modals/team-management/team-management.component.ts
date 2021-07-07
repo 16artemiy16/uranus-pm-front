@@ -4,9 +4,8 @@ import { UserService } from '../../../../../../../services/user.service';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { debounceTime, startWith, switchMap, takeUntil, withLatestFrom } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { UserI } from '../../../../../../../interfaces/user.interface';
 import { BoardsSandbox } from '../../../store/sandboxes/boards.sandbox';
-import { BoardUserI } from '../../../../../../../interfaces/board-user.interface';
+import { BoardUserI, BoardUserToInviteI } from '../../../../../../../interfaces/board-user.interface';
 
 @Component({
   selector: 'app-team-management',
@@ -16,7 +15,7 @@ import { BoardUserI } from '../../../../../../../interfaces/board-user.interface
 })
 export class TeamManagementComponent implements OnDestroy {
   readonly userSearchControl: FormControl = this.fb.control('');
-  inviteUsersList: UserI[] = [];
+  inviteUsersList: BoardUserToInviteI[] = [];
   usersSource: MatTableDataSource<BoardUserI> = new MatTableDataSource<BoardUserI>([]);
 
   private readonly unsubscribe$ = new Subject<void>();
@@ -45,12 +44,12 @@ export class TeamManagementComponent implements OnDestroy {
         withLatestFrom(this.boardsSandbox.boardMembers$),
         switchMap(([searchStr, members]) => {
           const emailsToExclude = members.map((member) => member.email);
-          return this.userService.searchByEmail(searchStr, { email: 1 },{ limit: 3 }, emailsToExclude);
+          return this.userService.searchByEmail(searchStr, { email: 1, img: 1 },{ limit: 3 }, emailsToExclude);
         }),
-        startWith([]),
+        startWith([] as BoardUserToInviteI[]),
         takeUntil(this.unsubscribe$)
       ).subscribe((users) => {
-      this.inviteUsersList = users;
+      this.inviteUsersList = users as BoardUserToInviteI[];
     });
   }
 
@@ -60,6 +59,11 @@ export class TeamManagementComponent implements OnDestroy {
       .includes(this.userSearchControl.value);
   }
 
+  get userToInvite(): BoardUserToInviteI | undefined {
+    const searchStr = this.userSearchControl.value.trim();
+    return this.inviteUsersList.find((user) => user.email === searchStr);
+  }
+
   getUserImgStyle(user: any): string {
     const src = user.img || '/assets/icons/anonymous.svg';
     return `url(${src})`;
@@ -67,6 +71,12 @@ export class TeamManagementComponent implements OnDestroy {
 
   getUserImgSrc(user: any): string {
     return user.img || '/assets/icons/anonymous.svg';
+  }
+
+  inviteUsers() {
+    if (this.userToInvite) {
+      this.boardsSandbox.inviteUsers([this.userToInvite])
+    }
   }
 
   ngOnDestroy() {

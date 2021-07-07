@@ -52,4 +52,9 @@ export class BoardService {
     const url = `${this.URL}/boards/${boardId}/members`;
     return this.http.get<BoardUserI[]>(url);
   }
+
+  inviteUsers(boardId: string, ids: string[]): Observable<boolean> {
+    const url = `${this.URL}/boards/${boardId}/members`;
+    return this.http.post<boolean>(url, { members: ids });
+  }
 }

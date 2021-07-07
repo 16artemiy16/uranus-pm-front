@@ -1,16 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { BoardService } from '../../../../../../services/board.service';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import {
   createBoard,
   fetchBoardMembersSuccess,
   fetchBoards,
-  fetchBoardsSuccess,
+  fetchBoardsSuccess, inviteUsers, inviteUsersSuccess,
   setSelectedBoardId
 } from '../actions/boards.actions';
 import { SnackService } from '../../../../../common/snack/snack.service';
 import { TranslocoService } from '@ngneat/transloco';
+import { Store } from '@ngrx/store';
+import { getSelected } from '../selectors/boards.selectors';
 
 @Injectable()
 export class BoardsEffects {
@@ -19,6 +21,7 @@ export class BoardsEffects {
     private readonly boardService: BoardService,
     private readonly snack: SnackService,
     private readonly transloco: TranslocoService,
+    private readonly store: Store
   ) {}
 
   setSelectedBoardId$ = createEffect(() => {
@@ -51,5 +54,17 @@ export class BoardsEffects {
       }),
       map(() => fetchBoards())
     );
-  })
+  });
+
+  inviteUsers$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(inviteUsers),
+      withLatestFrom(this.store.select(getSelected)),
+      switchMap(([ { users }, selectedBoard ]) => {
+        const ids = users.map((user) => user._id);
+        return this.boardService.inviteUsers(selectedBoard!._id, ids);
+      }),
+      map(() => inviteUsersSuccess())
+    )
+  });
 }
