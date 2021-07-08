@@ -29,6 +29,7 @@ import { BoardPageSidebarComponent } from './pages/board/components/board-page-s
 import { TeamManagementComponent } from './components/modals/team-management/team-management.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatTableModule } from '@angular/material/table';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { MatTableModule } from '@angular/material/table';
     ReactiveFormsModule,
     MatAutocompleteModule,
     MatTableModule,
+    MatSelectModule,
     DragDropModule,
     RouterModule.forChild([
       { path: 'boards', component: BoardsPageComponent },

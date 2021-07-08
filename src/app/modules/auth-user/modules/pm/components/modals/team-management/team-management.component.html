@@ -1,36 +1,43 @@
-<div class="invitation">
-  <form (keydown.enter)="$event.preventDefault()">
-    <mat-form-field appearance="outline">
-      <mat-label>Send invitation</mat-label>
-      <input type="text"
-             placeholder="User email..."
-             aria-label="Number"
-             matInput
-             [matAutocomplete]="auto"
-             [formControl]="userSearchControl"
-             (keyup.enter)="$event.preventDefault()"
-      >
-      <mat-autocomplete #auto="matAutocomplete">
-        <mat-option [value]="user.email" *ngFor="let user of inviteUsersList">
-          <div class="invite-item">
-            <img [src]="getUserImgSrc(user)" height="40" width="40" alt="User image" />
-            <span>{{ user.email }}</span>
-          </div>
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-    <button
-      mat-button
-      mat-stroked-button
-      color="primary"
-      type="button"
-      [disabled]="isInviteBtnDisabled"
-      (click)="inviteUsers()"
+<form (keydown.enter)="$event.preventDefault()" class="invitation">
+  <mat-form-field appearance="outline" class="invitation__email">
+    <mat-label>Send invitation</mat-label>
+    <input type="text"
+           placeholder="User email..."
+           aria-label="Number"
+           matInput
+           [matAutocomplete]="auto"
+           [formControl]="userSearchControl"
+           (keyup.enter)="$event.preventDefault()"
     >
-      Invite user
-    </button>
-  </form>
-</div>
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option [value]="user.email" *ngFor="let user of inviteUsersList">
+        <div class="invite-item">
+          <img [src]="getUserImgSrc(user)" height="40" width="40" alt="User image"/>
+          <span>{{ user.email }}</span>
+        </div>
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Role</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let role of roles" [value]="role">{{ role }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button
+    mat-button
+    mat-stroked-button
+    color="primary"
+    type="button"
+    [disabled]="isInviteBtnDisabled"
+    (click)="inviteUsers()"
+  >
+    Invite user
+  </button>
+</form>
+
 
 <p class="header">Team</p>
 

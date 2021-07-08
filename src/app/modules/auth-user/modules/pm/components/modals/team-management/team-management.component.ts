@@ -6,6 +6,7 @@ import { debounceTime, startWith, switchMap, takeUntil, withLatestFrom } from 'r
 import { Subject } from 'rxjs';
 import { BoardsSandbox } from '../../../store/sandboxes/boards.sandbox';
 import { BoardUserI, BoardUserToInviteI } from '../../../../../../../interfaces/board-user.interface';
+import { BoardUserRoleEnum } from '../../../../../../../enums/board-user-role.enum';
 
 @Component({
   selector: 'app-team-management',
@@ -14,6 +15,7 @@ import { BoardUserI, BoardUserToInviteI } from '../../../../../../../interfaces/
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TeamManagementComponent implements OnDestroy {
+  readonly roles = [BoardUserRoleEnum.User, BoardUserRoleEnum.Watcher, BoardUserRoleEnum.Admin];
   readonly userSearchControl: FormControl = this.fb.control('');
   inviteUsersList: BoardUserToInviteI[] = [];
   usersSource: MatTableDataSource<BoardUserI> = new MatTableDataSource<BoardUserI>([]);

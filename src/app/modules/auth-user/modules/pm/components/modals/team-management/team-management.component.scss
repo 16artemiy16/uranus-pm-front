@@ -4,10 +4,15 @@
 }
 
 .invitation {
-  form {
-    display: flex;
-    flex-direction: column;
-    width: 50%;
+  display: flex;
+  align-items: baseline;
+
+  * {
+    margin-right: 2em;
+  }
+
+  &__email {
+    width: 40%;
   }
 }
 
