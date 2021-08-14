@@ -1,6 +1,10 @@
-import { Component, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
 import { ColumnsSandbox } from '../../../../store/sandboxes/columns.sandbox';
+import { switchMap } from 'rxjs/operators';
+import { BoardsSandbox } from '../../../../store/sandboxes/boards.sandbox';
+import { Observable, of } from 'rxjs';
 import { TaskI } from '../../../../interfaces/task.interface';
+import { BoardUserI } from '../../../../../../../../interfaces/board-user.interface';
 
 @Component({
   selector: 'app-board-page-sidebar',
@@ -8,14 +12,23 @@ import { TaskI } from '../../../../interfaces/task.interface';
   styleUrls: ['./board-page-sidebar.component.scss']
 })
 export class BoardPageSidebarComponent {
-  selectedTask$ = this.columnsSandbox.activeTask$;
+  selectedTask$: Observable<TaskI | null> = this.columnsSandbox.activeTask$;
+  assignee$: Observable<BoardUserI | null> = this.selectedTask$.pipe(
+    switchMap((task) => {
+      return task?.assignee ? this.boardsSandbox.getMemberById(task.assignee) : of(null);
+    }),
+  );
 
   constructor(
-    private readonly columnsSandbox: ColumnsSandbox
+    private readonly columnsSandbox: ColumnsSandbox,
+    private readonly boardsSandbox: BoardsSandbox
   ) {}
 
-  unselectTask() {
-    this.columnsSandbox.setActiveTask(null);
+  getUserImgSrc(user: any): string {
+    return user.img || '/assets/icons/anonymous.svg';
   }
 
+  unselectTask(): void {
+    this.columnsSandbox.setActiveTask(null);
+  }
 }

@@ -10,4 +10,14 @@
     display: flex;
     justify-content: flex-end;
   }
+
+  &__assignee-row {
+    display: flex;
+    align-items: center;
+  }
+
+  &__assignee {
+    display: flex;
+    align-items: center;
+  }
 }

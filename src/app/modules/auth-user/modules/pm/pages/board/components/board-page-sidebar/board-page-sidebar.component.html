@@ -13,6 +13,14 @@
   <div class="task-sidebar__dates">
     <p>Created at: <i>{{ (selectedTask$ | async)?.createdAt | date }}</i></p>
     <p>Updated at: <i>{{ (selectedTask$ | async)?.updatedAt | date }}</i></p>
+    <div class="task-sidebar__assignee-row">
+      Assignee:
+      <div *ngIf="(assignee$ | async) as assignee" class="task-sidebar__assignee">
+        <img [src]="getUserImgSrc(assignee)" height="40" width="40" alt="User image"/>
+        <span>{{ assignee.email }}</span>
+      </div>
+      <div *ngIf="!(assignee$ | async)">Unassigned</div>
+    </div>
   </div>
   <hr/>
   <div>

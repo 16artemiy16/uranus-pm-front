@@ -28,3 +28,10 @@ export const getMembers = createSelector(
   selectBoardsState,
   ({ users }) => users
 );
+
+export const getMemberById = (id: string) => createSelector(
+  getMembers,
+  (users) => {
+    return users.find((user) => user._id === id) || null;
+  }
+);
