@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { UserService } from '../../../../../../../services/user.service';
 import { FormBuilder, FormControl } from '@angular/forms';
@@ -25,7 +25,8 @@ export class TeamManagementComponent implements OnDestroy {
   constructor(
     private readonly userService: UserService,
     private readonly fb: FormBuilder,
-    private readonly boardsSandbox: BoardsSandbox
+    private readonly boardsSandbox: BoardsSandbox,
+    private readonly cdRef: ChangeDetectorRef
   ) {
     this._watchBoardMembers();
     this._watchUserSearch();
@@ -52,6 +53,7 @@ export class TeamManagementComponent implements OnDestroy {
         takeUntil(this.unsubscribe$)
       ).subscribe((users) => {
       this.inviteUsersList = users as BoardUserToInviteI[];
+      this.cdRef.markForCheck();
     });
   }
 
