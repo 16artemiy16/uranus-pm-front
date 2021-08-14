@@ -17,3 +17,6 @@ export const fetchBoardMembersSuccess = createAction(
 
 export const inviteUsers = createAction('[Boards] Invite Users', props<{ users: BoardUserToInviteI[] }>());
 export const inviteUsersSuccess = createAction('[Boards] Invite Users Success');
+
+export const removeUsers = createAction('[Boards] Remove Users', props<{ users: string[] }>());
+export const removeUsersSuccess = createAction('[Boards] Remove Users Success');

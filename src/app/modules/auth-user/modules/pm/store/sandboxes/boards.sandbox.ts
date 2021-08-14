@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { getAll, getMembers, getSelected } from '../selectors/boards.selectors';
-import { createBoard, fetchBoards, inviteUsers, setSelectedBoardId } from '../actions/boards.actions';
+import { createBoard, fetchBoards, inviteUsers, removeUsers, setSelectedBoardId } from '../actions/boards.actions';
 import { Observable } from 'rxjs';
 import { BoardUserI, BoardUserToInviteI } from '../../../../../../interfaces/board-user.interface';
 
@@ -31,5 +31,9 @@ export class BoardsSandbox {
 
   inviteUsers(users: BoardUserToInviteI[]) {
     this.store.dispatch(inviteUsers({ users }));
+  }
+
+  removeUsers(users: string[]) {
+    this.store.dispatch(removeUsers({ users }));
   }
 }

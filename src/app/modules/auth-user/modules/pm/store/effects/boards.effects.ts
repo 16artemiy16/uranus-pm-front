@@ -6,7 +6,7 @@ import {
   createBoard,
   fetchBoardMembersSuccess,
   fetchBoards,
-  fetchBoardsSuccess, inviteUsers, inviteUsersSuccess,
+  fetchBoardsSuccess, inviteUsers, inviteUsersSuccess, removeUsers, removeUsersSuccess,
   setSelectedBoardId
 } from '../actions/boards.actions';
 import { SnackService } from '../../../../../common/snack/snack.service';
@@ -67,4 +67,15 @@ export class BoardsEffects {
       map(() => inviteUsersSuccess())
     )
   });
+
+  removeUsers$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(removeUsers),
+      withLatestFrom(this.store.select(getSelected)),
+      switchMap(([{ users }, selectedBoard ]) => {
+        return this.boardService.removeUsers(selectedBoard!._id, users)
+      }),
+      map(() => removeUsersSuccess())
+    )
+  })
 }

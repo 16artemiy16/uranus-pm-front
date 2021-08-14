@@ -57,4 +57,9 @@ export class BoardService {
     const url = `${this.URL}/boards/${boardId}/members`;
     return this.http.post<boolean>(url, { members: ids });
   }
+
+  removeUsers(boardId: string, ids: string[]): Observable<boolean> {
+    const url = `${this.URL}/boards/${boardId}/members/delete`;
+    return this.http.post<boolean>(url, { members: ids });
+  }
 }

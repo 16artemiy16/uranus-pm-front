@@ -75,10 +75,14 @@ export class TeamManagementComponent implements OnDestroy {
     return user.img || '/assets/icons/anonymous.svg';
   }
 
-  inviteUsers() {
+  inviteUsers(): void {
     if (this.userToInvite) {
       this.boardsSandbox.inviteUsers([this.userToInvite])
     }
+  }
+
+  removeUser(id: string): void {
+    this.boardsSandbox.removeUsers([id]);
   }
 
   ngOnDestroy() {

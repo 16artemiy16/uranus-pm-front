@@ -67,8 +67,8 @@
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef> Actions </th>
     <td mat-cell *matCellDef="let element">
-      <button mat-icon-button [matTooltip]="'auth.Info' | transloco">
-        <mat-icon>info</mat-icon>
+      <button mat-icon-button [matTooltip]="'auth.Remove' | transloco" (click)="removeUser(element._id)">
+        <mat-icon>clear</mat-icon>
       </button>
     </td>
   </ng-container>
