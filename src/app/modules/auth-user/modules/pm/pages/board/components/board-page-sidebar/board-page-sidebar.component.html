@@ -16,8 +16,7 @@
     <div class="task-sidebar__assignee-row">
       Assignee:
       <div *ngIf="(assignee$ | async) as assignee" class="task-sidebar__assignee">
-        <img [src]="getUserImgSrc(assignee)" height="40" width="40" alt="User image"/>
-        <span>{{ assignee.email }}</span>
+        <app-user-card [email]="assignee.email" [img]="assignee.img"></app-user-card>
       </div>
       <div *ngIf="!(assignee$ | async)">Unassigned</div>
     </div>

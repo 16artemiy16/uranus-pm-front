@@ -30,6 +30,7 @@ import { TeamManagementComponent } from './components/modals/team-management/tea
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
+import { UserCardComponent } from './components/user-card/user-card.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { MatSelectModule } from '@angular/material/select';
     BoardPageTopBarComponent,
     BoardPageColumnsComponent,
     BoardPageSidebarComponent,
-    TeamManagementComponent
+    TeamManagementComponent,
+    UserCardComponent
   ],
   imports: [
     CommonModule,

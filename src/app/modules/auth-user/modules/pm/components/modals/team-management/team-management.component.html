@@ -11,10 +11,7 @@
     >
     <mat-autocomplete #auto="matAutocomplete">
       <mat-option [value]="user.email" *ngFor="let user of inviteUsersList">
-        <div class="invite-item">
-          <img [src]="getUserImgSrc(user)" height="40" width="40" alt="User image"/>
-          <span>{{ user.email }}</span>
-        </div>
+        <app-user-card [email]="user.email" [img]="user.img"></app-user-card>
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>

@@ -73,10 +73,6 @@ export class TeamManagementComponent implements OnDestroy {
     return `url(${src})`;
   }
 
-  getUserImgSrc(user: any): string {
-    return user.img || '/assets/icons/anonymous.svg';
-  }
-
   inviteUsers(): void {
     if (this.userToInvite) {
       this.boardsSandbox.inviteUsers([this.userToInvite])
