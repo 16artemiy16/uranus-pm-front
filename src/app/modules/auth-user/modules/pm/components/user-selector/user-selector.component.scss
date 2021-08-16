@@ -1,0 +1,19 @@
+:host {
+  ::ng-deep {
+    .mat-form-field-wrapper {
+      margin: 0;
+      padding: 0;
+
+      .mat-form-field-infix {
+        padding: 0.25em 0 0.75em 0;
+      }
+    }
+  }
+}
+
+.user-input {
+  display: flex;
+  img {
+    margin-right: 1em;
+  }
+}

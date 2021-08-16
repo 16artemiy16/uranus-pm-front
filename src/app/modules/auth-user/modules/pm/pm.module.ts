@@ -31,6 +31,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
 import { UserCardComponent } from './components/user-card/user-card.component';
+import { UserSelectorComponent } from './components/user-selector/user-selector.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { UserCardComponent } from './components/user-card/user-card.component';
     BoardPageColumnsComponent,
     BoardPageSidebarComponent,
     TeamManagementComponent,
-    UserCardComponent
+    UserCardComponent,
+    UserSelectorComponent
   ],
   imports: [
     CommonModule,

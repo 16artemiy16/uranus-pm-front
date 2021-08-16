@@ -1,4 +1,4 @@
 <div class="user-card">
-  <img [src]="imgSrc" height="40" width="40" alt="User image"/>
-  <span class="user-card__email">{{ email }}</span>
+  <img [src]="imgSrc" [attr.height]="imgSize" [attr.width]="imgSize" alt="User image"/>
+  <span class="user-card__email">{{ email || noUserText }}</span>
 </div>

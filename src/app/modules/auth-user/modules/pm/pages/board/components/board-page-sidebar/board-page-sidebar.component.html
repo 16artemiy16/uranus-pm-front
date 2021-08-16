@@ -15,10 +15,9 @@
     <p>Updated at: <i>{{ (selectedTask$ | async)?.updatedAt | date }}</i></p>
     <div class="task-sidebar__assignee-row">
       Assignee:
-      <div *ngIf="(assignee$ | async) as assignee" class="task-sidebar__assignee">
-        <app-user-card [email]="assignee.email" [img]="assignee.img"></app-user-card>
+      <div class="task-sidebar__assignee">
+        <app-user-selector></app-user-selector>
       </div>
-      <div *ngIf="!(assignee$ | async)">Unassigned</div>
     </div>
   </div>
   <hr/>
