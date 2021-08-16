@@ -1,5 +1,11 @@
+@import "~src/scss/material";
+
 :host {
   ::ng-deep {
+    .mat-form-field {
+      width: 100%;
+    }
+
     .mat-form-field-wrapper {
       margin: 0;
       padding: 0;
@@ -11,9 +17,38 @@
   }
 }
 
+.invitation__email {
+  position: relative;
+}
+
+.users-list {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  list-style: none;
+  background: white;
+  cursor: pointer;
+
+  border-left: 1px $grey solid;
+  border-bottom: 1px $grey solid;
+  border-right: 1px $grey solid;
+
+  li {
+    padding: 0.5em;
+
+    &:hover {
+      background: $column-background;
+    }
+  }
+}
+
 .user-input {
   display: flex;
   img {
     margin-right: 1em;
+    border-radius: 50%;
   }
 }

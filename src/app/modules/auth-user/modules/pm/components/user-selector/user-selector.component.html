@@ -6,22 +6,28 @@
   noUserText="Unassigned"
 ></app-user-card>
 
-<mat-form-field appearance="outline" class="invitation__email" *ngIf="isActive">
-  <div class="user-input">
-    <img matSuffix [src]="imgSrc" width="20"/>
-    <input type="text"
-           placeholder="User email..."
-           aria-label="Number"
-           matInput
-           #userSearch
-           (keyup.enter)="$event.preventDefault()"
-           (blur)="toggleActivity(false)"
-    >
-  </div>
+<div class="invitation__email" *ngIf="isActive">
+  <mat-form-field appearance="outline">
+    <div class="user-input">
+      <img matSuffix [src]="imgSrc" width="30"/>
+      <input type="text"
+             autocomplete="off"
+             placeholder="User email..."
+             aria-label="Number"
+             matInput
+             #userSearch
+             (keyup.enter)="$event.preventDefault()"
+             [formControl]="searchControl"
+      >
+      <button matSuffix mat-icon-button (click)="setSelectedUser(undefined)">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </mat-form-field>
+  <ul class="users-list">
+    <li *ngFor="let user of usersOptions">
+      <app-user-card [email]="user.email" [img]="user.img" (click)="setSelectedUser(user)"></app-user-card>
+    </li>
+  </ul>
+</div>
 
-  <mat-autocomplete #auto="matAutocomplete">
-    <mat-option [value]="null" *ngFor="let user of []">
-      <app-user-card></app-user-card>
-    </mat-option>
-  </mat-autocomplete>
-</mat-form-field>
