@@ -10,6 +10,10 @@
       margin: 0;
       padding: 0;
 
+      .mat-form-field-appearance-outline .mat-form-field-flex {
+        padding-left: 1em;
+      }
+
       .mat-form-field-infix {
         padding: 0.25em 0 0.75em 0;
       }
@@ -19,6 +23,11 @@
 
 .invitation__email {
   position: relative;
+}
+
+.inactive-move {
+  margin-left: 1em;
+  padding: 1em 0;
 }
 
 .users-list {

@@ -1,10 +1,12 @@
-<app-user-card
-  *ngIf="!isActive"
-  [email]="selectedUser?.email"
-  [img]="selectedUser?.img"
-  (dblclick)="toggleActivity(true)"
-  noUserText="Unassigned"
-></app-user-card>
+<div class="inactive-move" *ngIf="!isActive">
+  <app-user-card
+    [email]="selectedUser?.email"
+    [img]="selectedUser?.img"
+    [size]="30"
+    (dblclick)="toggleActivity(true)"
+    noUserText="Unassigned"
+  ></app-user-card>
+</div>
 
 <div class="invitation__email" *ngIf="isActive">
   <mat-form-field appearance="outline">
