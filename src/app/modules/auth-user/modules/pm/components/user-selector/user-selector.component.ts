@@ -2,7 +2,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  ElementRef, HostListener,
+  ElementRef, HostListener, Input,
   OnDestroy,
   ViewChild
 } from '@angular/core';
@@ -13,6 +13,7 @@ import { startWith, switchMap, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 interface SelectorUserI {
+  _id: string;
   email: string;
   img?: string;
 }
@@ -28,11 +29,13 @@ export class UserSelectorComponent implements OnDestroy {
 
   @ViewChild('userSearch') userInput: ElementRef |  undefined;
 
+  @Input()
+  selectedUser: SelectorUserI | undefined | null;
+
   searchControl: FormControl = new FormControl('');
 
-  selectedUser: SelectorUserI | undefined;
   isActive: boolean = false;
-  usersOptions: BoardUserI[] = [];
+  usersOptions: (BoardUserI | undefined)[] = [];
 
   private readonly unsubscribe$: Subject<void> = new Subject<void>();
 
@@ -47,7 +50,7 @@ export class UserSelectorComponent implements OnDestroy {
       }),
       takeUntil(this.unsubscribe$)
     ).subscribe((users) => {
-      this.usersOptions = users;
+      this.usersOptions = [undefined, ...users];
       this.cdRef.markForCheck();
     });
   }
@@ -72,6 +75,7 @@ export class UserSelectorComponent implements OnDestroy {
 
     if (this.isActive) {
       setTimeout(() => {
+        this.searchControl.setValue(this.selectedUser?.email || 'Unassigned');
         this.userInput?.nativeElement?.focus();
       });
     }
@@ -79,7 +83,9 @@ export class UserSelectorComponent implements OnDestroy {
 
   setSelectedUser(user: BoardUserI | undefined): void {
     this.selectedUser = user;
-    setTimeout(() => this.searchControl.setValue(user?.email || ''));
+    setTimeout(() => {
+      this.searchControl.setValue(user?.email || 'Unassigned');
+    });
   }
 
   ngOnDestroy(): void {

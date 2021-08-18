@@ -16,7 +16,7 @@
     <div class="task-sidebar__assignee-row">
       Assignee:
       <div class="task-sidebar__assignee">
-        <app-user-selector></app-user-selector>
+        <app-user-selector [selectedUser]="assignee$ | async"></app-user-selector>
       </div>
     </div>
   </div>

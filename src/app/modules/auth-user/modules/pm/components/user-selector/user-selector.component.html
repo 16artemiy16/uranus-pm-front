@@ -28,7 +28,7 @@
   </mat-form-field>
   <ul class="users-list">
     <li *ngFor="let user of usersOptions">
-      <app-user-card [email]="user.email" [img]="user.img" (click)="setSelectedUser(user)"></app-user-card>
+      <app-user-card [email]="user?.email" [img]="user?.img" noUserText="Unassigned" (click)="setSelectedUser(user)"></app-user-card>
     </li>
   </ul>
 </div>
