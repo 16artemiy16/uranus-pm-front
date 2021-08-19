@@ -62,4 +62,9 @@ export class BoardService {
     const url = `${this.URL}/boards/${boardId}/members/delete`;
     return this.http.post<boolean>(url, { members: ids });
   }
+
+  assignTask(taskId: string, userId: string | null): Observable<boolean> {
+    const url = `${this.URL}/boards/task/${taskId}/assignee`;
+    return this.http.post<boolean>(url, { assignee: userId });
+  }
 }

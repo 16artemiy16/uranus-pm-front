@@ -26,3 +26,12 @@ export const setActiveTaskId = createAction(
   '[Columns] Set Active Task',
   props<{ taskId: string | null }>()
 );
+
+export const assignTask = createAction(
+  '[Columns] Assign Task',
+  props<{ taskId: string, userId: string | null }>()
+);
+
+export const assignTaskSuccess = createAction(
+  '[Columns] Assign Task Success'
+);

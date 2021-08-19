@@ -11,6 +11,7 @@ import { FormControl } from '@angular/forms';
 import { BoardUserI } from '../../../../../../interfaces/board-user.interface';
 import { startWith, switchMap, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { ColumnsSandbox } from '../../store/sandboxes/columns.sandbox';
 
 interface SelectorUserI {
   _id: string;
@@ -41,7 +42,8 @@ export class UserSelectorComponent implements OnDestroy {
 
   constructor(
     private readonly boardsSandbox: BoardsSandbox,
-    private readonly cdRef: ChangeDetectorRef
+    private readonly columnsSandbox: ColumnsSandbox,
+    private readonly cdRef: ChangeDetectorRef,
   ) {
     this.searchControl.valueChanges.pipe(
       startWith(this.searchControl.value),
@@ -86,6 +88,7 @@ export class UserSelectorComponent implements OnDestroy {
     setTimeout(() => {
       this.searchControl.setValue(user?.email || 'Unassigned');
     });
+    this.columnsSandbox.assignActiveTask(this.selectedUser?._id || null)
   }
 
   ngOnDestroy(): void {

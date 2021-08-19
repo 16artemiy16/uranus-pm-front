@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { BoardService } from '../../../../../../services/board.service';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
-import { fetchColumns, fetchColumnsSuccess, moveTask } from '../actions/columns.actions';
-import { EMPTY } from 'rxjs';
+import { assignTask, assignTaskSuccess, fetchColumns, fetchColumnsSuccess, moveTask } from '../actions/columns.actions';
 
 @Injectable()
 export class ColumnsEffects {
@@ -37,4 +36,14 @@ export class ColumnsEffects {
       }),
     );
   }, { dispatch: false });
+
+  assignToTask$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(assignTask),
+      switchMap(({ taskId, userId }) => {
+        return this.boardService.assignTask(taskId, userId)
+      }),
+      map(() => assignTaskSuccess())
+    )
+  })
 }

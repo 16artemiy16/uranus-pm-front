@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { getActiveTask, getAll } from '../selectors/columns.selector';
-import { fetchColumns, moveTask, setActiveTaskId, setTaskFilterText } from '../actions/columns.actions';
+import { assignTask, fetchColumns, moveTask, setActiveTaskId, setTaskFilterText } from '../actions/columns.actions';
+import { TaskI } from '../../interfaces/task.interface';
+import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -28,5 +30,15 @@ export class ColumnsSandbox {
 
   setActiveTask(taskId: string | null) {
     this.store.dispatch(setActiveTaskId({ taskId }));
+  }
+
+  assignActiveTask(userId: string | null) {
+    // TODO: refactor it, move to store
+    this.activeTask$
+      .pipe(take(1))
+      .subscribe((activeTask) => {
+        const taskId = (activeTask as TaskI)._id;
+        this.store.dispatch(assignTask({ taskId, userId }));
+      })
   }
 }

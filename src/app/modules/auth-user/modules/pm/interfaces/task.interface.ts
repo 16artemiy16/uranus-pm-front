@@ -5,5 +5,5 @@ export interface TaskI {
   createdAt: Date;
   updatedAt: Date;
   body?: string;
-  assignee: string;
+  assignee?: string | null;
 }
