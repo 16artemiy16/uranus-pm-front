@@ -2,15 +2,14 @@ import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { ColumnI } from '../../interfaces/column.interface';
 import { Action, createReducer, on } from '@ngrx/store';
 import {
-  assignTask,
   fetchColumns,
   fetchColumnsSuccess,
   moveTask,
   setActiveTaskId,
-  setTaskFilterText
+  setTaskFilterText,
+  assignActiveTask
 } from '../actions/columns.actions';
 import { moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { TaskI } from '../../interfaces/task.interface';
 
 export interface ColumnsStateI extends EntityState<ColumnI> {
   filter: {
@@ -103,7 +102,8 @@ const columnsReducer = createReducer(
     ...state,
     filter: { ...state.filter, text }
   })),
-  on(assignTask, (state, { taskId, userId }) => {
+  on(assignActiveTask, (state, { userId }) => {
+    const taskId = state.activeTaskId;
     const columns = selectAll(state);
     const updatedColumns = columns.map((col) => {
       const { tasks } = col;

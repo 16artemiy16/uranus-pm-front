@@ -35,3 +35,8 @@ export const assignTask = createAction(
 export const assignTaskSuccess = createAction(
   '[Columns] Assign Task Success'
 );
+
+export const assignActiveTask = createAction(
+  '[Columns] Assign Active Task',
+  props<{ userId: string | null }>()
+)

@@ -1,14 +1,23 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { BoardService } from '../../../../../../services/board.service';
-import { catchError, map, switchMap, tap } from 'rxjs/operators';
-import { assignTask, assignTaskSuccess, fetchColumns, fetchColumnsSuccess, moveTask } from '../actions/columns.actions';
+import { catchError, map, switchMap, withLatestFrom } from 'rxjs/operators';
+import {
+  assignActiveTask,
+  assignTaskSuccess,
+  fetchColumns,
+  fetchColumnsSuccess,
+  moveTask
+} from '../actions/columns.actions';
+import { Store } from '@ngrx/store';
+import { getActiveTask } from '../selectors/columns.selector';
 
 @Injectable()
 export class ColumnsEffects {
   constructor(
     private readonly actions$: Actions,
-    private readonly boardService: BoardService
+    private readonly boardService: BoardService,
+    private readonly store: Store
   ) {}
 
   fetchColumns$ = createEffect(() => {
@@ -37,13 +46,14 @@ export class ColumnsEffects {
     );
   }, { dispatch: false });
 
-  assignToTask$ = createEffect(() => {
+  assignActiveTask$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(assignTask),
-      switchMap(({ taskId, userId }) => {
-        return this.boardService.assignTask(taskId, userId)
+      ofType(assignActiveTask),
+      withLatestFrom(this.store.select(getActiveTask)),
+      switchMap(([{ userId }, task]) => {
+        return this.boardService.assignTask(task!._id, userId);
       }),
       map(() => assignTaskSuccess())
-    )
-  })
+    );
+  });
 }
