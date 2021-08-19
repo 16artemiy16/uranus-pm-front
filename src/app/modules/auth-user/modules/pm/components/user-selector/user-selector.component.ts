@@ -70,6 +70,7 @@ export class UserSelectorComponent implements OnDestroy {
   @HostListener('document:click')
   clickOutside() {
     this.isActive = false;
+    this.columnsSandbox.assignActiveTask(this.selectedUser?._id || null);
   }
 
   toggleActivity(flag: boolean | undefined): void {
@@ -88,7 +89,6 @@ export class UserSelectorComponent implements OnDestroy {
     setTimeout(() => {
       this.searchControl.setValue(user?.email || 'Unassigned');
     });
-    this.columnsSandbox.assignActiveTask(this.selectedUser?._id || null)
   }
 
   ngOnDestroy(): void {
