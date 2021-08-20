@@ -53,5 +53,17 @@
 mat-card {
   margin-bottom: 1.5em;
   cursor: default;
+  display: flex;
+  align-items: center;
+
+  .task {
+    &__title {
+      flex: 1;
+    }
+
+    &__user-img {
+      border-radius: 50%;
+    }
+  }
 }
 

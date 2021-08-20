@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { ColumnI } from '../../../../interfaces/column.interface';
 import { ColumnsSandbox } from '../../../../store/sandboxes/columns.sandbox';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { TaskI } from '../../../../interfaces/task.interface';
+import { BoardsSandbox } from '../../../../store/sandboxes/boards.sandbox';
+import { BoardUserI } from '../../../../../../../../interfaces/board-user.interface';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-board-page-columns',
@@ -14,7 +17,8 @@ export class BoardPageColumnsComponent {
   readonly columns$: Observable<ColumnI[]> = this.columnsSandbox.columns$;
 
   constructor(
-    private readonly columnsSandbox: ColumnsSandbox
+    private readonly columnsSandbox: ColumnsSandbox,
+    private readonly boardSandbox: BoardsSandbox
   ) { }
 
   onDragToggle(flag: boolean) {
@@ -34,5 +38,12 @@ export class BoardPageColumnsComponent {
 
   selectTask(taskId: string | null) {
     this.columnsSandbox.setActiveTask(taskId);
+  }
+
+  getTaskAssignee$(task: TaskI): Observable<BoardUserI | null> {
+    const { assignee } = task;
+    return assignee
+      ? this.boardSandbox.getMemberById(assignee)
+      : of(null);
   }
 }

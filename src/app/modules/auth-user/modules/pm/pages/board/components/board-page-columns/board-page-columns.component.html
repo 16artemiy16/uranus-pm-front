@@ -14,7 +14,17 @@
         (cdkDragReleased)="onDragToggle(false)"
         (click)="selectTask(task._id);"
       >
-        {{ task.title }}
+        <div class="task__title">
+          {{ task.title }}
+        </div>
+        <img
+          *ngIf="(getTaskAssignee$(task) | async) as assignee"
+          class="task__user-img"
+          [matTooltip]="assignee.email"
+          [src]="assignee.img || '/assets/icons/anonymous.svg'"
+          width="30"
+          height="30"
+        />
       </mat-card>
     </div>
   </div>
