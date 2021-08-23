@@ -1,0 +1,21 @@
+<div class="notifications">
+  <span *ngIf="showCounter" class="notifications__count">{{ counter }}</span>
+  <button
+    mat-icon-button
+    aria-label="Notifications"
+    (click)="toggle()"
+    class="notifications__toggle"
+  >
+    <mat-icon>notifications</mat-icon>
+  </button>
+  <div class="notifications__list" *ngIf="isOpened">
+    <div *ngFor="let notification of orderedNotifications" class="notification" [class.notification--unread]="notification.isUnread">
+      <div class="notification__icon">
+        <mat-icon>error_outline</mat-icon>
+      </div>
+      <div class="notification__text">
+        <b>{{ notification.date | date }}</b> {{ notification.text }}
+      </div>
+    </div>
+  </div>
+</div>

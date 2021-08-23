@@ -6,10 +6,13 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { TRANSLOCO_SCOPE, TranslocoModule } from '@ngneat/transloco';
+import { NotificationsIconComponent } from './components/notifications-icon/notifications-icon.component';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
-    AuthLayoutComponent
+    AuthLayoutComponent,
+    NotificationsIconComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +27,8 @@ import { TRANSLOCO_SCOPE, TranslocoModule } from '@ngneat/transloco';
     MatToolbarModule,
     MatIconModule,
     MatMenuModule,
-    TranslocoModule
+    TranslocoModule,
+    MatButtonModule
   ],
   providers: [
     {

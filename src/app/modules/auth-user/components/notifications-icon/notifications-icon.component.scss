@@ -1,0 +1,64 @@
+@import "~src/scss/material";
+
+.notifications {
+  position: relative;
+  display: flex;
+  user-select: none;
+
+  &__toggle {
+    cursor: pointer;
+  }
+
+  &__count {
+    background: $notifications-count;
+    position: absolute;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: -4px;
+    right: 0;
+    font-size: 14px;
+  }
+
+  &__list {
+    position: absolute;
+    background: white;
+    right: 15px;
+    top: 35px;
+    z-index: 2;
+    border: 1px black solid;
+    display: flex;
+    flex-direction: column;
+    color: black;
+    width: 400px;
+  }
+}
+
+.notification {
+  position: relative;
+  padding: 0.5em;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.5;
+  transition: background-color 2.5s ease;
+  background-color: white;
+
+  &.notification--unread {
+    background-color: $column-background;
+  }
+
+  &__icon {
+    width: 50px;
+    height: 50px;
+    background: aquamarine;
+    margin-right: 1em;
+    float: left;
+  }
+
+  &__text {
+    white-space: break-spaces;
+  }
+}
