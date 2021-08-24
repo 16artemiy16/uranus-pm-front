@@ -69,8 +69,10 @@ export class UserSelectorComponent implements OnDestroy {
 
   @HostListener('document:click')
   clickOutside() {
-    this.isActive = false;
-    this.columnsSandbox.assignActiveTask(this.selectedUser?._id || null);
+    if (this.isActive) {
+      this.isActive = false;
+      this.columnsSandbox.assignActiveTask(this.selectedUser?._id || null);
+    }
   }
 
   toggleActivity(flag: boolean | undefined): void {
