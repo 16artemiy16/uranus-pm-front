@@ -75,7 +75,8 @@ export class TeamManagementComponent implements OnDestroy {
 
   inviteUsers(): void {
     if (this.userToInvite) {
-      this.boardsSandbox.inviteUsers([this.userToInvite])
+      this.boardsSandbox.inviteUsers([this.userToInvite]);
+      this.userSearchControl.setValue('');
     }
   }
 
