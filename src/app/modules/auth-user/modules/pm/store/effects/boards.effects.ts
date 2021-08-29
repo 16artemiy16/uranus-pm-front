@@ -13,6 +13,7 @@ import { SnackService } from '../../../../../common/snack/snack.service';
 import { TranslocoService } from '@ngneat/transloco';
 import { Store } from '@ngrx/store';
 import { getSelected } from '../selectors/boards.selectors';
+import { AnalyticsService } from '../../../../../../services/analytics.service';
 
 @Injectable()
 export class BoardsEffects {
@@ -21,12 +22,16 @@ export class BoardsEffects {
     private readonly boardService: BoardService,
     private readonly snack: SnackService,
     private readonly transloco: TranslocoService,
-    private readonly store: Store
+    private readonly store: Store,
+    private readonly analyticsService: AnalyticsService
   ) {}
 
   setSelectedBoardId$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(setSelectedBoardId),
+      tap(({ boardId }) => {
+        this.analyticsService.traceUserVisitBoard(boardId).subscribe()
+      }),
       switchMap(({ boardId }) => {
         return this.boardService.getMembers(boardId);
       }),
