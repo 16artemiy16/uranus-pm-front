@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { BoardI } from '../modules/auth-user/modules/pm/interfaces/board.interface';
 
 type UserEventActionT = 'visit';
 type UserEventVisitData = {
@@ -37,5 +38,10 @@ export class AnalyticsService {
     return this.traceUserEvent('visit', data).pipe(
       tap(() => this.boardsLastsVisitsMs[board] = currentVisitMs)
     );
+  }
+
+  getUserFavouriteBoards(): Observable<Pick<BoardI, '_id' | 'name'>[]> {
+    const url = `${this.URL}/user/favourite/boards`;
+    return this.http.get<Pick<BoardI, '_id' | 'name'>[]>(url);
   }
 }

@@ -35,7 +35,6 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.activatedRoute.params
-      .pipe(take(1),)
       .subscribe(({ id }) => {
         // TODO: This is a workaround! Change in future on fetchBoardsById()
         this.boardsSandbox.fetchBoards();
