@@ -1,3 +1,5 @@
+@import "~src/scss/material";
+
 :host {
   display: flex;
   margin: 2em 0 2em 2em;
@@ -8,6 +10,7 @@
 
   .users-list {
     display: flex;
+
     &__item {
       background-position: center center;
       background-repeat: no-repeat;
@@ -18,9 +21,14 @@
       border-radius: 50%;
       margin-left: -5px;
       &:hover {
-        transform: translateY(-5px);
-        transition: .5s;
+        transform: translateY(-2px);
+        transition: .2s;
       }
+    }
+
+    .user-active {
+      transform: translateY(-5px);
+      border: 1px $primary solid;
     }
   }
 }

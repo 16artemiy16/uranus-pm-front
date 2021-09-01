@@ -11,8 +11,10 @@
   <div
     class="users-list__item"
     *ngFor="let user of users$ | async"
+    [class.user-active]="user._id === (tasksFilterAssignee$ | async)"
     [style.background-image]="getUserImgStyle(user)"
     [matTooltip]="user.email"
+    (click)="filterTasksByUser(user._id)"
   >
   </div>
 </div>

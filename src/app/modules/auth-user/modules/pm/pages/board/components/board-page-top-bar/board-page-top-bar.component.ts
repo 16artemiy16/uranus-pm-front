@@ -13,7 +13,8 @@ import { BoardUserI } from '../../../../../../../../interfaces/board-user.interf
 })
 export class BoardPageTopBarComponent implements OnDestroy {
   readonly filterTextControl = this.fb.control('');
-  users$: Observable<BoardUserI[]> = this.boardsSandbox.boardMembers$;
+  readonly tasksFilterAssignee$ = this.columnsSandbox.tasksFilterAssignee$;
+  readonly users$: Observable<BoardUserI[]> = this.boardsSandbox.boardMembers$;
 
   private readonly unsubscribe$: Subject<void> = new Subject<void>();
 
@@ -35,6 +36,10 @@ export class BoardPageTopBarComponent implements OnDestroy {
   getUserImgStyle(user: any): string {
     const src = user.img || '/assets/icons/anonymous.svg';
     return `url(${src})`;
+  }
+
+  filterTasksByUser(id: string) {
+    this.columnsSandbox.setTaskFilterAssigneeId(id);
   }
 
   ngOnDestroy() {

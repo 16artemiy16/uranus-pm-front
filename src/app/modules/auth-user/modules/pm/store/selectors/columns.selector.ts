@@ -33,16 +33,19 @@ export const getAll = createSelector(
   (state, filter) => {
     const columns = selectAll(state);
 
+    const { assigneeId } = filter;
     const filterText = filter.text.trim().toLowerCase();
 
     // If filter is empty, then just return without filtering
-    if (!filterText) {
+    if (!filterText && !assigneeId) {
       return columns;
     }
 
     return columns.map((column) => {
       const filteredTasks = column.tasks.filter((task) => {
-        return task.title.toLowerCase().includes(filterText);
+        const titleFilter = !filterText || task.title.toLowerCase().includes(filterText);
+        const assigneeFilter = !assigneeId || task.assignee === assigneeId;
+        return titleFilter && assigneeFilter;
       });
 
       return {

@@ -7,13 +7,15 @@ import {
   moveTask,
   setActiveTaskId,
   setTaskFilterText,
-  assignActiveTask
+  assignActiveTask,
+  setTaskFilterAssigneeId
 } from '../actions/columns.actions';
 import { moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 export interface ColumnsStateI extends EntityState<ColumnI> {
   filter: {
     text: string;
+    assigneeId: string | null;
   },
   activeTaskId: string | null;
 }
@@ -25,7 +27,8 @@ export const adapterColumns: EntityAdapter<ColumnI> = createEntityAdapter<Column
 
 const initialState: ColumnsStateI = adapterColumns.getInitialState({
   filter: {
-    text: ''
+    text: '',
+    assigneeId: null
   },
   activeTaskId: null
 });
@@ -101,6 +104,13 @@ const columnsReducer = createReducer(
   on(setTaskFilterText, (state, { text }) => ({
     ...state,
     filter: { ...state.filter, text }
+  })),
+  on(setTaskFilterAssigneeId, (state, { assigneeId }) => ({
+    ...state,
+    filter: {
+      ...state.filter,
+      assigneeId: state.filter.assigneeId === assigneeId ? null : assigneeId
+    }
   })),
   on(assignActiveTask, (state, { userId }) => {
     const taskId = state.activeTaskId;
