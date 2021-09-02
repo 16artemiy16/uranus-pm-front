@@ -6,6 +6,7 @@ import { Observable, of } from 'rxjs';
 import { TaskI } from '../../interfaces/task.interface';
 import { BoardsSandbox } from '../../store/sandboxes/boards.sandbox';
 import { BoardUserI } from '../../../../../../interfaces/board-user.interface';
+import { AnalyticsService } from '../../../../../../services/analytics.service';
 
 @Component({
   selector: 'app-task',
@@ -26,8 +27,12 @@ export class TaskComponent {
       }),
       map((params) => params.get('taskId')),
       switchMap((taskId) => {
-        return taskId ? this.columnSandbox.getTaskById(taskId) : of(null);
-      })
+        return taskId ?
+          this.columnSandbox.getTaskById(taskId).pipe(
+            tap(() => this.analyticsService.traceUserVisitTask(taskId).subscribe())
+          )
+          : of(null);
+      }),
     );
 
   assignee$: Observable<BoardUserI | null> = this.task$.pipe(
@@ -47,7 +52,8 @@ export class TaskComponent {
   constructor(
     private readonly activatedRoute: ActivatedRoute,
     private readonly columnSandbox: ColumnsSandbox,
-    private readonly boardsSandbox: BoardsSandbox
+    private readonly boardsSandbox: BoardsSandbox,
+    private readonly analyticsService: AnalyticsService
   ) {
 
   }

@@ -6,7 +6,7 @@ import { BoardI } from '../modules/auth-user/modules/pm/interfaces/board.interfa
 
 type UserEventActionT = 'visit';
 type UserEventVisitData = {
-  targetType: 'board';
+  targetType: 'board' | 'task';
   targetId: string;
 }
 type UserEventDataT = UserEventVisitData;
@@ -16,8 +16,9 @@ type UserEventDataT = UserEventVisitData;
 })
 export class AnalyticsService {
   private readonly URL = 'http://localhost:3000/analytics';
-  private readonly VISIT_BOARD_TRACKING_DEBOUNCE_MS = 600000 // 10 min
-  private boardsLastsVisitsMs: Record<string, number> = {}
+  private readonly VISIT_TRACKING_DEBOUNCE_MS = 600000 // 10 min
+  private boardsLastsVisitsMs: Record<string, number> = {};
+  private tasksLastsVisitsMs: Record<string, number> = {};
 
   constructor(private readonly http: HttpClient) { }
 
@@ -30,13 +31,27 @@ export class AnalyticsService {
     const lastVisitMs = this.boardsLastsVisitsMs[board];
     const currentVisitMs = new Date().getTime();
 
-    if (lastVisitMs && (currentVisitMs - lastVisitMs < this.VISIT_BOARD_TRACKING_DEBOUNCE_MS)) {
+    if (lastVisitMs && (currentVisitMs - lastVisitMs < this.VISIT_TRACKING_DEBOUNCE_MS)) {
       return of(null);
     }
 
     const data: UserEventVisitData = { targetType: 'board', targetId: board };
     return this.traceUserEvent('visit', data).pipe(
       tap(() => this.boardsLastsVisitsMs[board] = currentVisitMs)
+    );
+  }
+
+  traceUserVisitTask(task: string): Observable<any | null> {
+    const lastVisitMs = this.tasksLastsVisitsMs[task];
+    const currentVisitMs = new Date().getTime();
+
+    if (lastVisitMs && (currentVisitMs - lastVisitMs < this.VISIT_TRACKING_DEBOUNCE_MS)) {
+      return of(null);
+    }
+
+    const data: UserEventVisitData = { targetType: 'task', targetId: task };
+    return this.traceUserEvent('visit', data).pipe(
+      tap(() => this.boardsLastsVisitsMs[task] = currentVisitMs)
     );
   }
 
