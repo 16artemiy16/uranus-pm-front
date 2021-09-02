@@ -7,6 +7,16 @@
   padding: 2em;
 }
 
+.breadcrumbs {
+  margin-bottom: 1em;
+  font-size: 1.25em;
+
+  &__current {
+    color: $link;
+    cursor: default;
+  }
+}
+
 .task-info {
   display: flex;
   flex: 1;

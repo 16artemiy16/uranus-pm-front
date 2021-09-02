@@ -50,3 +50,8 @@ export const getMembersOrderedByEmailStr = (emailStr: string) => createSelector(
     return [...firstUsers, ...lastUsers];
   }
 );
+
+export const getBoardById = (id: string) => createSelector(
+  selectBoardsState,
+  (state) => selectEntities(state)[id] || null
+);

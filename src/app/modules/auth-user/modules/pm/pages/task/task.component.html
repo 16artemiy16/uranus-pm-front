@@ -1,5 +1,7 @@
-<nav>
-  <a>Boards</a> / <a>Board 1</a> / <a>{{ (task$ | async)?.title }}</a>
+<nav class="breadcrumbs">
+  <a routerLink="../../../">Boards</a> /
+  <a routerLink="../../../{{ (task$ | async)?.boardId }}">{{ boardName$ | async }} </a> /
+  <span class="breadcrumbs__current">{{ (task$ | async)?.title }}</span>
 </nav>
 <h1>{{ (task$ | async)?.title }}</h1>
 

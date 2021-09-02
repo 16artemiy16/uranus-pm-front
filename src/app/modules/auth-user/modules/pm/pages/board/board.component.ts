@@ -1,18 +1,14 @@
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   OnDestroy,
   OnInit,
-  ViewChild
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs/operators';
-import { TaskI } from '../../interfaces/task.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateTaskComponent } from '../../components/modals/create-task/create-task.component';
-import { MatSidenav } from '@angular/material/sidenav';
 import { ColumnsSandbox } from '../../store/sandboxes/columns.sandbox';
 import { BoardsSandbox } from '../../store/sandboxes/boards.sandbox';
 

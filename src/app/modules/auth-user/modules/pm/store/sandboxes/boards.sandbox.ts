@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { getAll, getMemberById, getMembers, getSelected, getMembersOrderedByEmailStr } from '../selectors/boards.selectors';
+import { getAll, getMemberById, getMembers, getSelected, getMembersOrderedByEmailStr, getBoardById } from '../selectors/boards.selectors';
 import { createBoard, fetchBoards, inviteUsers, removeUsers, setSelectedBoardId } from '../actions/boards.actions';
 import { Observable } from 'rxjs';
 import { BoardUserI, BoardUserToInviteI } from '../../../../../../interfaces/board-user.interface';
+import { BoardI } from '../../interfaces/board.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,10 @@ export class BoardsSandbox {
   boards$ = this.store.select(getAll);
   selectedBoard$ = this.store.select(getSelected);
   boardMembers$: Observable<BoardUserI[]> = this.store.select(getMembers);
+
+  getBoardById(id: string): Observable<BoardI | null> {
+    return this.store.select(getBoardById(id));
+  }
 
   getMemberById(id: string): Observable<BoardUserI | null> {
     return this.store.select(getMemberById(id));

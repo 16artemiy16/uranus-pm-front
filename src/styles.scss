@@ -22,3 +22,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .flex-spacer {
   flex: 1 1 auto;
 }
+
+a {
+  color: $link;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+    color: $link-focus;
+  }
+}

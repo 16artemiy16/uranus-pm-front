@@ -36,6 +36,14 @@ export class TaskComponent {
     }),
   );
 
+  boardName$: Observable<string | null> = this.task$.pipe(
+    switchMap((task) => task
+      ? this.boardsSandbox.getBoardById(task.boardId)
+      : of(null)
+    ),
+    map((board) => board?.name || '')
+  );
+
   constructor(
     private readonly activatedRoute: ActivatedRoute,
     private readonly columnSandbox: ColumnsSandbox,
