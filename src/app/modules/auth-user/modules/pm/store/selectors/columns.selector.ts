@@ -20,6 +20,17 @@ export const getActiveTask = createSelector(
           }, [] as TaskI[])
           .find((task) => task._id === activeTaskId) || null;
   }
+);
+
+export const getTaskById = (id: string) => createSelector(
+  selectColumnsState,
+  (state) => {
+    return selectAll(state)
+      .reduce((tasks, column) => {
+        return [ ...tasks, ...column.tasks ];
+      }, [] as TaskI[])
+      .find((task) => task._id === id) || null;
+  }
 )
 
 export const getFilter = createSelector(

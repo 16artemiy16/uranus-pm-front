@@ -32,6 +32,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
 import { UserCardComponent } from './components/user-card/user-card.component';
 import { UserSelectorComponent } from './components/user-selector/user-selector.component';
+import { TaskComponent } from './pages/task/task.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { UserSelectorComponent } from './components/user-selector/user-selector.
     BoardPageSidebarComponent,
     TeamManagementComponent,
     UserCardComponent,
-    UserSelectorComponent
+    UserSelectorComponent,
+    TaskComponent
   ],
   imports: [
     CommonModule,
@@ -66,6 +68,7 @@ import { UserSelectorComponent } from './components/user-selector/user-selector.
     RouterModule.forChild([
       { path: 'boards', component: BoardsPageComponent },
       { path: 'boards/:id', component: BoardComponent },
+      { path: 'boards/:id/task/:taskId', component: TaskComponent },
       { path: '**', redirectTo: 'boards' }
     ]),
     TranslocoModule,

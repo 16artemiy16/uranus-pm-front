@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ColumnsSandbox } from '../../../../store/sandboxes/columns.sandbox';
-import { switchMap } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { BoardsSandbox } from '../../../../store/sandboxes/boards.sandbox';
 import { Observable, of } from 'rxjs';
 import { TaskI } from '../../../../interfaces/task.interface';
@@ -18,15 +18,14 @@ export class BoardPageSidebarComponent {
       return task?.assignee ? this.boardsSandbox.getMemberById(task.assignee) : of(null);
     }),
   );
+  taskLink$: Observable<string> = this.selectedTask$.pipe(
+    map((task) => task ? `./task/${task._id}` : '')
+  );
 
   constructor(
     private readonly columnsSandbox: ColumnsSandbox,
     private readonly boardsSandbox: BoardsSandbox
   ) {}
-
-  getUserImgSrc(user: any): string {
-    return user.img || '/assets/icons/anonymous.svg';
-  }
 
   unselectTask(): void {
     this.columnsSandbox.setActiveTask(null);

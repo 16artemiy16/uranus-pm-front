@@ -1,8 +1,8 @@
 <div class="task-sidebar">
   <div class="task-sidebar__actions">
-    <button mat-icon-button aria-label="Open in new tab">
+    <a mat-icon-button aria-label="Open in new tab" [routerLink]="taskLink$ | async">
       <mat-icon>open_in_new</mat-icon>
-    </button>
+    </a>
 
     <button mat-icon-button aria-label="Close task sidebar" (click)="unselectTask()">
       <mat-icon>close</mat-icon>

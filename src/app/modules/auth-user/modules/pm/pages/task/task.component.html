@@ -1,0 +1,25 @@
+<nav>
+  <a>Boards</a> / <a>Board 1</a> / <a>{{ (task$ | async)?.title }}</a>
+</nav>
+<h1>{{ (task$ | async)?.title }}</h1>
+
+<main class="task-info">
+  <div class="task-info__main">
+    <div class="task-info__description">
+      {{ (task$ | async)?.body || 'Here is no description...'}}
+    </div>
+  </div>
+  <div class="task-info__right">
+    <h2 class="header">Details</h2>
+    <section>
+      <p>Created at: <i>{{ (task$ | async)?.createdAt | date }}</i></p>
+      <p>Updated at: <i>{{ (task$ | async)?.updatedAt | date }}</i></p>
+      <div class="task-info__assignee-row">
+        Assignee:
+        <div class="task-info__assignee">
+          <app-user-selector [selectedUser]="assignee$ | async"></app-user-selector>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
