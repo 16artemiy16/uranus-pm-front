@@ -1,8 +1,8 @@
 <form (keydown.enter)="$event.preventDefault()" class="invitation">
   <mat-form-field appearance="outline" class="invitation__email">
-    <mat-label>Send invitation</mat-label>
+    <mat-label>{{ 'auth.SendInvitation' | transloco }}</mat-label>
     <input type="text"
-           placeholder="User email..."
+           placeholder="{{ 'auth.UserEmail' | transloco }}..."
            aria-label="Number"
            matInput
            [matAutocomplete]="auto"
@@ -17,7 +17,7 @@
   </mat-form-field>
 
   <mat-form-field appearance="outline">
-    <mat-label>Role</mat-label>
+    <mat-label>{{ 'auth.Role' | transloco }}</mat-label>
     <mat-select>
       <mat-option *ngFor="let role of roles" [value]="role">{{ role }}</mat-option>
     </mat-select>
@@ -31,12 +31,12 @@
     [disabled]="isInviteBtnDisabled"
     (click)="inviteUsers()"
   >
-    Invite user
+    {{ 'auth.Invite' | transloco }}
   </button>
 </form>
 
 
-<p class="header">Team</p>
+<p class="header">{{ 'auth.Team' | transloco }}</p>
 
 <table mat-table [dataSource]="usersSource" class="users-table">
   <!-- Email Column -->
@@ -50,19 +50,19 @@
 
   <!-- Role Column -->
   <ng-container matColumnDef="role">
-    <th mat-header-cell *matHeaderCellDef> Role </th>
+    <th mat-header-cell *matHeaderCellDef> {{ 'auth.Role' | transloco }} </th>
     <td mat-cell *matCellDef="let element"> {{element.role}} </td>
   </ng-container>
 
   <!-- Status Column -->
   <ng-container matColumnDef="status">
-    <th mat-header-cell *matHeaderCellDef> Status </th>
+    <th mat-header-cell *matHeaderCellDef> {{ 'auth.Status' | transloco }} </th>
     <td mat-cell *matCellDef="let element"> {{element.status}} </td>
   </ng-container>
 
   <!-- Actions Column -->
   <ng-container matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef> Actions </th>
+    <th mat-header-cell *matHeaderCellDef> {{ 'auth.Actions' | transloco }} </th>
     <td mat-cell *matCellDef="let element">
       <button mat-icon-button [matTooltip]="'auth.Remove' | transloco" (click)="removeUser(element._id)">
         <mat-icon>clear</mat-icon>

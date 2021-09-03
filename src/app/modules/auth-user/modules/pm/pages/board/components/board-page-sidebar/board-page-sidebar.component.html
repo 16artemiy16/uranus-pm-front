@@ -11,10 +11,10 @@
   <h1>{{ (selectedTask$ | async)?.title }}</h1>
   <hr/>
   <div class="task-sidebar__dates">
-    <p>Created at: <i>{{ (selectedTask$ | async)?.createdAt | date }}</i></p>
-    <p>Updated at: <i>{{ (selectedTask$ | async)?.updatedAt | date }}</i></p>
+    <p>{{ 'auth.CreatedAt' | transloco }}: <i>{{ (selectedTask$ | async)?.createdAt | date }}</i></p>
+    <p>{{ 'auth.UpdatedAt' | transloco }}: <i>{{ (selectedTask$ | async)?.updatedAt | date }}</i></p>
     <div class="task-sidebar__assignee-row">
-      Assignee:
+      {{ 'auth.Assignee' | transloco }}:
       <div class="task-sidebar__assignee">
         <app-user-selector [selectedUser]="assignee$ | async"></app-user-selector>
       </div>
@@ -23,7 +23,7 @@
   <hr/>
   <div>
     {{ (selectedTask$ | async)?.body }}
-    <i *ngIf="!(selectedTask$ | async)?.body">Here is no description...</i>
+    <i *ngIf="!(selectedTask$ | async)?.body">{{ 'auth.HereIsNoDescription' | transloco }}</i>
   </div>
 </div>
 

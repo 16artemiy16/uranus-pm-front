@@ -2,7 +2,7 @@
   <div class="logo">URANUS-PM</div>
 
   <button mat-button [matMenuTriggerFor]="boardsMenu">
-    Boards
+    {{ 'auth.Boards' | transloco }}
     <mat-icon>expand_more</mat-icon>
   </button>
 
@@ -45,14 +45,14 @@
 </mat-menu>
 
 <mat-menu #boardsMenu="matMenu">
-  <a
+  <button
     *ngFor="let board of favouriteBoards"
     mat-menu-item
     [routerLink]="['pm', 'boards', board._id]"
   >
     {{ board.name }}
-  </a>
-  <button mat-menu-item routerLink="boards">View All</button>
+  </button>
+  <button mat-menu-item routerLink="boards">{{ 'auth.AllBoards' | transloco }}</button>
 </mat-menu>
 
 <router-outlet></router-outlet>

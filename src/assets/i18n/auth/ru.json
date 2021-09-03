@@ -23,5 +23,18 @@
     "Cancel": "Отмена"
   },
   "TeamManagement": "Управление командой",
-  "SearchTask": "Поиск задачи"
+  "SearchTask": "Поиск задачи",
+  "Boards": "Доски",
+  "AllBoards": "Все доски",
+  "UserEmail": "Email пользователя",
+  "Invite": "Пригласить",
+  "SendInvitation": "Отправить Приглашение",
+  "Role": "Роль",
+  "Team": "Команда",
+  "Status": "Статус",
+  "Actions": "Действия",
+  "CreatedAt": "Создан",
+  "UpdatedAt": "Обновлён",
+  "Assignee": "Исполнитель",
+  "HereIsNoDescription": "Описание отсутствует..."
 }

@@ -23,5 +23,18 @@
     "Cancel": "Cancel"
   },
   "TeamManagement": "Team management",
-  "SearchTask": "Search task"
+  "SearchTask": "Search task",
+  "Boards": "Boards",
+  "AllBoards": "All Boards",
+  "UserEmail": "User email",
+  "Invite": "Invite",
+  "SendInvitation": "Send Invitation",
+  "Role": "Role",
+  "Team": "Team",
+  "Status": "Status",
+  "Actions": "Actions",
+  "CreatedAt": "Created at",
+  "UpdatedAt": "Updated at",
+  "Assignee": "Assignee",
+  "HereIsNoDescription": "Here is no description..."
 }
