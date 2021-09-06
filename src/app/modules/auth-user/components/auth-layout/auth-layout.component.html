@@ -6,6 +6,11 @@
     <mat-icon>expand_more</mat-icon>
   </button>
 
+  <button mat-button [matMenuTriggerFor]="tasksMenu">
+    {{ 'auth.Tasks' | transloco }}
+    <mat-icon>expand_more</mat-icon>
+  </button>
+
   <span class="flex-spacer"></span>
 
   <div class="language" [matMenuTriggerFor]="langMenu">
@@ -54,5 +59,16 @@
   </button>
   <button mat-menu-item routerLink="boards">{{ 'auth.AllBoards' | transloco }}</button>
 </mat-menu>
+
+<mat-menu #tasksMenu="matMenu">
+  <button
+    *ngFor="let task of favouriteTasks"
+    mat-menu-item
+    [routerLink]="['pm', 'boards', task.boardId, 'task', task._id]"
+  >
+    {{ task.title }}
+  </button>
+</mat-menu>
+
 
 <router-outlet></router-outlet>

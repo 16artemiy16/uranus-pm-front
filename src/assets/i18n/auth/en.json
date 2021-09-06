@@ -36,5 +36,6 @@
   "CreatedAt": "Created at",
   "UpdatedAt": "Updated at",
   "Assignee": "Assignee",
-  "HereIsNoDescription": "Here is no description..."
+  "HereIsNoDescription": "Here is no description...",
+  "Tasks": "Tasks"
 }

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { BoardI } from '../modules/auth-user/modules/pm/interfaces/board.interface';
+import { TaskI } from '../modules/auth-user/modules/pm/interfaces/task.interface';
 
 type UserEventActionT = 'visit';
 type UserEventVisitData = {
@@ -58,5 +59,10 @@ export class AnalyticsService {
   getUserFavouriteBoards(): Observable<Pick<BoardI, '_id' | 'name'>[]> {
     const url = `${this.URL}/user/favourite/boards`;
     return this.http.get<Pick<BoardI, '_id' | 'name'>[]>(url);
+  }
+
+  getUserFavouriteTasks(): Observable<Pick<TaskI, '_id' | 'title' | 'boardId'>[]> {
+    const url = `${this.URL}/user/favourite/tasks`;
+    return this.http.get<Pick<TaskI, '_id' | 'title' | 'boardId'>[]>(url);
   }
 }

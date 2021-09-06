@@ -36,5 +36,6 @@
   "CreatedAt": "Создан",
   "UpdatedAt": "Обновлён",
   "Assignee": "Исполнитель",
-  "HereIsNoDescription": "Описание отсутствует..."
+  "HereIsNoDescription": "Описание отсутствует...",
+  "Tasks": "Задачи"
 }
