@@ -1,29 +1,26 @@
-<div class="task-sidebar">
-  <div class="task-sidebar__actions">
-    <a mat-icon-button aria-label="Open in new tab" [routerLink]="taskLink$ | async">
-      <mat-icon>open_in_new</mat-icon>
-    </a>
+<div class="actions">
+  <a mat-icon-button aria-label="Open in new tab" [routerLink]="taskLink$ | async">
+    <mat-icon>open_in_new</mat-icon>
+  </a>
 
-    <button mat-icon-button aria-label="Close task sidebar" (click)="unselectTask()">
-      <mat-icon>close</mat-icon>
-    </button>
-  </div>
-  <h1>{{ (selectedTask$ | async)?.title }}</h1>
-  <hr/>
-  <div class="task-sidebar__dates">
-    <p>{{ 'auth.CreatedAt' | transloco }}: <i>{{ (selectedTask$ | async)?.createdAt | date }}</i></p>
-    <p>{{ 'auth.UpdatedAt' | transloco }}: <i>{{ (selectedTask$ | async)?.updatedAt | date }}</i></p>
-    <div class="task-sidebar__assignee-row">
-      {{ 'auth.Assignee' | transloco }}:
-      <div class="task-sidebar__assignee">
-        <app-user-selector [selectedUser]="assignee$ | async"></app-user-selector>
-      </div>
+  <button mat-icon-button aria-label="Close task sidebar" (click)="unselectTask()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<h1>{{ (selectedTask$ | async)?.title }}</h1>
+<hr/>
+<div class="dates">
+  <p>{{ 'auth.CreatedAt' | transloco }}: <i>{{ (selectedTask$ | async)?.createdAt | date }}</i></p>
+  <p>{{ 'auth.UpdatedAt' | transloco }}: <i>{{ (selectedTask$ | async)?.updatedAt | date }}</i></p>
+  <div class="assignee-row">
+    {{ 'auth.Assignee' | transloco }}:
+    <div class="assignee">
+      <app-user-selector [selectedUser]="assignee$ | async"></app-user-selector>
     </div>
   </div>
-  <hr/>
-  <div>
-    {{ (selectedTask$ | async)?.body }}
-    <i *ngIf="!(selectedTask$ | async)?.body">{{ 'auth.HereIsNoDescription' | transloco }}</i>
-  </div>
 </div>
-
+<hr/>
+<div>
+  {{ (selectedTask$ | async)?.body }}
+  <i *ngIf="!(selectedTask$ | async)?.body">{{ 'auth.HereIsNoDescription' | transloco }}</i>
+</div>

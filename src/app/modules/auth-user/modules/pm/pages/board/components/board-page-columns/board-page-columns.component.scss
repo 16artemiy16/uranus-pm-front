@@ -2,9 +2,12 @@
 
 .columns-list {
   display: flex;
+  width: 100%;
 
   .column {
-    width: 400px;
+    max-width: 400px;
+    min-width: 200px;
+    flex: 1;
     border: 1px black solid;
     min-height: 300px;
     margin: 0 2em;

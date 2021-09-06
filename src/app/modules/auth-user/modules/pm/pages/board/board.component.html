@@ -1,26 +1,19 @@
-<mat-sidenav-container [hasBackdrop]="false" autosize scrollable>
-  <mat-sidenav-content>
+<div class="board-main">
+  <app-board-page-header></app-board-page-header>
+  <app-board-page-top-bar></app-board-page-top-bar>
+  <app-board-page-columns></app-board-page-columns>
 
-    <app-board-page-header></app-board-page-header>
-    <app-board-page-top-bar></app-board-page-top-bar>
-    <app-board-page-columns></app-board-page-columns>
-
-    <div class="actions">
-      <button
-        class="add-task"
-        mat-fab
-        aria-label="Add a board"
-        [matTooltip]="'auth.CreateTask' | transloco"
-        matTooltipPosition="left"
-        (click)="createTask()"
-      >
-        <mat-icon>add</mat-icon>
-      </button>
-    </div>
-  </mat-sidenav-content>
-
-  <mat-sidenav #drawer mode="over" position="end" class="task-sidebar" [opened]="!!(selectedTask$ | async)">
-    <app-board-page-sidebar></app-board-page-sidebar>
-  </mat-sidenav>
-
-</mat-sidenav-container>
+  <div class="actions">
+    <button
+      class="add-task"
+      mat-fab
+      aria-label="Add a board"
+      [matTooltip]="'auth.CreateTask' | transloco"
+      matTooltipPosition="left"
+      (click)="createTask()"
+    >
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+</div>
+<app-board-page-sidebar *ngIf="selectedTask$ | async"></app-board-page-sidebar>

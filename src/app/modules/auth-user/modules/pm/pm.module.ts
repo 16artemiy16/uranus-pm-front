@@ -15,7 +15,6 @@ import { TRANSLOCO_SCOPE, TranslocoModule } from '@ngneat/transloco';
 import { BoardComponent } from './pages/board/board.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CreateTaskComponent } from './components/modals/create-task/create-task.component';
-import { MatSidenavModule } from '@angular/material/sidenav';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { BoardsEffects } from './store/effects/boards.effects';
@@ -58,7 +57,6 @@ import { TaskComponent } from './pages/task/task.component';
     MatFormFieldModule,
     MatInputModule,
     MatCardModule,
-    MatSidenavModule,
     MatMenuModule,
     ReactiveFormsModule,
     MatAutocompleteModule,
