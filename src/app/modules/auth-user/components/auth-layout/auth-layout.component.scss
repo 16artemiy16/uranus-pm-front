@@ -1,25 +1,3 @@
-.language {
-  margin-right: 1.5em;
-  cursor: pointer;
-  border: 1px black solid;
-  padding: 0 0.5em;
-}
-
-.profile-icon {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  user-select: none;
-
-  &__email {
-    margin-right: 0.5em;
-  }
-
-  img {
-    border-radius: 50%;
-  }
-}
-
 .notifications {
   margin-right: 1.5em;
 }
