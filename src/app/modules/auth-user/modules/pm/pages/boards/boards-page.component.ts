@@ -5,6 +5,7 @@ import { CreateBoardComponent } from '../../components/modals/create-board/creat
 import { BoardI } from '../../interfaces/board.interface';
 import { Observable } from 'rxjs';
 import { BoardsSandbox } from '../../store/sandboxes/boards.sandbox';
+import { MatButtonToggleChange } from '@angular/material/button-toggle';
 
 @Component({
   selector: 'app-boards-page',
@@ -13,6 +14,7 @@ import { BoardsSandbox } from '../../store/sandboxes/boards.sandbox';
 })
 export class BoardsPageComponent {
   boards$: Observable<BoardI[]> = this.boardsSandbox.boards$;
+  view: 'grid' | 'list' = 'grid';
 
   constructor(
     private readonly boardService: BoardService,
@@ -26,5 +28,9 @@ export class BoardsPageComponent {
     this.dialog.open(CreateBoardComponent, {
       width: '600px'
     });
+  }
+
+  changeView(event: MatButtonToggleChange) {
+    this.view = event.value;
   }
 }

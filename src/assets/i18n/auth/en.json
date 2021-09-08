@@ -37,5 +37,7 @@
   "UpdatedAt": "Updated at",
   "Assignee": "Assignee",
   "HereIsNoDescription": "Here is no description...",
-  "Tasks": "Tasks"
+  "Tasks": "Tasks",
+  "GridView": "Grid view",
+  "ListView": "List view"
 }

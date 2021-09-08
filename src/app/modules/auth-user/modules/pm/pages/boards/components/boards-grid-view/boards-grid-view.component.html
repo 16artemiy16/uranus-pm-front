@@ -1,0 +1,23 @@
+<mat-card *ngFor="let board of boards" class="board">
+  <mat-card-header>
+    <mat-card-title>{{ board.name }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="board__image"></div>
+    <div class="board__description">{{ board.description }}</div>
+  </mat-card-content>
+  <mat-card-actions>
+    <a mat-button mat-stroked-button color="primary" [routerLink]="board._id">
+      {{ 'auth.Join' | transloco }}
+    </a>
+
+    <span class="flex-spacer"></span>
+
+    <button mat-icon-button [matTooltip]="'auth.Settings' | transloco">
+      <mat-icon>settings</mat-icon>
+    </button>
+    <button mat-icon-button [matTooltip]="'auth.Info' | transloco">
+      <mat-icon>info</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

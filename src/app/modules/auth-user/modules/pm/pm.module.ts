@@ -32,6 +32,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { UserCardComponent } from './components/user-card/user-card.component';
 import { UserSelectorComponent } from './components/user-selector/user-selector.component';
 import { TaskComponent } from './pages/task/task.component';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { BoardsGridViewComponent } from './pages/boards/components/boards-grid-view/boards-grid-view.component';
+import { BoardsListViewComponent } from './pages/boards/components/boards-list-view/boards-list-view.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +49,9 @@ import { TaskComponent } from './pages/task/task.component';
     TeamManagementComponent,
     UserCardComponent,
     UserSelectorComponent,
-    TaskComponent
+    TaskComponent,
+    BoardsGridViewComponent,
+    BoardsListViewComponent
   ],
   imports: [
     CommonModule,
@@ -63,6 +68,7 @@ import { TaskComponent } from './pages/task/task.component';
     MatTableModule,
     MatSelectModule,
     DragDropModule,
+    MatButtonToggleModule,
     RouterModule.forChild([
       { path: 'boards', component: BoardsPageComponent },
       { path: 'boards/:id', component: BoardComponent },
