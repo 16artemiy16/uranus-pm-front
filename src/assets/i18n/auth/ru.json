@@ -39,5 +39,7 @@
   "HereIsNoDescription": "Описание отсутствует...",
   "Tasks": "Задачи",
   "GridView": "Вид сетки",
-  "ListView": "Вид списка"
+  "ListView": "Вид списка",
+  "Owner": "Владелец",
+  "Key": "Ключ"
 }

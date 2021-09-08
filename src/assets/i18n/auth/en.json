@@ -39,5 +39,7 @@
   "HereIsNoDescription": "Here is no description...",
   "Tasks": "Tasks",
   "GridView": "Grid view",
-  "ListView": "List view"
+  "ListView": "List view",
+  "Owner": "Owner",
+  "Key": "Key"
 }

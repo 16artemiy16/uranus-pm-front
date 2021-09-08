@@ -7,7 +7,7 @@ import { BoardI } from '../../../../interfaces/board.interface';
   styleUrls: ['./boards-list-view.component.scss']
 })
 export class BoardsListViewComponent {
-  readonly DISPLAYED_COLUMNS = ['name'];
+  readonly DISPLAYED_COLUMNS = ['favourite', 'name', 'key', 'owner', 'actions'];
 
   @Input() boards: BoardI[] = [];
 

@@ -1,0 +1,23 @@
+@import "~src/scss/material";
+
+table {
+  width: 100%;
+}
+
+.mat-column-favourite {
+  width: 70px;
+  padding-left: 0 !important;
+  text-align: center;
+  .fav-icon {
+    &:not(.active) {
+      color: $link-focus;
+      &:hover {
+        color: $link;
+      }
+    }
+
+    &.active {
+      color: $warning;
+    }
+  }
+}

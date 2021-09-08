@@ -14,7 +14,7 @@ import { MatButtonToggleChange } from '@angular/material/button-toggle';
 })
 export class BoardsPageComponent {
   boards$: Observable<BoardI[]> = this.boardsSandbox.boards$;
-  view: 'grid' | 'list' = 'grid';
+  view: 'grid' | 'list' = 'list';
 
   constructor(
     private readonly boardService: BoardService,
