@@ -14,7 +14,7 @@ import { MatButtonToggleChange } from '@angular/material/button-toggle';
 })
 export class BoardsPageComponent {
   boards$: Observable<BoardI[]> = this.boardsSandbox.boards$;
-  view: 'grid' | 'list' = 'list';
+  view: 'grid' | 'list' = this.boardsSandbox.cachedBoardsView;
 
   constructor(
     private readonly boardService: BoardService,
@@ -30,7 +30,8 @@ export class BoardsPageComponent {
     });
   }
 
-  changeView(event: MatButtonToggleChange) {
-    this.view = event.value;
+  changeView({ value }: MatButtonToggleChange) {
+    this.view = value;
+    this.boardsSandbox.cacheBoardsView(value);
   }
 }
