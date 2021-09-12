@@ -11,7 +11,9 @@
     "Description": "Description",
     "descriptionHint": "Optional: short description",
     "Create": "Create",
-    "Cancel": "Cancel"
+    "Cancel": "Cancel",
+    "Key": "Key",
+    "keyHint": "Unique short string to identify the board"
   },
   "BoardCreated": "The board successfully created!",
   "CreateTask": "Create a Task",

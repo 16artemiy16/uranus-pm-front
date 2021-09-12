@@ -10,6 +10,7 @@ import { BoardsSandbox } from '../../../store/sandboxes/boards.sandbox';
 export class CreateBoardComponent {
   readonly boardForm = this.fb.group({
     name: ['', Validators.required],
+    key: ['', Validators.required],
     description: ['']
   });
 

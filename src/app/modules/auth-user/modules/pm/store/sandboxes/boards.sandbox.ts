@@ -34,7 +34,7 @@ export class BoardsSandbox {
     this.store.dispatch(fetchBoards());
   }
 
-  createBoard(dto: { name: string, description?: string }) {
+  createBoard(dto: { name: string, key: string, description?: string }) {
     this.store.dispatch(createBoard(dto));
   }
 

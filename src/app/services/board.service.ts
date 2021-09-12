@@ -8,6 +8,7 @@ import { BoardUserI } from '../interfaces/board-user.interface';
 
 interface CreateBoardDto {
   name: string;
+  key: string;
   description?: string;
 }
 

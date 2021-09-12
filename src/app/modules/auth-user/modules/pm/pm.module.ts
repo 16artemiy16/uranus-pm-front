@@ -35,9 +35,11 @@ import { TaskComponent } from './pages/task/task.component';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { BoardsGridViewComponent } from './pages/boards/components/boards-grid-view/boards-grid-view.component';
 import { BoardsListViewComponent } from './pages/boards/components/boards-list-view/boards-list-view.component';
+import { ToUppercaseDirective } from './directives/to-uppercase.directive';
 
 @NgModule({
   declarations: [
+    ToUppercaseDirective,
     BoardsPageComponent,
     CreateBoardComponent,
     BoardComponent,

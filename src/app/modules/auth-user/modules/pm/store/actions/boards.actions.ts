@@ -5,7 +5,7 @@ import { BoardUserI, BoardUserToInviteI } from '../../../../../../interfaces/boa
 export const fetchBoards = createAction('[Boards] Fetch Boards');
 export const fetchBoardsSuccess = createAction('[Boards] Fetch Boards Success', props<{ boards: BoardI[] }>());
 
-export const createBoard = createAction('[Boards] Create Board', props<{ name: string, description?: string }>());
+export const createBoard = createAction('[Boards] Create Board', props<{ name: string, key: string, description?: string }>());
 export const createBoardSuccess = createAction('[Boards] Create Board Success');
 
 export const setSelectedBoardId = createAction('[Boards] Set Selected Board Id', props<{ boardId: string }>());

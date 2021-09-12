@@ -50,8 +50,8 @@ export class BoardsEffects {
   createBoard$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(createBoard),
-      switchMap(({ name, description }) => {
-        return this.boardService.create({ name, description });
+      switchMap(({ name, key, description }) => {
+        return this.boardService.create({ name, key, description });
       }),
       tap(() => {
         const msg = this.transloco.translate('auth.BoardCreated');
