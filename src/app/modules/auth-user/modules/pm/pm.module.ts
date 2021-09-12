@@ -35,11 +35,10 @@ import { TaskComponent } from './pages/task/task.component';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { BoardsGridViewComponent } from './pages/boards/components/boards-grid-view/boards-grid-view.component';
 import { BoardsListViewComponent } from './pages/boards/components/boards-list-view/boards-list-view.component';
-import { ToUppercaseDirective } from './directives/to-uppercase.directive';
+import { SharedModule } from '../../../shared/shared.module';
 
 @NgModule({
   declarations: [
-    ToUppercaseDirective,
     BoardsPageComponent,
     CreateBoardComponent,
     BoardComponent,
@@ -79,7 +78,8 @@ import { ToUppercaseDirective } from './directives/to-uppercase.directive';
     ]),
     TranslocoModule,
     StoreModule.forFeature(FEATURE_NAME, reducers),
-    EffectsModule.forFeature([BoardsEffects, ColumnsEffects])
+    EffectsModule.forFeature([BoardsEffects, ColumnsEffects]),
+    SharedModule
   ],
   providers: [
     {
