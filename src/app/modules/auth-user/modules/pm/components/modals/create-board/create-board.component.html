@@ -11,6 +11,7 @@
       <mat-label>{{ 'auth.boardModal.Key' | transloco }}</mat-label>
       <input matInput formControlName="key" toUppercase />
       <mat-hint>{{ 'auth.boardModal.keyHint' | transloco }}</mat-hint>
+      <mat-error *ngIf="keyOccupiedError">{{ keyOccupiedError }}</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="legacy">
@@ -27,7 +28,7 @@
     mat-dialog-close
     color="primary"
     (click)="create()"
-    [disabled]="boardForm.invalid"
+    [disabled]="boardForm.invalid || boardForm.pending"
   >
     {{ 'auth.boardModal.Create' | transloco }}
   </button>

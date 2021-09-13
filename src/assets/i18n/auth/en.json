@@ -13,7 +13,8 @@
     "Create": "Create",
     "Cancel": "Cancel",
     "Key": "Key",
-    "keyHint": "Unique short string to identify the board"
+    "keyHint": "Unique short string to identify the board",
+    "KeyOccupied": "The key {{ key }} is already occupied"
   },
   "BoardCreated": "The board successfully created!",
   "CreateTask": "Create a Task",

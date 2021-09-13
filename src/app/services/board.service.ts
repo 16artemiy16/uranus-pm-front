@@ -68,4 +68,9 @@ export class BoardService {
     const url = `${this.URL}/boards/task/${taskId}/assignee`;
     return this.http.post<boolean>(url, { assignee: userId });
   }
+
+  isKeyFree(key: string): Observable<Boolean> {
+    const url = `${this.URL}/boards/is-key-free/${key}`;
+    return this.http.get<boolean>(url);
+  }
 }
