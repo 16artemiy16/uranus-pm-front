@@ -3,7 +3,6 @@ import { AbstractControl, AsyncValidatorFn, ValidationErrors } from '@angular/fo
 import { Observable, timer } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
-// TODO: add caching
 export class BoardKeyValidator {
   static createValidator(boardService: BoardService, debounceMS: number = 500): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {

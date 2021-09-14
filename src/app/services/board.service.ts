@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { BoardI } from '../modules/auth-user/modules/pm/interfaces/board.interface';
 import { ColumnI } from '../modules/auth-user/modules/pm/interfaces/column.interface';
 import { BoardUserI } from '../interfaces/board-user.interface';
+import { HttpRequestCache } from '../decorators/http-request-cache.decorator';
 
 interface CreateBoardDto {
   name: string;
@@ -69,6 +70,7 @@ export class BoardService {
     return this.http.post<boolean>(url, { assignee: userId });
   }
 
+  @HttpRequestCache()
   isKeyFree(key: string): Observable<Boolean> {
     const url = `${this.URL}/boards/is-key-free/${key}`;
     return this.http.get<boolean>(url);
