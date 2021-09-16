@@ -5,6 +5,7 @@ import { tap } from 'rxjs/operators';
 import jwtDecode from 'jwt-decode';
 import { Router } from '@angular/router';
 import { UserI } from '../interfaces/user.interface';
+import { HttpRequestCache } from '../decorators/http-request-cache.decorator';
 
 @Injectable({
   providedIn: 'root'
@@ -56,6 +57,7 @@ export class UserService {
     this.router.navigate(['guest'])
   }
 
+  @HttpRequestCache()
   searchByEmail(email: string, projection = {}, options = {}, emailsToExclude: string[] = []): Observable<Partial<UserI>[]> {
     const url = `${this.URL}/users/get-custom`;
     return this.http.post<UserI[]>(url, {
