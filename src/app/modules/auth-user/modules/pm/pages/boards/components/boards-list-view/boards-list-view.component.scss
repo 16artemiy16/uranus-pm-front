@@ -4,6 +4,14 @@ table {
   width: 100%;
 }
 
+table tr.mat-row:hover {
+  background: $border-row-hover;
+}
+
+.mat-column-name a {
+  color: unset;
+}
+
 .mat-column-favourite {
   width: 70px;
   padding-left: 0 !important;
