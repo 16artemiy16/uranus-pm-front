@@ -21,12 +21,11 @@ export class BoardService {
   private readonly URL = 'http://localhost:3000';
 
   constructor(
-    private readonly http: HttpClient,
-    private readonly userService: UserService
+    private readonly http: HttpClient
   ) { }
 
   getCurrentUserBoards(): Observable<BoardI[]> {
-    const url = `${this.URL}/boards/owner/${this.userService.currentUser._id}`;
+    const url = `${this.URL}/boards/my`;
     return this.http.get<BoardI[]>(url);
   }
 
