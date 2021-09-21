@@ -1,7 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { getAll, getMemberById, getMembers, getSelected, getMembersOrderedByEmailStr, getBoardById } from '../selectors/boards.selectors';
-import { createBoard, fetchBoards, inviteUsers, removeUsers, setSelectedBoardId } from '../actions/boards.actions';
+import {
+  createBoard,
+  fetchBoards,
+  inviteUsers,
+  removeUsers,
+  setSelectedBoardId,
+  toggleFavouriteBoard
+} from '../actions/boards.actions';
 import { Observable } from 'rxjs';
 import { BoardUserI, BoardUserToInviteI } from '../../../../../../interfaces/board-user.interface';
 import { BoardI } from '../../interfaces/board.interface';
@@ -48,6 +55,10 @@ export class BoardsSandbox {
 
   removeUsers(users: string[]) {
     this.store.dispatch(removeUsers({ users }));
+  }
+
+  toggleFavouriteBoard(boardId: string) {
+    this.store.dispatch(toggleFavouriteBoard({ boardId }));
   }
 
   cacheBoardsView(value: 'list' | 'view'): void {

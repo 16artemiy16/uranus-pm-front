@@ -20,3 +20,5 @@ export const inviteUsersSuccess = createAction('[Boards] Invite Users Success');
 
 export const removeUsers = createAction('[Boards] Remove Users', props<{ users: string[] }>());
 export const removeUsersSuccess = createAction('[Boards] Remove Users Success');
+
+export const toggleFavouriteBoard = createAction('[Boards] Toggle Favourite Board', props<{boardId: string}>());

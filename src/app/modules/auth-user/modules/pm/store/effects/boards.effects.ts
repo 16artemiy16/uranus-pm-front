@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { BoardService } from '../../../../../../services/board.service';
-import { map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import { map, mergeMap, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import {
   createBoard,
   fetchBoardMembersSuccess,
   fetchBoards,
   fetchBoardsSuccess, inviteUsers, inviteUsersSuccess, removeUsers, removeUsersSuccess,
-  setSelectedBoardId
+  setSelectedBoardId, toggleFavouriteBoard
 } from '../actions/boards.actions';
 import { SnackService } from '../../../../../common/snack/snack.service';
 import { TranslocoService } from '@ngneat/transloco';
@@ -82,5 +82,12 @@ export class BoardsEffects {
       }),
       map(() => removeUsersSuccess())
     )
-  })
+  });
+
+  toggleFavouriteBoard$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(toggleFavouriteBoard),
+      mergeMap(({ boardId }) => this.boardService.toggleFavouriteBoard(boardId)),
+    )
+  }, { dispatch: false })
 }

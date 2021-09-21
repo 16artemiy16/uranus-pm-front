@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { BoardI } from '../../../../interfaces/board.interface';
+import { BoardsSandbox } from '../../../../store/sandboxes/boards.sandbox';
 
 @Component({
   selector: 'app-boards-list-view',
@@ -11,5 +12,11 @@ export class BoardsListViewComponent {
 
   @Input() boards: BoardI[] = [];
 
-  constructor() { }
+  constructor(
+    private readonly boardsSandbox: BoardsSandbox
+  ) { }
+
+  toggleFavouriteBoard(boardId: string) {
+    this.boardsSandbox.toggleFavouriteBoard(boardId);
+  }
 }
