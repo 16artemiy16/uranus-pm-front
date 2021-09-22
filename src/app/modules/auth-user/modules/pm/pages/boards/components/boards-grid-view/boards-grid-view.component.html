@@ -13,11 +13,6 @@
 
     <span class="flex-spacer"></span>
 
-    <button mat-icon-button [matTooltip]="'auth.Settings' | transloco">
-      <mat-icon>settings</mat-icon>
-    </button>
-    <button mat-icon-button [matTooltip]="'auth.Info' | transloco">
-      <mat-icon>info</mat-icon>
-    </button>
+    <app-board-favourite-btn [board]="board"></app-board-favourite-btn>
   </mat-card-actions>
 </mat-card>

@@ -36,6 +36,9 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { BoardsGridViewComponent } from './pages/boards/components/boards-grid-view/boards-grid-view.component';
 import { BoardsListViewComponent } from './pages/boards/components/boards-list-view/boards-list-view.component';
 import { SharedModule } from '../../../shared/shared.module';
+import {
+  BoardFavouriteBtnComponent
+} from './pages/boards/components/board-favourite-btn/board-favourite-btn.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +55,8 @@ import { SharedModule } from '../../../shared/shared.module';
     UserSelectorComponent,
     TaskComponent,
     BoardsGridViewComponent,
-    BoardsListViewComponent
+    BoardsListViewComponent,
+    BoardFavouriteBtnComponent
   ],
   imports: [
     CommonModule,

@@ -3,9 +3,7 @@
   <ng-container matColumnDef="favourite">
     <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let element">
-      <button mat-icon-button (click)="toggleFavouriteBoard(element._id)">
-        <mat-icon class="fav-icon" [class.active]="element.isFavourite">star_rate</mat-icon>
-      </button>
+      <app-board-favourite-btn [board]="element"></app-board-favourite-btn>
     </td>
   </ng-container>
 
