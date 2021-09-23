@@ -24,7 +24,17 @@
   <!-- Lead Column -->
   <ng-container matColumnDef="owner">
     <th mat-header-cell *matHeaderCellDef> {{ 'auth.Owner' | transloco }} </th>
-    <td mat-cell *matCellDef="let element"> {{ element.ownerId }} </td>
+    <td mat-cell *matCellDef="let element">
+      <div class="owner-container">
+        <!-- TODO: replace fake image -->
+        <img
+          width="35"
+          height="35"
+          [src]="element.owner.img || 'https://s3.amazonaws.com/assets.saam.media/files/styles/x_large/s3/files/images/1966/SAAM-1966.48.26_1.jpg?itok=_g0Ompts'"
+        />
+        {{ element.owner.email }}
+      </div>
+    </td>
   </ng-container>
 
   <!-- Actions Column -->

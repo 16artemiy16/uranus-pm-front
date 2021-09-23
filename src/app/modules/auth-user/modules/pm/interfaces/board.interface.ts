@@ -3,4 +3,9 @@ export interface BoardI {
   name: string;
   description?: string;
   isFavourite?: boolean;
+  owner: {
+    _id: string;
+    email: string;
+    img: string;
+  }
 }
