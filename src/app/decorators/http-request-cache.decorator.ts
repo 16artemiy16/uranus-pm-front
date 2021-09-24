@@ -4,14 +4,25 @@ import { tap } from 'rxjs/operators';
 type HttpRequestCacheMethod = (...args: any[]) => Observable<any>;
 
 export class CacheStorage {
-  static storage: Record<string, any> = {};
+  private static instance: CacheStorage;
+  private readonly storage: Record<string, any> = {};
 
-  static setItem(key: string, item: Observable<any>): void {
-    CacheStorage.storage[key] = item;
+  private constructor() {}
+
+  static getInstance(): CacheStorage {
+    if (!CacheStorage.instance) {
+      CacheStorage.instance = new CacheStorage();
+    }
+
+    return CacheStorage.instance;
   }
 
-  static getItem(key: string): Observable<any> | undefined {
-    return CacheStorage.storage[key];
+  setItem(key: string, item: Observable<any>): void {
+    this.storage[key] = item;
+  }
+
+  getItem(key: string): Observable<any> | undefined {
+    return this.storage[key];
   }
 }
 
@@ -32,7 +43,7 @@ export function HttpRequestCache() {
     const originalMethod = descriptor.value;
 
     descriptor.value = function (...args: any[]): Observable<any> {
-      const storage = CacheStorage;
+      const storage = CacheStorage.getInstance();
       const key = `${ cacheKeyPrefix }_${ JSON.stringify(args) }`;
       const cachedValue = storage.getItem(key);
 
