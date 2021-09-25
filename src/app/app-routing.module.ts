@@ -10,7 +10,7 @@ const routes: Routes = [
     canLoad: [GuestGuard]
   },
   {
-    path: 'auth',
+    path: '',
     loadChildren: () => import('./modules/auth-user/auth-user.module').then((m) => m.AuthUserModule),
     canLoad: [AuthGuard]
   },

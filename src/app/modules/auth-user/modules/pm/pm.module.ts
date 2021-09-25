@@ -75,9 +75,9 @@ import {
     DragDropModule,
     MatButtonToggleModule,
     RouterModule.forChild([
-      { path: 'boards', component: BoardsPageComponent },
-      { path: 'boards/:id', component: BoardComponent },
-      { path: 'boards/:id/task/:taskId', component: TaskComponent },
+      { path: '', component: BoardsPageComponent },
+      { path: ':id', component: BoardComponent },
+      { path: ':id/task/:taskId', component: TaskComponent },
       { path: '**', redirectTo: 'boards' }
     ]),
     TranslocoModule,

@@ -16,7 +16,7 @@ import { AnalyticsService } from '../../../../../services/analytics.service';
       <button
         *ngFor="let task of favouriteTasks"
         mat-menu-item
-        [routerLink]="['pm', 'boards', task.boardId, 'task', task._id]"
+        [routerLink]="['pm', task.boardId, 'task', task._id]"
       >
         {{ task.title }}
       </button>

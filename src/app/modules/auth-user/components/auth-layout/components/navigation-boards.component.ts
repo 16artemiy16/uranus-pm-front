@@ -16,7 +16,7 @@ import { BoardI } from '../../../modules/pm/interfaces/board.interface';
       <button
         *ngFor="let board of favouriteBoards"
         mat-menu-item
-        [routerLink]="['pm', 'boards', board._id]"
+        [routerLink]="['pm', board._id]"
       >
         {{ board.name }}
       </button>
