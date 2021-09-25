@@ -37,6 +37,9 @@
   border: 2px $grey dashed;
   background: transparent;
   color: transparent;
+  * {
+    visibility: hidden;
+  }
 }
 
 .cdk-drag-preview {
