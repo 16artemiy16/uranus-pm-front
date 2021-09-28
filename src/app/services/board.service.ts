@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { UserService } from './user.service';
 import { Observable } from 'rxjs';
 import { BoardI } from '../modules/auth-user/modules/pm/interfaces/board.interface';
 import { ColumnI } from '../modules/auth-user/modules/pm/interfaces/column.interface';

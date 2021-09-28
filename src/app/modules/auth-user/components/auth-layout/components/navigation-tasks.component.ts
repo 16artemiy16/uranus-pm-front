@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { TaskI } from '../../../modules/pm/interfaces/task.interface';
 import { take } from 'rxjs/operators';
 import { AnalyticsService } from '../../../../../services/analytics.service';
+import { TaskFavourite } from '../../../../../types/task-favourite.type';
 
 @Component({
   selector: 'app-navigation-tasks',
@@ -16,7 +17,7 @@ import { AnalyticsService } from '../../../../../services/analytics.service';
       <button
         *ngFor="let task of favouriteTasks"
         mat-menu-item
-        [routerLink]="['pm', task.boardId, 'task', task._id]"
+        [routerLink]="['pm', task.boardId, 'task', task.boardId + '-' + task.number]"
       >
         {{ task.title }}
       </button>
@@ -24,7 +25,7 @@ import { AnalyticsService } from '../../../../../services/analytics.service';
   `,
 })
 export class NavigationTasksComponent {
-  favouriteTasks: Pick<TaskI, '_id' | 'title' | 'boardId'>[] = [];
+  favouriteTasks: TaskFavourite[] = [];
 
   constructor(
     private readonly analyticsService: AnalyticsService

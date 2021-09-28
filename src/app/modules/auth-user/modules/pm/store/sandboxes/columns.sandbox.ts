@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { getActiveTask, getAll, getFilter, getTaskById } from '../selectors/columns.selector';
+import { getActiveTask, getAll, getFilter, getTaskByCode, getTaskById } from '../selectors/columns.selector';
 import {
   assignActiveTask,
   assignTask,
@@ -30,6 +30,10 @@ export class ColumnsSandbox {
 
   getTaskById(id: string): Observable<TaskI | null> {
     return this.store.select(getTaskById(id));
+  }
+
+  getTaskByCode(code: string): Observable<TaskI | null> {
+    return this.store.select(getTaskByCode(code));
   }
 
   moveTask(taskId: string, toIndex: number, columnId?: string) {

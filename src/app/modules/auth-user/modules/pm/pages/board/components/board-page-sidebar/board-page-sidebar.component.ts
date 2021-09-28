@@ -19,7 +19,7 @@ export class BoardPageSidebarComponent {
     }),
   );
   taskLink$: Observable<string> = this.selectedTask$.pipe(
-    map((task) => task ? `./task/${task._id}` : '')
+    map((task) => task ? `./task/${task.boardId}-${task.number}` : '')
   );
 
   constructor(

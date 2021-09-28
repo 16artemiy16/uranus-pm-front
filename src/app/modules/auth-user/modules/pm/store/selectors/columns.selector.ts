@@ -31,7 +31,22 @@ export const getTaskById = (id: string) => createSelector(
       }, [] as TaskI[])
       .find((task) => task._id === id) || null;
   }
-)
+);
+
+export const getTaskByCode = (code: string) => createSelector(
+  selectColumnsState,
+  (state) => {
+    console.log('CODES', selectAll(state)
+      .reduce((tasks, column) => {
+        return [ ...tasks, ...column.tasks ];
+      }, [] as TaskI[]), code)
+    return selectAll(state)
+      .reduce((tasks, column) => {
+        return [ ...tasks, ...column.tasks ];
+      }, [] as TaskI[])
+      .find(({ boardId, number }) => `${boardId}-${number}` === code) || null;
+  }
+);
 
 export const getFilter = createSelector(
   selectColumnsState,

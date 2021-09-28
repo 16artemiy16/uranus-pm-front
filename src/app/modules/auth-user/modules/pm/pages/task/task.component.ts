@@ -25,12 +25,10 @@ export class TaskComponent {
           this.columnSandbox.fetchColumns(boardId);
         }
       }),
-      map((params) => params.get('taskId')),
-      switchMap((taskId) => {
-        return taskId ?
-          this.columnSandbox.getTaskById(taskId).pipe(
-            tap(() => this.analyticsService.traceUserVisitTask(taskId).subscribe())
-          )
+      map((params) => params.get('taskCode')),
+      switchMap((taskCode) => {
+        return taskCode ?
+          this.columnSandbox.getTaskByCode(taskCode)
           : of(null);
       }),
     );

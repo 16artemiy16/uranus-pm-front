@@ -77,7 +77,7 @@ import {
     RouterModule.forChild([
       { path: '', component: BoardsPageComponent },
       { path: ':id', component: BoardComponent },
-      { path: ':id/task/:taskId', component: TaskComponent },
+      { path: ':id/task/:taskCode', component: TaskComponent },
       { path: '**', redirectTo: 'boards' }
     ]),
     TranslocoModule,
