@@ -2,7 +2,7 @@ export interface BoardI {
   _id: string;
   name: string;
   description?: string;
-  isFavourite?: boolean;
+  isFavourite: boolean;
   owner: {
     _id: string;
     email: string;

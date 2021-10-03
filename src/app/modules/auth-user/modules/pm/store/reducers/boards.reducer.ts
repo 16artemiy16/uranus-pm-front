@@ -18,7 +18,13 @@ export interface BoardsStateI extends EntityState<BoardI>{
 }
 
 export const adapterBoards: EntityAdapter<BoardI> = createEntityAdapter<BoardI>({
-  selectId: (model) => model._id
+  selectId: (model) => model._id,
+  sortComparer: (a, b) => {
+    const favDiff = +b.isFavourite - +a.isFavourite;
+    const alphabetDiff = a.name.localeCompare(b.name);
+
+    return favDiff || alphabetDiff;
+  }
 });
 
 const initialState: BoardsStateI = adapterBoards.getInitialState({
