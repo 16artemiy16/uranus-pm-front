@@ -39,6 +39,7 @@ import { SharedModule } from '../../../shared/shared.module';
 import {
   BoardFavouriteBtnComponent
 } from './pages/boards/components/board-favourite-btn/board-favourite-btn.component';
+import { SelectorModule } from '../../../reusable/selector/selector.module';
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import {
     MatSelectModule,
     DragDropModule,
     MatButtonToggleModule,
+    SelectorModule,
     RouterModule.forChild([
       { path: '', component: BoardsPageComponent },
       { path: ':id', component: BoardComponent },

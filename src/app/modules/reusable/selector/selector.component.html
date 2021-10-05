@@ -1,0 +1,37 @@
+<div class="inactive-mode" *ngIf="!isActive" (dblclick)="toggleActivity(true)">
+  <ng-container *ngTemplateOutlet="selectedItem"></ng-container>
+</div>
+
+<div class="active-mode" *ngIf="isActive">
+  <mat-form-field appearance="outline">
+    <div class="item-input">
+      <img matSuffix [src]="selectedId ? selectedOption?.img : fallbackImg" width="30"/>
+      <input type="text"
+             autocomplete="off"
+             matInput
+             #searchInput
+             (keyup.enter)="$event.preventDefault()"
+             [formControl]="searchControl"
+      >
+      <button matSuffix mat-icon-button (click)="setSelectedOption(null)">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </mat-form-field>
+  <ul class="selector-options">
+    <li *ngFor="let option of sortedOptions" (click)="setSelectedOption(option.id)">
+      <ng-container *ngTemplateOutlet="item; context: {$implicit: option}"></ng-container>
+    </li>
+  </ul>
+</div>
+
+<ng-template #item let-item>
+  <div class="selector-item">
+    <img class="selector-item__img" [src]="item?.img" width="30" height="30" />
+    <div class="selector-item__text">{{ item?.text }}</div>
+  </div>
+</ng-template>
+
+<ng-template #selectedItem>
+  <ng-container  *ngTemplateOutlet="item; context: {$implicit: selectedOption}"></ng-container>
+</ng-template>

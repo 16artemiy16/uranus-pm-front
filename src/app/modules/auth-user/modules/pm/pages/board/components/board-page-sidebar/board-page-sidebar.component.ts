@@ -21,6 +21,13 @@ export class BoardPageSidebarComponent {
   taskLink$: Observable<string> = this.selectedTask$.pipe(
     map((task) => task ? `./task/${task.boardId}-${task.number}` : '')
   );
+  usersOptions$: Observable<{ id: string, text: string, img?: string }[]> = this.boardsSandbox.boardMembers$.pipe(
+    map((members) => {
+      return members.map(({ img, _id: id, email: text }) => {
+        return { id, text, img };
+      });
+    })
+  )
 
   constructor(
     private readonly columnsSandbox: ColumnsSandbox,
