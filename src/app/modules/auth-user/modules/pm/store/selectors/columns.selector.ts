@@ -36,10 +36,6 @@ export const getTaskById = (id: string) => createSelector(
 export const getTaskByCode = (code: string) => createSelector(
   selectColumnsState,
   (state) => {
-    console.log('CODES', selectAll(state)
-      .reduce((tasks, column) => {
-        return [ ...tasks, ...column.tasks ];
-      }, [] as TaskI[]), code)
     return selectAll(state)
       .reduce((tasks, column) => {
         return [ ...tasks, ...column.tasks ];
