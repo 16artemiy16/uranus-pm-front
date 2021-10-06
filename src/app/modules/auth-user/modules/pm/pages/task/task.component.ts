@@ -14,7 +14,7 @@ import { AnalyticsService } from '../../../../../../services/analytics.service';
   styleUrls: ['./task.component.scss']
 })
 export class TaskComponent {
-  task$ = this.activatedRoute.data.pipe(pluck('task'));
+  task$: Observable<TaskI> = this.activatedRoute.data.pipe(pluck('task'));
 
   assignee$: Observable<BoardUserI | null> = this.task$.pipe(
     switchMap((task) => {
@@ -34,5 +34,16 @@ export class TaskComponent {
     private readonly activatedRoute: ActivatedRoute,
     private readonly columnSandbox: ColumnsSandbox,
     private readonly boardsSandbox: BoardsSandbox,
-  ) {}
+    private readonly analyticsService: AnalyticsService
+  ) {
+    this.trackVisitTask();
+  }
+
+  private trackVisitTask() {
+    this.task$
+      .pipe(
+        take(1),
+        switchMap(({ _id }) => this.analyticsService.traceUserVisitTask(_id))
+      ).subscribe()
+  }
 }
