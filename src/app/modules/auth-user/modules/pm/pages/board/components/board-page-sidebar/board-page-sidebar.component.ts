@@ -37,4 +37,8 @@ export class BoardPageSidebarComponent {
   unselectTask(): void {
     this.columnsSandbox.setActiveTask(null);
   }
+
+  assignActiveTask(assigneeId: string | null): void {
+    this.columnsSandbox.assignActiveTask(assigneeId);
+  }
 }

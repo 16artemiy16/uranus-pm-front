@@ -15,7 +15,13 @@
   <div class="assignee-row">
     {{ 'auth.Assignee' | transloco }}:
     <div class="assignee">
-      <app-user-selector [selectedUser]="assignee$ | async"></app-user-selector>
+      <app-selector
+        [ngModel]="(assignee$ | async)?._id"
+        [options]="(usersOptions$ | async) || []"
+        [fallbackText]="'Unassigned'"
+        [fallbackImg]="'/assets/icons/anonymous.svg'"
+        (ngModelChange)="assignActiveTask($event)"
+      ></app-selector>
     </div>
   </div>
 </div>

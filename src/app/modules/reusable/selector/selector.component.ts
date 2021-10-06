@@ -1,13 +1,13 @@
 import {
   ChangeDetectionStrategy, ChangeDetectorRef,
   Component,
-  ElementRef,
+  ElementRef, EventEmitter, forwardRef,
   HostListener,
   Input,
-  OnChanges, SimpleChanges,
+  OnChanges, Output, SimpleChanges,
   ViewChild
 } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 type Option = {
   id: string | null;
@@ -19,12 +19,22 @@ type Option = {
   selector: 'app-selector',
   templateUrl: './selector.component.html',
   styleUrls: ['./selector.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => SelectorComponent),
+      multi: true
+    }
+  ]
 })
-export class SelectorComponent implements OnChanges {
+export class SelectorComponent implements OnChanges, ControlValueAccessor {
   @Input() options: Option[] = [];
   @Input() fallbackText: string = '';
   @Input() fallbackImg: string | null = null;
+
+  @Output() onSelect: EventEmitter<string | null> = new EventEmitter<string | null>();
+
   @ViewChild('searchInput') searchInput: ElementRef | undefined;
 
   sortedOptions: Option[] = [this.fallbackOption];
@@ -32,6 +42,9 @@ export class SelectorComponent implements OnChanges {
   selectedId: string | null = null;
   isActive: boolean = false;
   readonly searchControl: FormControl = new FormControl('');
+
+  private onChange = (value: any) => {};
+  private onTouched = () => {};
 
   constructor(
     private readonly cdRef: ChangeDetectorRef
@@ -49,11 +62,33 @@ export class SelectorComponent implements OnChanges {
       })
   }
 
+  private sortOptions() {
+    this.sortedOptions = this.selectedOption?.id
+      ? [
+        this.selectedOption,
+        ...this.sortedOptions.filter((op) => op.id !== this.selectedId)
+      ]
+      : [this.fallbackOption, ...this.options];
+  }
+
   ngOnChanges(changes: SimpleChanges) {
     const { options } = changes;
     if (options) {
       this.sortedOptions = [this.fallbackOption, ...options.currentValue];
     }
+  }
+
+  writeValue(val: string | null) {
+    this.selectedId = val;
+    this.sortOptions();
+  }
+
+  registerOnChange(fn: any) {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: any) {
+    this.onTouched = fn;
   }
 
   private getOption(id: string | null): Option | null {
@@ -76,7 +111,7 @@ export class SelectorComponent implements OnChanges {
   @HostListener('document:click')
   clickOutside() {
     if (this.isActive) {
-      this.isActive = false;
+      this.toggleActivity(false);
     }
   }
 
@@ -84,6 +119,8 @@ export class SelectorComponent implements OnChanges {
     this.selectedId = id;
     setTimeout(() => {
       this.searchControl.setValue(this.selectedOption?.text || this.fallbackText, { emitEvent: false });
+      this.onChange(this.selectedId);
+      this.sortOptions();
     });
   }
 

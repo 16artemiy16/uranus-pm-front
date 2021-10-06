@@ -9,7 +9,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { CreateBoardComponent } from './components/modals/create-board/create-board.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { TRANSLOCO_SCOPE, TranslocoModule } from '@ngneat/transloco';
 import { BoardComponent } from './pages/board/board.component';
@@ -85,7 +85,8 @@ import { SelectorModule } from '../../../reusable/selector/selector.module';
     TranslocoModule,
     StoreModule.forFeature(FEATURE_NAME, reducers),
     EffectsModule.forFeature([BoardsEffects, ColumnsEffects]),
-    SharedModule
+    SharedModule,
+    FormsModule
   ],
   providers: [
     {
