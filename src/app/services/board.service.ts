@@ -5,6 +5,7 @@ import { BoardI } from '../modules/auth-user/modules/pm/interfaces/board.interfa
 import { ColumnI } from '../modules/auth-user/modules/pm/interfaces/column.interface';
 import { BoardUserI } from '../interfaces/board-user.interface';
 import { HttpRequestCache } from '../decorators/http-request-cache.decorator';
+import { TaskI } from '../modules/auth-user/modules/pm/interfaces/task.interface';
 
 interface CreateBoardDto {
   name: string;
@@ -71,6 +72,11 @@ export class BoardService {
   assignTask(taskId: string, userId: string | null): Observable<boolean> {
     const url = `${this.URL}/boards/task/${taskId}/assignee`;
     return this.http.post<boolean>(url, { assignee: userId });
+  }
+
+  getTaskByCode(code: string): Observable<TaskI> {
+    const url = `${this.URL}/boards/task/${code}`;
+    return this.http.get<TaskI>(url);
   }
 
   @HttpRequestCache()

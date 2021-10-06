@@ -40,6 +40,7 @@ import {
   BoardFavouriteBtnComponent
 } from './pages/boards/components/board-favourite-btn/board-favourite-btn.component';
 import { SelectorModule } from '../../../reusable/selector/selector.module';
+import { TaskResolver } from './resolvers/task.resolver';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,7 @@ import { SelectorModule } from '../../../reusable/selector/selector.module';
     RouterModule.forChild([
       { path: '', component: BoardsPageComponent },
       { path: ':id', component: BoardComponent },
-      { path: ':id/task/:taskCode', component: TaskComponent },
+      { path: ':id/task/:taskCode', component: TaskComponent, resolve: { task: TaskResolver } },
       { path: '**', redirectTo: 'boards' }
     ]),
     TranslocoModule,

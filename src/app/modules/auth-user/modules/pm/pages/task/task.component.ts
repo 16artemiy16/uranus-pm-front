@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { distinctUntilChanged, map, pluck, share, switchMap, take, tap } from 'rxjs/operators';
 import { ColumnsSandbox } from '../../store/sandboxes/columns.sandbox';
 import { Observable, of } from 'rxjs';
 import { TaskI } from '../../interfaces/task.interface';
@@ -14,24 +14,7 @@ import { AnalyticsService } from '../../../../../../services/analytics.service';
   styleUrls: ['./task.component.scss']
 })
 export class TaskComponent {
-  task$: Observable<TaskI | null> = this.activatedRoute.paramMap
-    .pipe(
-      tap((params) => {
-        // TODO: duplicated code! the same as in Board Page
-        const boardId = params.get('id');
-        if (boardId) {
-          this.boardsSandbox.fetchBoards();
-          this.boardsSandbox.setSelectedBoardId(boardId);
-          this.columnSandbox.fetchColumns(boardId);
-        }
-      }),
-      map((params) => params.get('taskCode')),
-      switchMap((taskCode) => {
-        return taskCode ?
-          this.columnSandbox.getTaskByCode(taskCode)
-          : of(null);
-      }),
-    );
+  task$ = this.activatedRoute.data.pipe(pluck('task'));
 
   assignee$: Observable<BoardUserI | null> = this.task$.pipe(
     switchMap((task) => {
@@ -51,8 +34,5 @@ export class TaskComponent {
     private readonly activatedRoute: ActivatedRoute,
     private readonly columnSandbox: ColumnsSandbox,
     private readonly boardsSandbox: BoardsSandbox,
-    private readonly analyticsService: AnalyticsService
-  ) {
-
-  }
+  ) {}
 }
