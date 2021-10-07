@@ -15,6 +15,10 @@ import { UserService } from '../../../../../services/user.service';
     </div>
 
     <mat-menu #profileMenu="matMenu">
+      <button mat-menu-item [routerLink]="['profile']">
+        <mat-icon>person</mat-icon>
+        <span>{{ 'auth.Profile' | transloco }}</span>
+      </button>
       <button mat-menu-item (click)="logOut()">
         <mat-icon>logout</mat-icon>
         <span>{{ 'auth.LogOut' | transloco }}</span>

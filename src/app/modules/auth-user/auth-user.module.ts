@@ -28,6 +28,7 @@ import { NavigationProfileComponent } from './components/auth-layout/components/
       {
         path: '', component: AuthLayoutComponent, children: [
           { path: 'pm', loadChildren: () => import('./modules/pm/pm.module').then(m => m.PmModule) },
+          { path: 'profile', loadChildren: () => import('./modules/profile/profile.module').then(m => m.ProfileModule) },
           { path: '**', redirectTo: 'pm' }
         ]
       }
