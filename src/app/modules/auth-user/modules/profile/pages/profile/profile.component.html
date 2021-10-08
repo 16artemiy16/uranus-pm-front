@@ -1,1 +1,61 @@
-<p>profile works!</p>
+<header class="header">
+</header>
+<div class="content">
+  <aside class="aside">
+    <div class="aside__user-img" [style.background-image]="userImgUrl"></div>
+    <div class="aside__name">{{ user.email }}</div>
+    <button class="aside__manage-account" mat-button>Manage your account</button>
+    <div class="about">
+      <p class="about__title">ABOUT</p>
+      <div class="about__item">
+        <mat-icon>work_outline</mat-icon>
+        Web-developer
+      </div>
+      <div class="about__item">
+        <mat-icon>schema</mat-icon>
+        Department
+      </div>
+      <div class="about__item">
+        <mat-icon>business</mat-icon>
+        Organization
+      </div>
+      <div class="about__item">
+        <mat-icon class="about__item__icon">location_on</mat-icon>
+        Location
+      </div>
+
+      <p class="about__title">CONTACT</p>
+      <div class="about__item">
+        <mat-icon>email</mat-icon>
+        Department
+      </div>
+    </div>
+  </aside>
+  <main class="main">
+    <section class="main__item">
+      <div class="main__title">Worked on</div>
+      <div class="main__subtitle">The list of the issues the user worked on</div>
+      <div class="issues-list">
+        <ul>
+          <li
+            *ngFor="let item of ['TEST-12 Need to add authorization', 'IT-691 Implement UI', 'TEST-14 Make introduction']"
+            class="issues-list__item"
+          >{{ item }}</li>
+        </ul>
+        <a class="issues-list__show-more" href="#">Show more</a>
+      </div>
+    </section>
+    <section class="main__item">
+      <div class="main__title">Places of work</div>
+      <div class="work-places">
+        <ul>
+          <li
+            *ngFor="let item of ['Board 1', 'IT', 'Board 3']"
+          >
+            <div class="work-places__item">{{ item }}</div>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+</div>
