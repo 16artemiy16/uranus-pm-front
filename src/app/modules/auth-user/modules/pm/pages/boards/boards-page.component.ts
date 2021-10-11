@@ -6,6 +6,7 @@ import { BoardI } from '../../interfaces/board.interface';
 import { Observable } from 'rxjs';
 import { BoardsSandbox } from '../../store/sandboxes/boards.sandbox';
 import { MatButtonToggleChange } from '@angular/material/button-toggle';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-boards-page',
@@ -19,9 +20,11 @@ export class BoardsPageComponent {
   constructor(
     private readonly boardService: BoardService,
     private readonly dialog: MatDialog,
-    private readonly boardsSandbox: BoardsSandbox
+    private readonly boardsSandbox: BoardsSandbox,
+    private readonly title: Title
   ) {
     this.boardsSandbox.fetchBoards();
+    this.title.setTitle('Boards');
   }
 
   createBoard() {

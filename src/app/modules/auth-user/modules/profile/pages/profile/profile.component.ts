@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { UserService } from '../../../../../../services/user.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-profile',
@@ -12,7 +13,10 @@ export class ProfileComponent {
   readonly user = this.userService.currentUser;
 
   constructor(
-    private readonly userService: UserService
-  ) {}
+    private readonly userService: UserService,
+    private readonly title: Title
+  ) {
+    this.title.setTitle('Profile');
+  }
 
 }

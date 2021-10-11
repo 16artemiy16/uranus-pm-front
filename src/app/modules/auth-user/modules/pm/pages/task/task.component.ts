@@ -7,6 +7,7 @@ import { TaskI } from '../../interfaces/task.interface';
 import { BoardsSandbox } from '../../store/sandboxes/boards.sandbox';
 import { BoardUserI } from '../../../../../../interfaces/board-user.interface';
 import { AnalyticsService } from '../../../../../../services/analytics.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-task',
@@ -14,7 +15,10 @@ import { AnalyticsService } from '../../../../../../services/analytics.service';
   styleUrls: ['./task.component.scss']
 })
 export class TaskComponent {
-  task$: Observable<TaskI> = this.activatedRoute.data.pipe(pluck('task'));
+  task$: Observable<TaskI> = this.activatedRoute.data.pipe(
+    pluck('task'),
+    tap((task) => this.title.setTitle(`${task.boardId}-${task.number} ${task.title}`))
+  );
 
   assignee$: Observable<BoardUserI | null> = this.task$.pipe(
     switchMap((task) => {
@@ -34,7 +38,8 @@ export class TaskComponent {
     private readonly activatedRoute: ActivatedRoute,
     private readonly columnSandbox: ColumnsSandbox,
     private readonly boardsSandbox: BoardsSandbox,
-    private readonly analyticsService: AnalyticsService
+    private readonly analyticsService: AnalyticsService,
+    private readonly title: Title
   ) {
     this.trackVisitTask();
   }

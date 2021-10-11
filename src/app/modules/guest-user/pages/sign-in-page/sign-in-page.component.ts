@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../../../services/user.service';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-sign-in-page',
@@ -17,8 +18,11 @@ export class SignInPageComponent {
   constructor(
     private readonly fb: FormBuilder,
     private readonly userService: UserService,
-    private readonly router: Router
-  ) { }
+    private readonly router: Router,
+    private readonly title: Title
+  ) {
+    this.title.setTitle('Sign In');
+  }
 
   signIn() {
     const { email, password } = this.signInForm.getRawValue();

@@ -10,6 +10,7 @@ import { combineLatest, Observable, of } from 'rxjs';
 import { UserService } from '../../../../services/user.service';
 import { SnackService } from '../../../common/snack/snack.service';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-sign-up-page',
@@ -79,8 +80,11 @@ export class SignUpPageComponent {
     private readonly fb: FormBuilder,
     private readonly userService: UserService,
     private readonly snack: SnackService,
-    private readonly router: Router
-  ) { }
+    private readonly router: Router,
+    private readonly title: Title
+  ) {
+    this.title.setTitle('Sign Up')
+  }
 
   signUp() {
     this.userService

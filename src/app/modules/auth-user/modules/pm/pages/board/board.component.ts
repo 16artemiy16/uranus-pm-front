@@ -6,11 +6,13 @@ import {
   OnInit,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { take } from 'rxjs/operators';
+import { filter, take } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateTaskComponent } from '../../components/modals/create-task/create-task.component';
 import { ColumnsSandbox } from '../../store/sandboxes/columns.sandbox';
 import { BoardsSandbox } from '../../store/sandboxes/boards.sandbox';
+import { Title } from '@angular/platform-browser';
+import { BoardI } from '../../interfaces/board.interface';
 
 @Component({
   selector: 'app-board',
@@ -26,17 +28,31 @@ export class BoardComponent implements OnInit, OnDestroy {
     private readonly activatedRoute: ActivatedRoute,
     private readonly changeDetectorRef: ChangeDetectorRef,
     private readonly dialog: MatDialog,
-    private readonly columnsSandbox: ColumnsSandbox
+    private readonly columnsSandbox: ColumnsSandbox,
+    private readonly title: Title
   ) {}
 
-  ngOnInit() {
+  private initColumns() {
     this.activatedRoute.params
       .subscribe(({ id }) => {
-        // TODO: This is a workaround! Change in future on fetchBoardsById()
         this.boardsSandbox.fetchBoards();
         this.boardsSandbox.setSelectedBoardId(id);
         this.columnsSandbox.fetchColumns(id);
       });
+  }
+
+  private setTitle() {
+    this.boardsSandbox.selectedBoard$
+      .pipe(
+        filter(Boolean),
+        take(1)
+      )
+      .subscribe((board) => this.title.setTitle((board as BoardI).name));
+  }
+
+  ngOnInit() {
+    this.initColumns();
+    this.setTitle();
   }
 
   // TODO: move to store
