@@ -5,10 +5,15 @@ export const selectAuthState = createFeatureSelector<AuthUserStateI>('AuthUser')
 
 export const selectLastTasks = createSelector(
   selectAuthState,
-  (state: AuthUserStateI) => state.lastTasks
+  (state) => state.lastTasks
 );
 
 export const selectLastBoards = createSelector(
   selectAuthState,
-  (state: AuthUserStateI) => state.lastBoards
+  (state) => state.lastBoards
 );
+
+export const selectNotifications = createSelector(
+  selectAuthState,
+  (state) => state.notifications
+)
