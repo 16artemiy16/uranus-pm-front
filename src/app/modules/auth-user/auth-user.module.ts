@@ -12,6 +12,10 @@ import { NavigationBoardsComponent } from './components/auth-layout/components/n
 import { NavigationTasksComponent } from './components/auth-layout/components/navigation-tasks.component';
 import { NavigationLanguageComponent } from './components/auth-layout/components/navigation-language.component';
 import { NavigationProfileComponent } from './components/auth-layout/components/navigation-profile.component';
+import { StoreModule } from '@ngrx/store';
+import { reducer, FEATURE_NAME } from './store/auth-user.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthUserEffects } from './store/auth-user.effects';
 
 @NgModule({
   declarations: [
@@ -33,6 +37,8 @@ import { NavigationProfileComponent } from './components/auth-layout/components/
         ]
       }
     ]),
+    StoreModule.forFeature(FEATURE_NAME, reducer),
+    EffectsModule.forFeature([AuthUserEffects]),
     MatToolbarModule,
     MatIconModule,
     MatMenuModule,

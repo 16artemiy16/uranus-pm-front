@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { TaskI } from '../../../modules/pm/interfaces/task.interface';
-import { take } from 'rxjs/operators';
-import { AnalyticsService } from '../../../../../services/analytics.service';
-import { TaskFavourite } from '../../../../../types/task-favourite.type';
+import { AuthUserSandbox } from '../../../store/auth-user.sandbox';
+import { Observable } from 'rxjs';
+import { LastTaskI } from '../../../interfaces/last-task.interface';
 
 @Component({
   selector: 'app-navigation-tasks',
@@ -15,7 +14,7 @@ import { TaskFavourite } from '../../../../../types/task-favourite.type';
 
     <mat-menu #tasksMenu="matMenu">
       <button
-        *ngFor="let task of favouriteTasks"
+        *ngFor="let task of lastTasks$ | async"
         mat-menu-item
         [routerLink]="['pm', task.boardId, 'task', task.boardId + '-' + task.number]"
       >
@@ -25,16 +24,9 @@ import { TaskFavourite } from '../../../../../types/task-favourite.type';
   `,
 })
 export class NavigationTasksComponent {
-  favouriteTasks: TaskFavourite[] = [];
+  readonly lastTasks$: Observable<LastTaskI[]> = this.authSandbox.lastTasks$;
 
   constructor(
-    private readonly analyticsService: AnalyticsService
-  ) {
-    this.analyticsService
-      .getUserFavouriteTasks()
-      .pipe(take(1))
-      .subscribe((tasks) => {
-        this.favouriteTasks = tasks;
-      });
-  }
+    private readonly authSandbox: AuthUserSandbox
+  ) {}
 }

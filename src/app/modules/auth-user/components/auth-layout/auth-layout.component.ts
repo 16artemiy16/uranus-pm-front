@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthUserSandbox } from '../../store/auth-user.sandbox';
 
 @Component({
   selector: 'app-auth-layout',
@@ -6,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./auth-layout.component.scss']
 })
 export class AuthLayoutComponent {
-  constructor() {}
+  constructor(
+    private readonly authSandbox: AuthUserSandbox
+  ) {
+    this.authSandbox.fetchLastBoards();
+    this.authSandbox.fetchLastTasks();
+  }
 }

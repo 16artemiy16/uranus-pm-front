@@ -2,6 +2,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { take } from 'rxjs/operators';
 import { AnalyticsService } from '../../../../../services/analytics.service';
 import { BoardI } from '../../../modules/pm/interfaces/board.interface';
+import { AuthUserSandbox } from '../../../store/auth-user.sandbox';
+import { Observable } from 'rxjs';
+import { LastBoardI } from '../../../interfaces/last-boards.interface';
 
 @Component({
   selector: 'app-navigation-boards',
@@ -14,7 +17,7 @@ import { BoardI } from '../../../modules/pm/interfaces/board.interface';
 
     <mat-menu #boardsMenu="matMenu">
       <button
-        *ngFor="let board of favouriteBoards"
+        *ngFor="let board of lastBoards$ | async"
         mat-menu-item
         [routerLink]="['pm', board._id]"
       >
@@ -25,14 +28,9 @@ import { BoardI } from '../../../modules/pm/interfaces/board.interface';
   `
 })
 export class NavigationBoardsComponent {
-  favouriteBoards: Pick<BoardI, '_id' | 'name'>[] = [];
+  readonly lastBoards$: Observable<LastBoardI[]> = this.authSandbox.lastBoards$;
 
-  constructor(private readonly analyticsService: AnalyticsService) {
-    this.analyticsService
-      .getUserFavouriteBoards()
-      .pipe(take(1))
-      .subscribe((boards) => {
-        this.favouriteBoards = boards;
-      });
-  }
+  constructor(
+    private readonly authSandbox: AuthUserSandbox
+  ) {}
 }

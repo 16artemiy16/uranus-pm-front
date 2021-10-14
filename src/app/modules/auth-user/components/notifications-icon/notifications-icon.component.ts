@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { NotificationI } from '../../interfaces/notification.interface';
 import { UserService } from '../../../../services/user.service';
+import { AuthUserSandbox } from '../../store/auth-user.sandbox';
 
 @Component({
   selector: 'app-notifications-icon',
