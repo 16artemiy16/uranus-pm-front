@@ -9,12 +9,12 @@
     <mat-icon>notifications</mat-icon>
   </button>
   <div class="notifications__list" *ngIf="isOpened">
-    <div *ngFor="let notification of orderedNotifications" class="notification" [class.notification--unread]="notification.isUnread">
+    <div *ngFor="let notification of orderedNotifications" class="notification" [class.notification--unread]="!notification.isRead">
       <div class="notification__icon">
         <mat-icon>error_outline</mat-icon>
       </div>
       <div class="notification__text">
-        <b>{{ notification.date | date: 'hh:mm dd.MM' }}</b> {{ notification.text }}
+        <b>{{ notification.createdAt | date: 'hh:mm dd.MM' }}</b> {{ notification.text }}
       </div>
     </div>
   </div>

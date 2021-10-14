@@ -6,6 +6,7 @@ import jwtDecode from 'jwt-decode';
 import { Router } from '@angular/router';
 import { UserI } from '../interfaces/user.interface';
 import { HttpRequestCache } from '../decorators/http-request-cache.decorator';
+import { NotificationI } from '../modules/auth-user/interfaces/notification.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -67,5 +68,10 @@ export class UserService {
         $and: [{ email: { $regex: email } }, { email: { $nin: emailsToExclude } }]
       }
     });
+  }
+
+  getMyNotifications(): Observable<NotificationI[]> {
+    const url = `${this.URL}/users/notifications`;
+    return this.http.get<NotificationI[]>(url);
   }
 }

@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { NotificationI } from '../../interfaces/notification.interface';
+import { UserService } from '../../../../services/user.service';
 
 @Component({
   selector: 'app-notifications-icon',
@@ -9,32 +10,22 @@ import { NotificationI } from '../../interfaces/notification.interface';
 export class NotificationsIconComponent {
   private readonly GLANCED_TIME_MS = 3000;
 
-  @Input() notifications: NotificationI[] = [{
-    _id: '1',
-    date: new Date(2019, 11, 5),
-    isUnread: true,
-    text: `You've been invited to a new board`
-  }, {
-    _id: '2',
-    date: new Date(2019, 11, 6),
-    isUnread: true,
-    text: 'John Snow moved your task to Done column'
-  }, {
-    _id: '3',
-    date: new Date(2019, 11, 5),
-    isUnread: false,
-    text: `Hello! This is a test notification. The test is to check how it will work with a huge text. Let's check it out! Here we go!`
-  }];
+  notifications: NotificationI[] = [];
 
   isOpened: boolean = false;
 
-  constructor() { }
+  constructor(
+    private readonly userService: UserService
+  ) {
+    this.userService.getMyNotifications()
+      .subscribe((items) => this.notifications = items)
+  }
 
   toggle(): void {
     this.isOpened = !this.isOpened;
 
     if (this.isOpened) {
-      const areUnreadExist = this.notifications.some((item) => item.isUnread);
+      const areUnreadExist = this.notifications.some((item) => !item.isRead);
       // TODO: it will send a request to the server to mark them as read in future
       if (areUnreadExist) {
         setTimeout(() => {
@@ -46,7 +37,7 @@ export class NotificationsIconComponent {
 
   get counter(): number {
     return this.notifications
-      .filter(({ isUnread }) => isUnread)
+      .filter(({ isRead }) => !isRead)
       .length;
   }
 
@@ -56,8 +47,8 @@ export class NotificationsIconComponent {
 
   get orderedNotifications(): NotificationI[] {
     return this.notifications.sort((a, b) => {
-      const dateDiff = +b.date - +a.date;
-      const unreadDiff = +b.isUnread - +a.isUnread
+      const dateDiff = +b.createdAt - +a.createdAt;
+      const unreadDiff = +a.isRead - +b.isRead;
       return dateDiff === 0 ? unreadDiff : dateDiff;
     });
   }

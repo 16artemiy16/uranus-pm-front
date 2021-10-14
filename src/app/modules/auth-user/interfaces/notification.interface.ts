@@ -1,6 +1,7 @@
 export interface NotificationI {
   _id: string;
-  date: Date;
-  isUnread: boolean;
+  createdAt: Date;
+  isRead: boolean;
   text: string;
+  type: string;
 }
