@@ -1,5 +1,7 @@
 <div class="notifications">
-  <span *ngIf="showCounter" class="notifications__count">{{ counter }}</span>
+  <span *ngIf="showNotificationsCount$ | async" class="notifications__count">
+    {{ notificationsCount$ | async }}
+  </span>
   <button
     mat-icon-button
     aria-label="Notifications"
@@ -8,8 +10,8 @@
   >
     <mat-icon>notifications</mat-icon>
   </button>
-  <div class="notifications__list" *ngIf="isOpened">
-    <div *ngFor="let notification of orderedNotifications" class="notification" [class.notification--unread]="!notification.isRead">
+  <div class="notifications__list" *ngIf="isOpened$ | async">
+    <div *ngFor="let notification of notifications$ | async" class="notification" [class.notification--unread]="!notification.isRead">
       <div class="notification__icon">
         <mat-icon>error_outline</mat-icon>
       </div>

@@ -6,7 +6,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { TRANSLOCO_SCOPE, TranslocoModule } from '@ngneat/transloco';
-import { NotificationsIconComponent } from './components/notifications-icon/notifications-icon.component';
+import { NotificationsComponent } from './components/notifications/notifications.component';
 import { MatButtonModule } from '@angular/material/button';
 import { NavigationBoardsComponent } from './components/auth-layout/components/navigation-boards.component';
 import { NavigationTasksComponent } from './components/auth-layout/components/navigation-tasks.component';
@@ -20,7 +20,7 @@ import { AuthUserEffects } from './store/auth-user.effects';
 @NgModule({
   declarations: [
     AuthLayoutComponent,
-    NotificationsIconComponent,
+    NotificationsComponent,
     NavigationBoardsComponent,
     NavigationTasksComponent,
     NavigationLanguageComponent,

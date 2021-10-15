@@ -1,7 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AuthUserStateI } from './auth-user.reducer';
-import { selectLastBoards, selectLastTasks, selectNotifications } from './auth-user.selectors';
+import {
+  selectLastBoards,
+  selectLastTasks,
+  selectNotifications,
+  selectNotificationsCount
+} from './auth-user.selectors';
 import { fetchLastBoards, fetchLastTasks, fetchNotifications } from './auth-user.actions';
 import { Observable } from 'rxjs';
 import { LastTaskI } from '../interfaces/last-task.interface';
@@ -19,6 +24,7 @@ export class AuthUserSandbox {
   lastTasks$: Observable<LastTaskI[]> = this.store.select(selectLastTasks);
   lastBoards$: Observable<LastBoardI[]> = this.store.select(selectLastBoards);
   notifications$: Observable<NotificationI[]> = this.store.select(selectNotifications);
+  notificationsCount$: Observable<number> = this.store.select(selectNotificationsCount);
 
   fetchLastBoards() {
     this.store.dispatch(fetchLastBoards());

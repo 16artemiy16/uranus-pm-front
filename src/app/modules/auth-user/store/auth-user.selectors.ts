@@ -15,5 +15,20 @@ export const selectLastBoards = createSelector(
 
 export const selectNotifications = createSelector(
   selectAuthState,
-  (state) => state.notifications
+  (state) => {
+    return [...state.notifications].sort((a, b) => {
+      const dateDiff = +b.createdAt - +a.createdAt;
+      const unreadDiff = +a.isRead - +b.isRead;
+      return dateDiff === 0 ? unreadDiff : dateDiff;
+    });
+  }
+);
+
+export const selectNotificationsCount = createSelector(
+  selectAuthState,
+  (state) => {
+    return state.notifications
+      .filter((item) => !item.isRead)
+      .length;
+  }
 )
