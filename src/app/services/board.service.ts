@@ -5,7 +5,6 @@ import { BoardI } from '../modules/auth-user/modules/pm/interfaces/board.interfa
 import { ColumnI } from '../modules/auth-user/modules/pm/interfaces/column.interface';
 import { BoardUserI } from '../interfaces/board-user.interface';
 import { HttpRequestCache } from '../decorators/http-request-cache.decorator';
-import { TaskI } from '../modules/auth-user/modules/pm/interfaces/task.interface';
 
 interface CreateBoardDto {
   name: string;
@@ -44,11 +43,6 @@ export class BoardService {
     return this.http.post<boolean>(url, { title, body });
   }
 
-  moveTask(taskId: string, toIndex: number, targetColumnId?: string): Observable<boolean> {
-    const url = `${this.URL}/boards/task/${taskId}/move`;
-    return this.http.put<boolean>(url, { toIndex, targetColumnId });
-  }
-
   getMembers(boardId: string): Observable<BoardUserI[]> {
     const url = `${this.URL}/boards/${boardId}/members`;
     return this.http.get<BoardUserI[]>(url);
@@ -67,16 +61,6 @@ export class BoardService {
   toggleFavouriteBoard(boardId: string): Observable<boolean> {
     const url = `${this.URL}/users/favourite/board/${boardId}/toggle`;
     return this.http.post<boolean>(url, {});
-  }
-
-  assignTask(taskId: string, userId: string | null): Observable<boolean> {
-    const url = `${this.URL}/boards/task/${taskId}/assignee`;
-    return this.http.post<boolean>(url, { assignee: userId });
-  }
-
-  getTaskByCode(code: string): Observable<TaskI> {
-    const url = `${this.URL}/boards/task/${code}`;
-    return this.http.get<TaskI>(url);
   }
 
   @HttpRequestCache()

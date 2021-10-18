@@ -11,13 +11,15 @@ import {
 } from '../actions/columns.actions';
 import { Store } from '@ngrx/store';
 import { getActiveTask } from '../selectors/columns.selector';
+import { TasksService } from '../../../../../../services/tasks.service';
 
 @Injectable()
 export class ColumnsEffects {
   constructor(
     private readonly actions$: Actions,
     private readonly boardService: BoardService,
-    private readonly store: Store
+    private readonly store: Store,
+    private readonly tasksService: TasksService
   ) {}
 
   fetchColumns$ = createEffect(() => {
@@ -35,8 +37,8 @@ export class ColumnsEffects {
     return this.actions$.pipe(
       ofType(moveTask),
       switchMap(({ taskId, toIndex, columnId }) => {
-        return this.boardService
-          .moveTask(taskId, toIndex, columnId)
+        return this.tasksService
+          .move(taskId, toIndex, columnId)
           .pipe(
             catchError((err) => {
               throw err;
@@ -51,7 +53,7 @@ export class ColumnsEffects {
       ofType(assignActiveTask),
       withLatestFrom(this.store.select(getActiveTask)),
       switchMap(([{ userId }, task]) => {
-        return this.boardService.assignTask(task!._id, userId);
+        return this.tasksService.assign(task!._id, userId);
       }),
       map(() => assignTaskSuccess())
     );

@@ -5,19 +5,21 @@ import { map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { BoardService } from '../../../../../../../services/board.service';
 import { Store } from '@ngrx/store';
 import { selectTask } from './task.selectors';
+import { TasksService } from '../../../../../../../services/tasks.service';
 
 @Injectable()
 export class TaskEffects {
   constructor(
     private readonly actions$: Actions,
     private readonly boardService: BoardService,
-    private readonly store: Store
+    private readonly store: Store,
+    private readonly tasksService: TasksService
   ) {}
 
   fetchTask$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(fetchTask),
-      switchMap(({ id }) => this.boardService.getTaskByCode(id)),
+      switchMap(({ id }) => this.tasksService.getById(id)),
       tap(({ boardId }) => this.store.dispatch(fetchUsers({ boardId }))),
       map((task) => fetchTaskSuccess({ task })),
     );
@@ -39,7 +41,7 @@ export class TaskEffects {
         if (!task) {
           throw Error('The task does not exist');
         }
-        return this.boardService.assignTask(task._id, userId)
+        return this.tasksService.assign(task._id, userId)
       }),
     )
   }, { dispatch: false });
