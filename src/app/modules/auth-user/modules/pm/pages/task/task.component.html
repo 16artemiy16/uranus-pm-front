@@ -16,10 +16,17 @@
     <section>
       <p>Created at: <i>{{ (task$ | async)?.createdAt | date }}</i></p>
       <p>Updated at: <i>{{ (task$ | async)?.updatedAt | date }}</i></p>
+
       <div class="task-info__assignee-row">
         Assignee:
         <div class="task-info__assignee">
-          <app-user-selector [selectedUser]="assignee$ | async"></app-user-selector>
+          <app-selector
+            [ngModel]="(assignee$ | async)?._id"
+            [options]="(assignUserOptions$ | async) || []"
+            [fallbackText]="'Unassigned'"
+            [fallbackImg]="'/assets/icons/anonymous.svg'"
+            (ngModelChange)="assignTask($event)"
+          ></app-selector>
         </div>
       </div>
     </section>

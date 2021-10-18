@@ -31,7 +31,6 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
 import { UserCardComponent } from './components/user-card/user-card.component';
 import { UserSelectorComponent } from './components/user-selector/user-selector.component';
-import { TaskComponent } from './pages/task/task.component';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { BoardsGridViewComponent } from './pages/boards/components/boards-grid-view/boards-grid-view.component';
 import { BoardsListViewComponent } from './pages/boards/components/boards-list-view/boards-list-view.component';
@@ -40,7 +39,6 @@ import {
   BoardFavouriteBtnComponent
 } from './pages/boards/components/board-favourite-btn/board-favourite-btn.component';
 import { SelectorModule } from '../../../reusable/selector/selector.module';
-import { TaskResolver } from './resolvers/task.resolver';
 
 @NgModule({
   declarations: [
@@ -55,7 +53,6 @@ import { TaskResolver } from './resolvers/task.resolver';
     TeamManagementComponent,
     UserCardComponent,
     UserSelectorComponent,
-    TaskComponent,
     BoardsGridViewComponent,
     BoardsListViewComponent,
     BoardFavouriteBtnComponent
@@ -80,7 +77,10 @@ import { TaskResolver } from './resolvers/task.resolver';
     RouterModule.forChild([
       { path: '', component: BoardsPageComponent },
       { path: ':id', component: BoardComponent },
-      { path: ':id/task/:taskCode', component: TaskComponent, resolve: { task: TaskResolver } },
+      {
+        path: ':id/task',
+        loadChildren: () => import('./pages/task/task.module').then(m => m.TaskModule)
+      },
       { path: '**', redirectTo: 'boards' }
     ]),
     TranslocoModule,

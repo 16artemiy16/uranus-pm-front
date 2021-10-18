@@ -1,54 +1,57 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { distinctUntilChanged, map, pluck, share, switchMap, take, tap } from 'rxjs/operators';
-import { ColumnsSandbox } from '../../store/sandboxes/columns.sandbox';
+import { filter, map, switchMap, take } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { TaskI } from '../../interfaces/task.interface';
-import { BoardsSandbox } from '../../store/sandboxes/boards.sandbox';
-import { BoardUserI } from '../../../../../../interfaces/board-user.interface';
-import { AnalyticsService } from '../../../../../../services/analytics.service';
 import { Title } from '@angular/platform-browser';
+import { TaskSandbox } from './store/task.sandbox';
+import { BoardService } from '../../../../../../services/board.service';
+import { BoardUserI } from '../../../../../../interfaces/board-user.interface';
 
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
-  styleUrls: ['./task.component.scss']
+  styleUrls: ['./task.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TaskComponent {
-  task$: Observable<TaskI> = this.activatedRoute.data.pipe(
-    pluck('task'),
-    tap((task) => this.title.setTitle(`${task.boardId}-${task.number} ${task.title}`))
-  );
+  task$: Observable<TaskI | null> = this.taskSandbox.task$;
+  assignee$: Observable<BoardUserI | null> = this.taskSandbox.assignee$;
+  assignUserOptions$: Observable<{ id: string, text: string, img?: string }[]> = this.taskSandbox.assignUserOptions$;
 
-  assignee$: Observable<BoardUserI | null> = this.task$.pipe(
-    switchMap((task) => {
-      return task?.assignee ? this.boardsSandbox.getMemberById(task.assignee) : of(null);
-    }),
-  );
-
+  // TODO: this is workaround! Move to store!
   boardName$: Observable<string | null> = this.task$.pipe(
     switchMap((task) => task
-      ? this.boardsSandbox.getBoardById(task.boardId)
+      ? this.boardService.getCurrentUserBoards().pipe(
+          map((boards) => {
+            return boards.find((board) => board._id === task.boardId)
+          })
+        )
       : of(null)
     ),
     map((board) => board?.name || '')
   );
 
   constructor(
-    private readonly activatedRoute: ActivatedRoute,
-    private readonly columnSandbox: ColumnsSandbox,
-    private readonly boardsSandbox: BoardsSandbox,
-    private readonly analyticsService: AnalyticsService,
+    private readonly taskSandbox: TaskSandbox,
+    private readonly boardService: BoardService,
+    private readonly route: ActivatedRoute,
     private readonly title: Title
   ) {
-    this.trackVisitTask();
+    const id = this.route.snapshot.paramMap.get('id') as string;
+    this.taskSandbox.fetchTask(id);
+    this.taskSandbox.task$.pipe(
+      filter((task) => !!task),
+      take(1)
+    ).subscribe((task) => {
+      this.title.setTitle(task ? `${task._id} ${task.title}` : 'Loading the task');
+      if (task) {
+        this.taskSandbox.trackVisitTask(task._id)
+      }
+    });
   }
 
-  private trackVisitTask() {
-    this.task$
-      .pipe(
-        take(1),
-        switchMap(({ _id }) => this.analyticsService.traceUserVisitTask(_id))
-      ).subscribe()
+  assignTask(userId: string | null): void {
+    this.taskSandbox.assign(userId);
   }
 }

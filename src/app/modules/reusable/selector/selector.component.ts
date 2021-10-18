@@ -81,6 +81,7 @@ export class SelectorComponent implements OnChanges, ControlValueAccessor {
   writeValue(val: string | null) {
     this.selectedId = val;
     this.sortOptions();
+    this.cdRef.markForCheck();
   }
 
   registerOnChange(fn: any) {
