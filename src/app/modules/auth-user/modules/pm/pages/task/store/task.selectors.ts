@@ -5,6 +5,7 @@ export const selectTaskState = createFeatureSelector<TaskStateI>(FEATURE_NAME);
 
 export const selectTask = createSelector(selectTaskState, ({ task }) => task);
 export const selectUsers = createSelector(selectTaskState, ({ users }) => users);
+export const selectBoardInfo = createSelector(selectTaskState, ({ board }) => board);
 
 export const selectAssignee = createSelector(
   selectTaskState,

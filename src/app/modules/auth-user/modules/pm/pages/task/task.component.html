@@ -1,6 +1,11 @@
 <nav class="breadcrumbs">
   <a routerLink="../../../">Boards</a> /
-  <a routerLink="../../../{{ (task$ | async)?.boardId }}">{{ boardName$ | async }} </a> /
+  <a
+    *ngIf="board$ | async as board"
+    routerLink="../../../{{ board._id }}"
+  >
+    {{ board.name }}
+  </a> /
   <span class="breadcrumbs__current">{{ (task$ | async)?.title }}</span>
 </nav>
 <h1>{{ (task$ | async)?.title }}</h1>

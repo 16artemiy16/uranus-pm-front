@@ -7,6 +7,7 @@ import { Title } from '@angular/platform-browser';
 import { TaskSandbox } from './store/task.sandbox';
 import { BoardService } from '../../../../../../services/board.service';
 import { BoardUserI } from '../../../../../../interfaces/board-user.interface';
+import { LastBoardI } from '../../../../interfaces/last-boards.interface';
 
 @Component({
   selector: 'app-task',
@@ -16,21 +17,9 @@ import { BoardUserI } from '../../../../../../interfaces/board-user.interface';
 })
 export class TaskComponent {
   task$: Observable<TaskI | null> = this.taskSandbox.task$;
+  board$: Observable<LastBoardI | null> = this.taskSandbox.boardInfo$;
   assignee$: Observable<BoardUserI | null> = this.taskSandbox.assignee$;
   assignUserOptions$: Observable<{ id: string, text: string, img?: string }[]> = this.taskSandbox.assignUserOptions$;
-
-  // TODO: this is workaround! Move to store!
-  boardName$: Observable<string | null> = this.task$.pipe(
-    switchMap((task) => task
-      ? this.boardService.getCurrentUserBoards().pipe(
-          map((boards) => {
-            return boards.find((board) => board._id === task.boardId)
-          })
-        )
-      : of(null)
-    ),
-    map((board) => board?.name || '')
-  );
 
   constructor(
     private readonly taskSandbox: TaskSandbox,

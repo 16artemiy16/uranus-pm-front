@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { selectAssignee, selectTask, selectUsersOptions } from './task.selectors';
+import { selectAssignee, selectBoardInfo, selectTask, selectUsersOptions } from './task.selectors';
 import { Observable } from 'rxjs';
 import { TaskI } from '../../../interfaces/task.interface';
 import { assign, fetchTask } from './task.actions';
 import { AnalyticsService } from '../../../../../../../services/analytics.service';
 import { take } from 'rxjs/operators';
 import { BoardUserI } from '../../../../../../../interfaces/board-user.interface';
+import { LastBoardI } from '../../../../../interfaces/last-boards.interface';
 
 @Injectable({ providedIn: 'root' })
 export class TaskSandbox {
@@ -18,6 +19,7 @@ export class TaskSandbox {
   task$: Observable<TaskI | null> = this.store.select(selectTask);
   assignee$: Observable<BoardUserI | null> = this.store.select(selectAssignee);
   assignUserOptions$: Observable<{ id: string, text: string, img?: string }[]> = this.store.select(selectUsersOptions);
+  boardInfo$: Observable<LastBoardI | null> = this.store.select(selectBoardInfo);
 
   fetchTask(id: string) {
     this.store.dispatch(fetchTask({ id }));
