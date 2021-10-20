@@ -36,7 +36,6 @@ const { selectEntities } = adapterBoards.getSelectors();
 
 const boardsReducer = createReducer(
   initialState,
-  on(fetchBoardsSuccess, (state, { boards }) => adapterBoards.setAll(boards, state)),
   on(setSelectedBoardId, (state, { boardId }) => ({
     ...state,
     selectedBoardId: boardId
@@ -57,12 +56,7 @@ const boardsReducer = createReducer(
         role: BoardUserRoleEnum.User
       }))
     ]
-  })),
-  on(toggleFavouriteBoard, (state, { boardId }) => {
-    const board = selectEntities(state)[boardId];
-    const changes = { id: board!._id, changes: { isFavourite: !board!.isFavourite } };
-    return adapterBoards.updateOne(changes, state);
-  })
+  }))
 );
 
 export function reducer(state: BoardsStateI | undefined, action: Action) {

@@ -56,19 +56,4 @@ export class BoardsSandbox {
   removeUsers(users: string[]) {
     this.store.dispatch(removeUsers({ users }));
   }
-
-  toggleFavouriteBoard(boardId: string) {
-    this.store.dispatch(toggleFavouriteBoard({ boardId }));
-  }
-
-  cacheBoardsView(value: 'list' | 'view'): void {
-    localStorage.setItem('boards-view', value);
-  }
-
-  get cachedBoardsView(): 'list' | 'grid' {
-    const lsValue = localStorage.getItem('boards-view') || 'list';
-    return ['list', 'grid'].includes(lsValue)
-      ? lsValue as 'list' | 'grid'
-      : 'list';
-  }
 }

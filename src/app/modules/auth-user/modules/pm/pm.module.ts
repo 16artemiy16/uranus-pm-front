@@ -42,7 +42,6 @@ import { SelectorModule } from '../../../reusable/selector/selector.module';
 
 @NgModule({
   declarations: [
-    BoardsPageComponent,
     CreateBoardComponent,
     BoardComponent,
     CreateTaskComponent,
@@ -53,9 +52,6 @@ import { SelectorModule } from '../../../reusable/selector/selector.module';
     TeamManagementComponent,
     UserCardComponent,
     UserSelectorComponent,
-    BoardsGridViewComponent,
-    BoardsListViewComponent,
-    BoardFavouriteBtnComponent
   ],
   imports: [
     CommonModule,
@@ -75,7 +71,7 @@ import { SelectorModule } from '../../../reusable/selector/selector.module';
     MatButtonToggleModule,
     SelectorModule,
     RouterModule.forChild([
-      { path: '', component: BoardsPageComponent },
+      { path: '', loadChildren: () => import('./pages/boards/boards-page.module').then(m => m.BoardsPageModule) },
       { path: ':id', component: BoardComponent },
       {
         path: ':id/task',
@@ -85,7 +81,10 @@ import { SelectorModule } from '../../../reusable/selector/selector.module';
     ]),
     TranslocoModule,
     StoreModule.forFeature(FEATURE_NAME, reducers),
-    EffectsModule.forFeature([BoardsEffects, ColumnsEffects]),
+    EffectsModule.forFeature([
+      // BoardsEffects,
+      ColumnsEffects
+    ]),
     SharedModule,
     FormsModule
   ],

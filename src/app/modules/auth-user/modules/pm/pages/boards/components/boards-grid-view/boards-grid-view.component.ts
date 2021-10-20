@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { BoardI } from '../../../../interfaces/board.interface';
-import { BoardsSandbox } from '../../../../store/sandboxes/boards.sandbox';
+import { BoardsSandbox } from '../../store/boards.sandbox';
 
 @Component({
   selector: 'app-boards-grid-view',

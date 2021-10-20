@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { BoardsSandbox } from '../../../../store/sandboxes/boards.sandbox';
 import { BoardI } from '../../../../interfaces/board.interface';
+import { BoardsSandbox } from '../../store/boards.sandbox';
 
 @Component({
   selector: 'app-board-favourite-btn',

@@ -4,9 +4,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { CreateBoardComponent } from '../../components/modals/create-board/create-board.component';
 import { BoardI } from '../../interfaces/board.interface';
 import { Observable } from 'rxjs';
-import { BoardsSandbox } from '../../store/sandboxes/boards.sandbox';
 import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import { Title } from '@angular/platform-browser';
+import { BoardsSandbox } from './store/boards.sandbox';
 
 @Component({
   selector: 'app-boards-page',

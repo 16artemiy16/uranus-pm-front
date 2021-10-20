@@ -39,28 +39,6 @@ export class BoardsEffects {
     );
   });
 
-  fetchBoards$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(fetchBoards),
-      switchMap(() => this.boardService.getCurrentUserBoards()),
-      map((boards) => fetchBoardsSuccess({ boards }))
-    );
-  });
-
-  createBoard$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(createBoard),
-      switchMap(({ name, key, description }) => {
-        return this.boardService.create({ name, key, description });
-      }),
-      tap(() => {
-        const msg = this.transloco.translate('auth.BoardCreated');
-        this.snack.success(msg);
-      }),
-      map(() => fetchBoards())
-    );
-  });
-
   inviteUsers$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(inviteUsers),
@@ -83,11 +61,4 @@ export class BoardsEffects {
       map(() => removeUsersSuccess())
     )
   });
-
-  toggleFavouriteBoard$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(toggleFavouriteBoard),
-      mergeMap(({ boardId }) => this.boardService.toggleFavouriteBoard(boardId)),
-    )
-  }, { dispatch: false })
 }
