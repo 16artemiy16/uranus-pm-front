@@ -1,0 +1,51 @@
+@import 'src/scss/material';
+
+:host {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 2em;
+}
+
+.breadcrumbs {
+  margin-bottom: 1em;
+  font-size: 1.25em;
+
+  &__current {
+    color: $link;
+    cursor: default;
+  }
+}
+
+.task-info {
+  display: flex;
+  flex: 1;
+
+  &__main {
+    flex-grow: 1;
+  }
+
+  &__right {
+    flex-basis: 20%;
+    border: 1px solid $border;
+    height: fit-content;
+
+    section {
+      padding: 2em;
+    }
+
+    .header {
+      text-align: center;
+      border-bottom: 1px solid $border;
+    }
+  }
+
+  &__assignee-row {
+    display: flex;
+    align-items: center;
+  }
+
+  &__assignee {
+    flex: 1;
+  }
+}

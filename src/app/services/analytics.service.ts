@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { BoardI } from '../modules/auth-user/modules/pm/interfaces/board.interface';
-import { TaskI } from '../modules/auth-user/modules/pm/interfaces/task.interface';
+import { BoardI } from '../modules/auth-user/interfaces/board.interface';
+import { TaskI } from '../modules/auth-user/interfaces/task.interface';
 import { TaskFavourite } from '../types/task-favourite.type';
 
 type UserEventActionT = 'visit';
