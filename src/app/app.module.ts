@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { SnackModule } from './modules/common/snack/snack.module';
+import { SnackModule } from './shared/services/snack/snack.module';
 import { TranslocoRootModule } from './transloco-root.module';
 import { InternalizationInterceptor } from './interceptors/internalization.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';

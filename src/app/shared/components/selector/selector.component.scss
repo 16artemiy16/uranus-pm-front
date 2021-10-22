@@ -1,0 +1,80 @@
+@import "src/scss/material";
+
+:host {
+  ::ng-deep {
+    .mat-form-field {
+      width: 100%;
+    }
+
+    .mat-form-field-wrapper {
+      margin: 0;
+      padding: 0;
+
+      .mat-form-field-appearance-outline .mat-form-field-flex {
+        padding-left: 1em;
+      }
+
+      .mat-form-field-infix {
+        padding: 0.25em 0 0.75em 0;
+      }
+    }
+  }
+}
+
+.selector-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  &__img {
+    margin-right: 1.5em;
+    border-radius: 50%;
+  }
+
+  &__text {
+    flex: 1;
+  }
+}
+
+.inactive-mode {
+  margin-left: 1em;
+  padding: 1em 0;
+}
+
+.active-mode {
+  position: relative;
+
+  .selector-options {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    list-style: none;
+    background: white;
+    cursor: pointer;
+
+    border-left: 1px $grey solid;
+    border-bottom: 1px $grey solid;
+    border-right: 1px $grey solid;
+
+    li {
+      padding: 0.5em;
+
+      &:hover {
+        background: $column-background;
+      }
+    }
+  }
+
+}
+
+.item-input {
+  display: flex;
+  img {
+    margin-right: 1em;
+    border-radius: 50%;
+  }
+}
+
