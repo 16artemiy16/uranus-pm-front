@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { TaskI } from '../modules/auth-user/modules/pm/interfaces/task.interface';
+import { TaskI } from '../modules/auth-user/interfaces/task.interface';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({

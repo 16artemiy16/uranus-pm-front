@@ -1,7 +1,4 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { take } from 'rxjs/operators';
-import { AnalyticsService } from '../../../../../services/analytics.service';
-import { BoardI } from '../../../modules/pm/interfaces/board.interface';
 import { AuthUserSandbox } from '../../../store/auth-user.sandbox';
 import { Observable } from 'rxjs';
 import { LastBoardI } from '../../../interfaces/last-boards.interface';
@@ -19,7 +16,7 @@ import { LastBoardI } from '../../../interfaces/last-boards.interface';
       <button
         *ngFor="let board of lastBoards$ | async"
         mat-menu-item
-        [routerLink]="['pm', board._id]"
+        [routerLink]="['/', board._id]"
       >
         {{ board.name }}
       </button>

@@ -16,7 +16,7 @@ import { LastTaskI } from '../../../interfaces/last-task.interface';
       <button
         *ngFor="let task of lastTasks$ | async"
         mat-menu-item
-        [routerLink]="['pm', task.boardId, 'task', task.boardId + '-' + task.number]"
+        [routerLink]="['/', task.boardId, 'task', task.boardId + '-' + task.number]"
       >
         {{ task.title }}
       </button>

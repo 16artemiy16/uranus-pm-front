@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { BoardI } from '../modules/auth-user/modules/pm/interfaces/board.interface';
-import { ColumnI } from '../modules/auth-user/modules/pm/interfaces/column.interface';
+import { BoardI } from '../modules/auth-user/interfaces/board.interface';
+import { ColumnI } from '../modules/auth-user/interfaces/column.interface';
 import { BoardUserI } from '../interfaces/board-user.interface';
 import { HttpRequestCache } from '../decorators/http-request-cache.decorator';
 
@@ -33,7 +33,7 @@ export class BoardService {
     return this.http.post<BoardI>(url, boardDto);
   }
 
-  getBoard<T extends Partial<BoardI>>(boardId: string, fields: string[]): Observable<T> {
+  getBoard<T extends Partial<BoardI>>(boardId: string, fields: string[] = []): Observable<T> {
     const url = `${this.URL}/boards/${boardId}`;
     const params = { fields };
     return this.http.get<T>(url, { params });

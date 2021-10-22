@@ -1,0 +1,25 @@
+@import "src/scss/material";
+
+:host {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+}
+
+.actions {
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+
+  .add-task {
+    background-color: $success !important;
+  }
+}
+
+mat-sidenav-container {
+  height: 100%;
+}
+
+.board-main {
+  width: 100%;
+}

@@ -1,0 +1,20 @@
+<div class="tasks-search">
+  <form (keydown.enter)="$event.preventDefault()">
+    <mat-form-field appearance="outline">
+      <mat-label>{{ 'auth.SearchTask' | transloco }}</mat-label>
+      <input type="text" matInput [formControl]="filterTextControl">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </form>
+</div>
+<div class="users-list">
+  <div
+    class="users-list__item"
+    *ngFor="let user of users$ | async"
+    [class.user-active]="user._id === (tasksFilterAssigneeId$ | async)"
+    [style.background-image]="getUserImgStyle(user)"
+    [matTooltip]="user.email"
+    (click)="filterTasksByUser(user._id)"
+  >
+  </div>
+</div>

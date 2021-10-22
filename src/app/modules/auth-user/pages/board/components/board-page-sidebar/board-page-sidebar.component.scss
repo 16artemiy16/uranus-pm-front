@@ -1,0 +1,24 @@
+@import "src/scss/material";
+:host {
+  width: 500px;
+  padding: 2em;
+  border-left: 1px $grey solid;
+
+  h1 {
+    text-align: center;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .assignee-row {
+    display: flex;
+    align-items: center;
+  }
+
+  .assignee {
+    flex: 1;
+  }
+}
