@@ -4,9 +4,9 @@ import { UserService } from '../../../../../../../services/user.service';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { debounceTime, startWith, switchMap, takeUntil, withLatestFrom } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { BoardsSandbox } from '../../../store/sandboxes/boards.sandbox';
 import { BoardUserI, BoardUserToInviteI } from '../../../../../../../interfaces/board-user.interface';
 import { BoardUserRoleEnum } from '../../../../../../../enums/board-user-role.enum';
+import { BoardSandbox } from '../../../pages/board/store/board.sandbox';
 
 @Component({
   selector: 'app-team-management',
@@ -25,7 +25,7 @@ export class TeamManagementComponent implements OnDestroy {
   constructor(
     private readonly userService: UserService,
     private readonly fb: FormBuilder,
-    private readonly boardsSandbox: BoardsSandbox,
+    private readonly boardSandbox: BoardSandbox,
     private readonly cdRef: ChangeDetectorRef
   ) {
     this._watchBoardMembers();
@@ -33,10 +33,10 @@ export class TeamManagementComponent implements OnDestroy {
   }
 
   private _watchBoardMembers(): void {
-    this.boardsSandbox.boardMembers$
+    this.boardSandbox.users$
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((members) => {
-        this.usersSource.data = members;
+      .subscribe((users) => {
+        this.usersSource.data = users;
       });
   }
 
@@ -44,7 +44,7 @@ export class TeamManagementComponent implements OnDestroy {
     this.userSearchControl.valueChanges
       .pipe(
         debounceTime(500),
-        withLatestFrom(this.boardsSandbox.boardMembers$),
+        withLatestFrom(this.boardSandbox.users$),
         switchMap(([searchStr, members]) => {
           const emailsToExclude = members.map((member) => member.email);
           return this.userService.searchByEmail(searchStr, { email: 1, img: 1 },{ limit: 3 }, emailsToExclude);
@@ -75,13 +75,13 @@ export class TeamManagementComponent implements OnDestroy {
 
   inviteUsers(): void {
     if (this.userToInvite) {
-      this.boardsSandbox.inviteUsers([this.userToInvite]);
+      this.boardSandbox.inviteUsers([this.userToInvite]);
       this.userSearchControl.setValue('');
     }
   }
 
   removeUser(id: string): void {
-    this.boardsSandbox.removeUsers([id]);
+    this.boardSandbox.removeUsers([id]);
   }
 
   ngOnDestroy() {

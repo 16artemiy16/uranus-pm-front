@@ -9,10 +9,9 @@ import { ActivatedRoute } from '@angular/router';
 import { filter, take } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateTaskComponent } from '../../components/modals/create-task/create-task.component';
-import { ColumnsSandbox } from '../../store/sandboxes/columns.sandbox';
-import { BoardsSandbox } from '../../store/sandboxes/boards.sandbox';
 import { Title } from '@angular/platform-browser';
 import { BoardI } from '../../interfaces/board.interface';
+import { BoardSandbox } from './store/board.sandbox';
 
 @Component({
   selector: 'app-board',
@@ -21,28 +20,26 @@ import { BoardI } from '../../interfaces/board.interface';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BoardComponent implements OnInit, OnDestroy {
-  selectedTask$ = this.columnsSandbox.activeTask$;
+  selectedTask$ = this.boardSandbox.activeTask$;
 
   constructor(
-    private readonly boardsSandbox: BoardsSandbox,
+    private readonly boardSandbox: BoardSandbox,
     private readonly activatedRoute: ActivatedRoute,
     private readonly changeDetectorRef: ChangeDetectorRef,
     private readonly dialog: MatDialog,
-    private readonly columnsSandbox: ColumnsSandbox,
     private readonly title: Title
   ) {}
 
   private initColumns() {
     this.activatedRoute.params
+      .pipe(take(1))
       .subscribe(({ id }) => {
-        this.boardsSandbox.fetchBoards();
-        this.boardsSandbox.setSelectedBoardId(id);
-        this.columnsSandbox.fetchColumns(id);
+        this.boardSandbox.fetchBoard(id);
       });
   }
 
   private setTitle() {
-    this.boardsSandbox.selectedBoard$
+    this.boardSandbox.board$
       .pipe(
         filter(Boolean),
         take(1)
@@ -69,6 +66,6 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.columnsSandbox.setTaskFilterText('')
+    this.boardSandbox.resetTaskFilterText();
   }
 }

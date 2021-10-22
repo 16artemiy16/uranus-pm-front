@@ -33,7 +33,7 @@ export class BoardService {
     return this.http.post<BoardI>(url, boardDto);
   }
 
-  getBoard<T extends Partial<BoardI>>(boardId: string, fields: string[]): Observable<T> {
+  getBoard<T extends Partial<BoardI>>(boardId: string, fields: string[] = []): Observable<T> {
     const url = `${this.URL}/boards/${boardId}`;
     const params = { fields };
     return this.http.get<T>(url, { params });

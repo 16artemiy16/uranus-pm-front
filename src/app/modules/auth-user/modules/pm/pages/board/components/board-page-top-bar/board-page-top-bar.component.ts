@@ -1,11 +1,11 @@
 import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { debounceTime, takeUntil } from 'rxjs/operators';
-import { ColumnsSandbox } from '../../../../store/sandboxes/columns.sandbox';
 import { Observable, Subject } from 'rxjs';
-import { BoardsSandbox } from '../../../../store/sandboxes/boards.sandbox';
 import { BoardUserI } from '../../../../../../../../interfaces/board-user.interface';
+import { BoardSandbox } from '../../store/board.sandbox';
 
+// TODO: make OnPush STRATEGY!!!
 @Component({
   selector: 'app-board-page-top-bar',
   templateUrl: './board-page-top-bar.component.html',
@@ -13,23 +13,23 @@ import { BoardUserI } from '../../../../../../../../interfaces/board-user.interf
 })
 export class BoardPageTopBarComponent implements OnDestroy {
   readonly filterTextControl = this.fb.control('');
-  readonly tasksFilterAssignee$ = this.columnsSandbox.tasksFilterAssignee$;
-  readonly users$: Observable<BoardUserI[]> = this.boardsSandbox.boardMembers$;
+  readonly tasksFilterAssigneeId$ = this.boardSandbox.taskFilterAssigneeId$;
+  readonly users$: Observable<BoardUserI[]> = this.boardSandbox.users$;
 
   private readonly unsubscribe$: Subject<void> = new Subject<void>();
 
   constructor(
     private readonly fb: FormBuilder,
-    private readonly columnsSandbox: ColumnsSandbox,
-    private readonly boardsSandbox: BoardsSandbox
+    private readonly boardSandbox: BoardSandbox
   ) {
+    this.tasksFilterAssigneeId$.subscribe(console.log);
     this.filterTextControl.valueChanges
       .pipe(
         debounceTime(500),
         takeUntil(this.unsubscribe$)
       )
       .subscribe((text) => {
-        this.columnsSandbox.setTaskFilterText(text);
+        this.boardSandbox.setTaskFilterText(text);
       });
   }
 
@@ -39,7 +39,7 @@ export class BoardPageTopBarComponent implements OnDestroy {
   }
 
   filterTasksByUser(id: string) {
-    this.columnsSandbox.setTaskFilterAssigneeId(id);
+    this.boardSandbox.setTaskFilterAssigneeId(id);
   }
 
   ngOnDestroy() {

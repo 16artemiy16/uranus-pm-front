@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { BoardsSandbox } from '../../../store/sandboxes/boards.sandbox';
 import { BoardService } from '../../../../../../../services/board.service';
 import { BoardKeyValidator } from './validators/board-key.validator';
 import { TranslocoService } from '@ngneat/transloco';
+import { BoardsSandbox } from '../../../pages/boards/store/boards.sandbox';
 
 @Component({
   selector: 'app-create-board',

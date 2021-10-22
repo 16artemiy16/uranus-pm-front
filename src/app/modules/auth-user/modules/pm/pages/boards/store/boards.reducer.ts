@@ -1,9 +1,7 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { BoardI } from '../../../interfaces/board.interface';
 import { Action, createReducer, on } from '@ngrx/store';
-import { fetchBoardsSuccess } from './boards.actions';
-import { toggleFavouriteBoard } from '../../../store/actions/boards.actions';
-import { adapterBoards } from '../../../store/reducers/boards.reducer';
+import { fetchBoardsSuccess, toggleFavouriteBoard } from './boards.actions';
 
 export const FEATURE_NAME = 'Boards';
 
@@ -33,7 +31,7 @@ const boardsReducer = createReducer(
   on(toggleFavouriteBoard, (state, { boardId }) => {
     const board = selectEntities(state)[boardId];
     const changes = { id: board!._id, changes: { isFavourite: !board!.isFavourite } };
-    return adapterBoards.updateOne(changes, state);
+    return adapter.updateOne(changes, state);
   })
 );
 

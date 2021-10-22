@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { createBoard, fetchBoards, fetchBoardsSuccess } from './boards.actions';
+import { createBoard, fetchBoards, fetchBoardsSuccess, toggleFavouriteBoard } from './boards.actions';
 import { map, mergeMap, switchMap, tap } from 'rxjs/operators';
 import { BoardService } from '../../../../../../../services/board.service';
 import { TranslocoService } from '@ngneat/transloco';
 import { SnackService } from '../../../../../../common/snack/snack.service';
-import { toggleFavouriteBoard } from '../../../store/actions/boards.actions';
 
 @Injectable()
 export class BoardsEffects {

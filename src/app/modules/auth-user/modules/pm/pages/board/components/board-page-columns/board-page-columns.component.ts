@@ -1,35 +1,35 @@
 import { Component } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ColumnI } from '../../../../interfaces/column.interface';
-import { ColumnsSandbox } from '../../../../store/sandboxes/columns.sandbox';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { TaskI } from '../../../../interfaces/task.interface';
-import { BoardsSandbox } from '../../../../store/sandboxes/boards.sandbox';
 import { BoardUserI } from '../../../../../../../../interfaces/board-user.interface';
-import { tap } from 'rxjs/operators';
+import { BoardSandbox } from '../../store/board.sandbox';
 
+// TODO: set onPush STRATEGY!!!
 @Component({
   selector: 'app-board-page-columns',
   templateUrl: './board-page-columns.component.html',
   styleUrls: ['./board-page-columns.component.scss']
 })
 export class BoardPageColumnsComponent {
-  readonly columns$: Observable<ColumnI[]> = this.columnsSandbox.columns$;
+  readonly columns$: Observable<ColumnI[]> = this.boardSandbox.columns$;
 
   constructor(
-    private readonly columnsSandbox: ColumnsSandbox,
-    private readonly boardSandbox: BoardsSandbox
+    private readonly boardSandbox: BoardSandbox
   ) { }
 
   onDragToggle(flag: boolean) {
+    // TODO: use injected DOCUMENT
     document.body.style.setProperty('cursor', flag ? 'grabbing' : '', 'important');
   }
 
   onDropTask(event: CdkDragDrop<TaskI[]>, targetColumnId?: string) {
+    console.log('ON_DROP', event, targetColumnId)
     const isBetweenColumns = event.previousContainer !== event.container;
     const task = event.previousContainer.data[event.previousIndex];
 
-    this.columnsSandbox.moveTask(
+    this.boardSandbox.moveTask(
       task._id,
       event.currentIndex,
       isBetweenColumns ? targetColumnId : undefined
@@ -37,13 +37,10 @@ export class BoardPageColumnsComponent {
   }
 
   selectTask(taskId: string | null) {
-    this.columnsSandbox.setActiveTask(taskId);
+    this.boardSandbox.setTask(taskId);
   }
 
   getTaskAssignee$(task: TaskI): Observable<BoardUserI | null> {
-    const { assignee } = task;
-    return assignee
-      ? this.boardSandbox.getMemberById(assignee)
-      : of(null);
+    return this.boardSandbox.getTaskAssignee$(task._id);
   }
 }

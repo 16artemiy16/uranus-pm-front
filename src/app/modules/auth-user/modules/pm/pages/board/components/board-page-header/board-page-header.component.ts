@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { BoardsSandbox } from '../../../../store/sandboxes/boards.sandbox';
-import { map } from 'rxjs/operators';
 import { TeamManagementComponent } from '../../../../components/modals/team-management/team-management.component';
 import { MatDialog } from '@angular/material/dialog';
+import { BoardSandbox } from '../../store/board.sandbox';
 
+// TODO: set onPush STRATEGY!!!
 @Component({
   selector: 'app-board-page-header',
   template: `
@@ -46,13 +46,10 @@ import { MatDialog } from '@angular/material/dialog';
   `],
 })
 export class BoardPageHeaderComponent {
-  readonly boardName$: Observable<string | undefined> = this.boardsSandbox.selectedBoard$
-    .pipe(
-      map((board) => board?.name)
-    );
+  readonly boardName$: Observable<string | null> = this.boardSandbox.boardName$;
 
   constructor(
-    private readonly boardsSandbox: BoardsSandbox,
+    private readonly boardSandbox: BoardSandbox,
     private readonly dialog: MatDialog
   ) { }
 

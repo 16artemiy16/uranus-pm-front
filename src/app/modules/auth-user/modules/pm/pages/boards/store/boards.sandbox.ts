@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { fetchBoards } from './boards.actions';
+import { fetchBoards, createBoard, toggleFavouriteBoard } from './boards.actions';
 import { Observable } from 'rxjs';
 import { BoardI } from '../../../interfaces/board.interface';
 import { selectBoards } from './boards.selectors';
-import { toggleFavouriteBoard } from '../../../store/actions/boards.actions';
 
 @Injectable({ providedIn: 'root' })
 export class BoardsSandbox {
@@ -16,6 +15,10 @@ export class BoardsSandbox {
 
   fetchBoards() {
     this.store.dispatch(fetchBoards());
+  }
+
+  createBoard(dto: { name: string, key: string, description?: string }) {
+    this.store.dispatch(createBoard(dto));
   }
 
   toggleFavouriteBoard(boardId: string) {
