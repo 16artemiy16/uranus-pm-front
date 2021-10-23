@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { BoardService } from '../../../services/board.service';
+import { BoardService } from '@services/board.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateBoardComponent } from './components/create-board/create-board.component';
-import { BoardI } from '../../../layouts/auth/interfaces/board.interface';
+import { BoardI } from '@layouts/auth/interfaces/board.interface';
 import { Observable } from 'rxjs';
 import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import { Title } from '@angular/platform-browser';

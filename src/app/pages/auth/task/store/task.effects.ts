@@ -10,11 +10,11 @@ import {
   fetchUsersSuccess
 } from './task.actions';
 import { map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
-import { BoardService } from '../../../../services/board.service';
+import { BoardService } from '@services/board.service';
 import { Store } from '@ngrx/store';
 import { selectTask } from './task.selectors';
-import { TasksService } from '../../../../services/tasks.service';
-import { LastBoardI } from '../../../../layouts/auth/interfaces/last-boards.interface';
+import { TasksService } from '@services/tasks.service';
+import { LastBoardI } from '@layouts/auth/interfaces/last-boards.interface';
 
 @Injectable()
 export class TaskEffects {

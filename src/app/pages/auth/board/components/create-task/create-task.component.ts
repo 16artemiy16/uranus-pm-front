@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { BoardService } from '../../../../../services/board.service';
+import { BoardService } from '@services/board.service';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BoardSandbox } from '../../store/board.sandbox';
 

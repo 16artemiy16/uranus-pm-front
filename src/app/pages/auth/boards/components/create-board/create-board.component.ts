@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { BoardService } from '../../../../../services/board.service';
+import { BoardService } from '@services/board.service';
 import { BoardKeyValidator } from './validators/board-key.validator';
 import { TranslocoService } from '@ngneat/transloco';
 import { BoardsSandbox } from '../../store/boards.sandbox';

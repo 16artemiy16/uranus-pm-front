@@ -5,13 +5,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { SignInPageComponent } from '../../pages/guest/sign-in-page/sign-in-page.component';
-import { SignUpPageComponent } from '../../pages/guest/sign-up-page/sign-up-page.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TRANSLOCO_SCOPE, TranslocoModule } from '@ngneat/transloco';
-
-
+import { SignInPageComponent } from '@pages/guest/sign-in-page/sign-in-page.component';
+import { SignUpPageComponent } from '@pages/guest/sign-up-page/sign-up-page.component';
 
 @NgModule({
   declarations: [

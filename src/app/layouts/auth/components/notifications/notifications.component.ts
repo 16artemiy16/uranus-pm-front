@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { NotificationI } from '../../interfaces/notification.interface';
-import { UserService } from '../../../../services/user.service';
+import { UserService } from '@services/user.service';
 import { AuthUserSandbox } from '../../store/auth-user.sandbox';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';

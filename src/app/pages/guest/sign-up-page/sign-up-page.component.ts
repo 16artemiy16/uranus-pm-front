@@ -7,8 +7,8 @@ import {
   switchMap, take,
 } from 'rxjs/operators';
 import { combineLatest, Observable, of } from 'rxjs';
-import { UserService } from '../../../services/user.service';
-import { SnackService } from '../../../shared/services/snack/snack.service';
+import { UserService } from '@services/user.service';
+import { SnackService } from '@shared/services/snack/snack.service';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 

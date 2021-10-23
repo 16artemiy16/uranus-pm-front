@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { UserService } from '../../../../../services/user.service';
+import { UserService } from '@services/user.service';
 import { Title } from '@angular/platform-browser';
 
 @Component({

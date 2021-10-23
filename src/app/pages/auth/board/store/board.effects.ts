@@ -14,11 +14,11 @@ import {
   removeUsersSuccess
 } from './board.actions';
 import { catchError, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
-import { BoardService } from '../../../../services/board.service';
-import { BoardI } from '../../../../layouts/auth/interfaces/board.interface';
+import { BoardService } from '@services/board.service';
+import { BoardI } from '@layouts/auth/interfaces/board.interface';
 import { Store } from '@ngrx/store';
 import { selectBoard } from './board.selectors';
-import { TasksService } from '../../../../services/tasks.service';
+import { TasksService } from '@services/tasks.service';
 
 @Injectable()
 export class BoardEffects {

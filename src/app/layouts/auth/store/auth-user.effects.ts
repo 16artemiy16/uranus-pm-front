@@ -7,8 +7,8 @@ import {
   fetchNotifications, fetchNotificationsSuccess
 } from './auth-user.actions';
 import { map, switchMap } from 'rxjs/operators';
-import { AnalyticsService } from '../../../services/analytics.service';
-import { UserService } from '../../../services/user.service';
+import { AnalyticsService } from '@services/analytics.service';
+import { UserService } from '@services/user.service';
 
 @Injectable()
 export class AuthUserEffects {

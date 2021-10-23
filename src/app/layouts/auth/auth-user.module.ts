@@ -31,10 +31,10 @@ import { AuthUserEffects } from './store/auth-user.effects';
     RouterModule.forChild([
       {
         path: '', component: AuthLayoutComponent, children: [
-          { path: '', loadChildren: () => import('../../pages/auth/boards/boards-page.module').then(m => m.BoardsPageModule) },
-          { path: ':id', loadChildren: () => import('../../pages/auth/board/board.module').then(m => m.BoardModule) },
-          { path: ':id/task', loadChildren: () => import('../../pages/auth/task/task.module').then(m => m.TaskModule)},
-          { path: 'profile', loadChildren: () => import('../../pages/auth/profile/profile.module').then(m => m.ProfileModule) },
+          { path: '', loadChildren: () => import('@pages/auth/boards/boards-page.module').then(m => m.BoardsPageModule) },
+          { path: ':id', loadChildren: () => import('@pages/auth/board/board.module').then(m => m.BoardModule) },
+          { path: ':id/task', loadChildren: () => import('@pages/auth/task/task.module').then(m => m.TaskModule)},
+          { path: 'profile', loadChildren: () => import('@pages/auth/profile/profile.module').then(m => m.ProfileModule) },
           { path: '**', redirectTo: '/boards' }
         ]
       }

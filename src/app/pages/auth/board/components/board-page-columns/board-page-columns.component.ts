@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ColumnI } from '../../../../../layouts/auth/interfaces/column.interface';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
-import { TaskI } from '../../../../../layouts/auth/interfaces/task.interface';
-import { BoardUserI } from '../../../../../shared/models/interfaces/board-user.interface';
 import { BoardSandbox } from '../../store/board.sandbox';
+import { ColumnI } from '@layouts/auth/interfaces/column.interface';
+import { TaskI } from '@layouts/auth/interfaces/task.interface';
+import { BoardUserI } from '@shared/models/interfaces/board-user.interface';
 
 // TODO: set onPush STRATEGY!!!
 @Component({

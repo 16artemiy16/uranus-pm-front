@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { UserService } from '../../../../../services/user.service';
+import { UserService } from '@services/user.service';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { debounceTime, startWith, switchMap, takeUntil, withLatestFrom } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { BoardUserI, BoardUserToInviteI } from '../../../../../shared/models/interfaces/board-user.interface';
-import { BoardUserRoleEnum } from '../../../../../shared/models/enums/board-user-role.enum';
+import { BoardUserI, BoardUserToInviteI } from '@shared/models/interfaces/board-user.interface';
+import { BoardUserRoleEnum } from '@shared/models/enums/board-user-role.enum';
 import { BoardSandbox } from '../../store/board.sandbox';
 
 @Component({

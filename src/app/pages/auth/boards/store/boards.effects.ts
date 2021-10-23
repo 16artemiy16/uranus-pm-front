@@ -3,9 +3,9 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { createBoard, fetchBoards, fetchBoardsSuccess, toggleFavouriteBoard } from './boards.actions';
 import { map, mergeMap, switchMap, tap } from 'rxjs/operators';
-import { BoardService } from '../../../../services/board.service';
+import { BoardService } from '@services/board.service';
 import { TranslocoService } from '@ngneat/transloco';
-import { SnackService } from '../../../../shared/services/snack/snack.service';
+import { SnackService } from '@shared/services/snack/snack.service';
 
 @Injectable()
 export class BoardsEffects {

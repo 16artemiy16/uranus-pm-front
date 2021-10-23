@@ -15,7 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TRANSLOCO_SCOPE, TranslocoModule } from '@ngneat/transloco';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { SelectorModule } from '../../../shared/components/selector/selector.module';
+import { SelectorModule } from '@shared/components/selector/selector.module';
 import { MatMenuModule } from '@angular/material/menu';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatCardModule } from '@angular/material/card';

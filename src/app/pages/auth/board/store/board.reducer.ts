@@ -11,11 +11,11 @@ import {
   setTaskFilterText,
   setTaskFilterAssigneeId
 } from './board.actions';
-import { BoardI } from '../../../../layouts/auth/interfaces/board.interface';
+import { BoardI } from '@layouts/auth/interfaces/board.interface';
 import { moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { BoardUserI } from '../../../../shared/models/interfaces/board-user.interface';
-import { BoardUserStatusEnum } from '../../../../shared/models/enums/board-user-status.enum';
-import { BoardUserRoleEnum } from '../../../../shared/models/enums/board-user-role.enum';
+import { BoardUserI } from '@shared/models/interfaces/board-user.interface';
+import { BoardUserStatusEnum } from '@shared/models/enums/board-user-status.enum';
+import { BoardUserRoleEnum } from '@shared/models/enums/board-user-role.enum';
 
 export const FEATURE_NAME = 'Board';
 

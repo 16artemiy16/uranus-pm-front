@@ -1,4 +1,4 @@
-import { BoardService } from '../../../../../../services/board.service';
+import { BoardService } from '@services/board.service';
 import { AbstractControl, AsyncValidatorFn, ValidationErrors } from '@angular/forms';
 import { Observable, timer } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';

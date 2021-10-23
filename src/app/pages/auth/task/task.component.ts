@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { filter, map, switchMap, take } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
-import { TaskI } from '../../../layouts/auth/interfaces/task.interface';
+import { filter, take } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { TaskI } from '@layouts/auth/interfaces/task.interface';
 import { Title } from '@angular/platform-browser';
 import { TaskSandbox } from './store/task.sandbox';
-import { BoardService } from '../../../services/board.service';
-import { BoardUserI } from '../../../shared/models/interfaces/board-user.interface';
-import { LastBoardI } from '../../../layouts/auth/interfaces/last-boards.interface';
+import { BoardService } from '@services/board.service';
+import { BoardUserI } from '@shared/models/interfaces/board-user.interface';
+import { LastBoardI } from '@layouts/auth/interfaces/last-boards.interface';
 
 @Component({
   selector: 'app-task',

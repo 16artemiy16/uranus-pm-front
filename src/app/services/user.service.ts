@@ -4,9 +4,9 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import jwtDecode from 'jwt-decode';
 import { Router } from '@angular/router';
-import { UserI } from '../shared/models/interfaces/user.interface';
-import { HttpRequestCache } from '../shared/decorators/http-request-cache.decorator';
-import { NotificationI } from '../layouts/auth/interfaces/notification.interface';
+import { UserI } from '@shared/models/interfaces/user.interface';
+import { HttpRequestCache } from '@shared/decorators/http-request-cache.decorator';
+import { NotificationI } from '@layouts/auth/interfaces/notification.interface';
 
 @Injectable({
   providedIn: 'root'

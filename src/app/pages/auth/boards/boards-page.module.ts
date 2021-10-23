@@ -16,13 +16,13 @@ import { FEATURE_NAME, reducer } from './store/boards.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { BoardsEffects } from './store/boards.effects';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { SnackModule } from '../../../shared/services/snack/snack.module';
+import { SnackModule } from '@shared/services/snack/snack.module';
 import { CreateBoardComponent } from './components/create-board/create-board.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
-import { ToUppercaseModule } from '../../../shared/directives/to-uppercase.module';
+import { ToUppercaseModule } from '@shared/directives/to-uppercase.module';
 
 @NgModule({
   imports: [

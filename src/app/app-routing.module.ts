@@ -6,12 +6,12 @@ import { GuestGuard } from './guards/guest.guard';
 const routes: Routes = [
   {
     path: 'guest',
-    loadChildren: () => import('./layouts/guest/guest-user.module').then((m) => m.GuestUserModule),
+    loadChildren: () => import('@layouts/guest/guest-user.module').then((m) => m.GuestUserModule),
     canLoad: [GuestGuard]
   },
   {
     path: '',
-    loadChildren: () => import('./layouts/auth/auth-user.module').then((m) => m.AuthUserModule),
+    loadChildren: () => import('@layouts/auth/auth-user.module').then((m) => m.AuthUserModule),
     canLoad: [AuthGuard]
   },
   {

@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { selectAssignee, selectBoardInfo, selectTask, selectUsersOptions } from './task.selectors';
 import { Observable } from 'rxjs';
-import { TaskI } from '../../../../layouts/auth/interfaces/task.interface';
+import { TaskI } from '@layouts/auth/interfaces/task.interface';
 import { assign, fetchTask } from './task.actions';
-import { AnalyticsService } from '../../../../services/analytics.service';
+import { AnalyticsService } from '@services/analytics.service';
 import { take } from 'rxjs/operators';
-import { BoardUserI } from '../../../../shared/models/interfaces/board-user.interface';
-import { LastBoardI } from '../../../../layouts/auth/interfaces/last-boards.interface';
+import { BoardUserI } from '@shared/models/interfaces/board-user.interface';
+import { LastBoardI } from '@layouts/auth/interfaces/last-boards.interface';
 
 @Injectable({ providedIn: 'root' })
 export class TaskSandbox {
