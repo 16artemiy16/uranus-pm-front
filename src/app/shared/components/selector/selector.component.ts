@@ -33,8 +33,6 @@ export class SelectorComponent implements OnChanges, ControlValueAccessor {
   @Input() fallbackText: string = '';
   @Input() fallbackImg: string | null = null;
 
-  @Output() onSelect: EventEmitter<string | null> = new EventEmitter<string | null>();
-
   @ViewChild('searchInput') searchInput: ElementRef | undefined;
 
   sortedOptions: Option[] = [this.fallbackOption];

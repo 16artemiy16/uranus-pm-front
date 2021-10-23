@@ -11,7 +11,7 @@ import { BoardSandbox } from '../../store/board.sandbox';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreateTaskComponent {
-  @Output() onCreate: EventEmitter<void> = new EventEmitter<void>();
+  @Output() created: EventEmitter<void> = new EventEmitter<void>();
 
   readonly taskForm = this.fb.group({
     title: ['', [Validators.required]],
@@ -31,7 +31,7 @@ export class CreateTaskComponent {
       const { boardId } = this.data;
       // TODO: refactor it, perform via store
       this.boardService.createTask(boardId, title, body).subscribe(a => {
-        this.onCreate.emit();
+        this.created.emit();
         this.boardSandbox.fetchBoard(boardId);
       });
     }

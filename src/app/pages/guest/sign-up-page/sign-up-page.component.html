@@ -34,7 +34,7 @@
     transloco="guest.SignUp"
     mat-raised-button
     color="primary"
-    [disabled]="!(areStepsPassed$ | async)"
+    [disabled]="(areStepsPassed$ | async) === false"
     (click)="signUp()"
   ></button>
   <div class="or" transloco="guest.OR"></div>

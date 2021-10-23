@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import {
   debounceTime,
   distinctUntilChanged, filter,
-  map,
+  map, startWith,
   switchMap, take,
 } from 'rxjs/operators';
 import { combineLatest, Observable, of } from 'rxjs';
@@ -73,7 +73,8 @@ export class SignUpPageComponent {
   areStepsPassed$ = combineLatest(
     this.steps.map((step) => step.isSuccess$)
   ).pipe(
-    map((isSuccessList) => isSuccessList.every((isSuccess) => isSuccess))
+    map((isSuccessList) => isSuccessList.every((isSuccess) => isSuccess)),
+    startWith(false)
   );
 
   constructor(

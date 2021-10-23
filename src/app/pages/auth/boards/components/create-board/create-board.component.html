@@ -9,7 +9,7 @@
 
     <mat-form-field appearance="legacy">
       <mat-label>{{ 'auth.boardModal.Key' | transloco }}</mat-label>
-      <input matInput formControlName="key" toUppercase />
+      <input matInput formControlName="key" appToUppercase />
       <mat-hint>{{ 'auth.boardModal.keyHint' | transloco }}</mat-hint>
       <mat-error *ngIf="keyOccupiedError">{{ keyOccupiedError }}</mat-error>
     </mat-form-field>

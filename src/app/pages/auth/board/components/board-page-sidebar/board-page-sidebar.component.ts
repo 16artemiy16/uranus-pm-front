@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { TaskI } from '../../../../../layouts/auth/interfaces/task.interface';
-import { BoardUserI } from '../../../../../shared/models/interfaces/board-user.interface';
+import { TaskI } from '@layouts/auth/interfaces/task.interface';
+import { BoardUserI } from '@shared/models/interfaces/board-user.interface';
 import { BoardSandbox } from '../../store/board.sandbox';
 
 // TODO: make onPush STRATEGY!!!

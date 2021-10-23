@@ -60,7 +60,7 @@ export class BoardComponent implements OnInit, OnDestroy {
         boardId: this.activatedRoute.snapshot.params.id
       }
     });
-    dialogRef.componentInstance.onCreate
+    dialogRef.componentInstance.created
       .pipe(take(1))
       .subscribe(() => null)
   }

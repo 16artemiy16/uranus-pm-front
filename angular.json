@@ -103,9 +103,21 @@
             ],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
-  "defaultProject": "uranus-pm-front"
+  "defaultProject": "uranus-pm-front",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }
