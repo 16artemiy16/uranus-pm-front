@@ -1,8 +1,8 @@
 <nav class="breadcrumbs">
-  <a routerLink="../../../">Boards</a> /
+  <a [routerLink]="boardsLink">Boards</a> /
   <a
     *ngIf="board$ | async as board"
-    routerLink="../../../{{ board._id }}"
+    [routerLink]="board | boardRoute"
   >
     {{ board.name }}
   </a> /

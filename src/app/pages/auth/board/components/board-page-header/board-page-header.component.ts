@@ -3,12 +3,13 @@ import { Observable } from 'rxjs';
 import { TeamManagementComponent } from '../team-management/team-management.component';
 import { MatDialog } from '@angular/material/dialog';
 import { BoardSandbox } from '../../store/board.sandbox';
+import { RoutingService } from '@services/routing.service';
 
 // TODO: set onPush STRATEGY!!!
 @Component({
   selector: 'app-board-page-header',
   template: `
-    <a mat-button mat-stroked-button color="primary" routerLink=".." class="back-btn"><--</a>
+    <a mat-button mat-stroked-button color="primary" [routerLink]="boardsLink" class="back-btn"><--</a>
     <div class="board-name">{{ boardName$ | async }}</div>
     <span class="flex-spacer"></span>
     <button
@@ -33,24 +34,26 @@ import { BoardSandbox } from '../../store/board.sandbox';
       padding: 0 2em;
       display: flex;
       align-items: center;
+    }
 
-      .board-name {
-        font-size: 2em;
-        margin-left: 1.25em;
-      }
+    .board-name {
+      font-size: 2em;
+      margin-left: 1.25em;
+    }
 
-      .more-btn {
-        font-size: 2.5em;
-      }
+    .more-btn {
+      font-size: 2.5em;
     }
   `],
 })
 export class BoardPageHeaderComponent {
+  readonly boardsLink: string = this.routingService.routes.boards;
   readonly boardName$: Observable<string | null> = this.boardSandbox.boardName$;
 
   constructor(
     private readonly boardSandbox: BoardSandbox,
-    private readonly dialog: MatDialog
+    private readonly dialog: MatDialog,
+    private readonly routingService: RoutingService
   ) { }
 
   openTeamManagement() {

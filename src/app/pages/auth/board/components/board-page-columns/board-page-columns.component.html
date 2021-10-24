@@ -28,9 +28,8 @@
           />
         </div>
         <div class="task__number">
-          <a [routerLink]="['.', 'task', task.boardId + '-' + task.number]">{{ task.boardId }}-{{ task.number }}</a>
+          <a [routerLink]="task | taskRoute">{{ task._id }}</a>
         </div>
-
       </mat-card>
     </div>
   </div>

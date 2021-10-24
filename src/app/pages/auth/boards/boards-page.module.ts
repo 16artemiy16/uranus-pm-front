@@ -23,6 +23,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { ToUppercaseModule } from '@shared/directives/to-uppercase.module';
+import { BoardRouteModule } from '@shared/pipes/board-route/board-route.module';
 
 @NgModule({
   imports: [
@@ -45,7 +46,8 @@ import { ToUppercaseModule } from '@shared/directives/to-uppercase.module';
     SnackModule,
     MatFormFieldModule,
     MatDialogModule,
-    MatInputModule
+    MatInputModule,
+    BoardRouteModule
   ],
   providers: [
     { provide: TRANSLOCO_SCOPE, useValue: 'auth' }

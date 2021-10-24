@@ -29,6 +29,7 @@ import { BoardEffects } from './store/board.effects';
 import { MatButtonModule } from '@angular/material/button';
 import { CreateTaskComponent } from './components/create-task/create-task.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { TaskRouteModule } from '@shared/pipes/task-route/task-route.module';
 
 @NgModule({
   imports: [
@@ -40,6 +41,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     CommonModule,
     SelectorModule,
     TranslocoModule,
+    TaskRouteModule,
     ReactiveFormsModule,
     FormsModule,
     MatTooltipModule,

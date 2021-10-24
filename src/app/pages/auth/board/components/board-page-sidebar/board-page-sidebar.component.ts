@@ -15,11 +15,6 @@ export class BoardPageSidebarComponent {
   selectedTask$: Observable<TaskI | null> = this.boardSandbox.activeTask$;
   assignee$: Observable<BoardUserI | null> = this.boardSandbox.activeTaskAssignee$;
 
-  // TODO: think about to move to a Pipe
-  taskLink$: Observable<string> = this.selectedTask$.pipe(
-    map((task) => task ? `./task/${task.boardId}-${task.number}` : '')
-  );
-
   usersOptions$: Observable<{ id: string, text: string, img?: string }[]> = this.boardSandbox.users$.pipe(
     map((members) => {
       return members.map(({ img, _id: id, email: text }) => {

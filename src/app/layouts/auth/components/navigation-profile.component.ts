@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { UserService } from '@services/user.service';
+import { RoutingService } from '@services/routing.service';
 
 @Component({
   selector: 'app-navigation-profile',
@@ -15,7 +16,7 @@ import { UserService } from '@services/user.service';
     </div>
 
     <mat-menu #profileMenu="matMenu">
-      <button mat-menu-item [routerLink]="['profile']">
+      <button mat-menu-item [routerLink]="profileLink">
         <mat-icon>person</mat-icon>
         <span>{{ 'auth.Profile' | transloco }}</span>
       </button>
@@ -39,7 +40,11 @@ import { UserService } from '@services/user.service';
   `]
 })
 export class NavigationProfileComponent {
-  constructor(private readonly userService: UserService) {}
+  readonly profileLink: string = this.routingService.routes.profile;
+  constructor(
+    private readonly userService: UserService,
+    private readonly routingService: RoutingService
+  ) {}
 
   logOut() {
     this.userService.logOut();

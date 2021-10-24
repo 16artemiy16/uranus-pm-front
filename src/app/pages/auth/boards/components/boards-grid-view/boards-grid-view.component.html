@@ -7,7 +7,7 @@
     <div class="board__description">{{ board.description }}</div>
   </mat-card-content>
   <mat-card-actions>
-    <a mat-button mat-stroked-button color="primary" [routerLink]="board._id">
+    <a mat-button mat-stroked-button color="primary" [routerLink]="board | boardRoute">
       {{ 'auth.Join' | transloco }}
     </a>
 

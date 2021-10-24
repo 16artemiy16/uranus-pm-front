@@ -1,5 +1,5 @@
-<div class="actions">
-  <a mat-icon-button aria-label="Open in new tab" [routerLink]="taskLink$ | async">
+<div class="actions" *ngIf="selectedTask$ | async as task">
+  <a mat-icon-button aria-label="Open" [routerLink]="task | taskRoute">
     <mat-icon>open_in_new</mat-icon>
   </a>
 

@@ -15,7 +15,7 @@
   <button mat-raised-button color="primary" (click)="signIn()" transloco="guest.SignIn"></button>
   <span>
     {{ 'guest.textOrSignUp.or' | transloco }}
-    <a routerLink="../sign-up">{{ 'guest.textOrSignUp.SignUp' | transloco }}</a>
+    <a [routerLink]="signUpLink">{{ 'guest.textOrSignUp.SignUp' | transloco }}</a>
     {{ 'guest.textOrSignUp.ifYou' | transloco }}
   </span>
 </form>

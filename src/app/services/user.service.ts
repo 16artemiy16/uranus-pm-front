@@ -3,10 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import jwtDecode from 'jwt-decode';
-import { Router } from '@angular/router';
 import { UserI } from '@shared/models/interfaces/user.interface';
 import { HttpRequestCache } from '@shared/decorators/http-request-cache.decorator';
 import { NotificationI } from '@layouts/auth/interfaces/notification.interface';
+import { RoutingService } from '@services/routing.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,7 @@ export class UserService {
 
   constructor(
     private readonly http: HttpClient,
-    private readonly router: Router
+    private readonly routingService: RoutingService
   ) { }
 
   get token(): string | null {
@@ -55,7 +55,7 @@ export class UserService {
 
   logOut(): void {
     localStorage.removeItem('token');
-    this.router.navigate(['guest'])
+    this.routingService.goTo('guest');
   }
 
   @HttpRequestCache()

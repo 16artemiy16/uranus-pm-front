@@ -7,6 +7,7 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UserService } from '@services/user.service';
+import { RoutingService } from '@services/routing.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ import { UserService } from '@services/user.service';
 export class GuestGuard implements CanLoad {
   constructor(
     private readonly userService: UserService,
-    private readonly router: Router
+    private readonly routingService: RoutingService
   ) {}
 
   canLoad(
@@ -24,7 +25,7 @@ export class GuestGuard implements CanLoad {
     if (!this.userService.isAuthed) {
       return true;
     }
-    this.router.navigate(['auth']);
+    this.routingService.goTo('boards');
     return false;
   }
 

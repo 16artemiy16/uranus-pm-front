@@ -8,6 +8,7 @@ import { TaskSandbox } from './store/task.sandbox';
 import { BoardService } from '@services/board.service';
 import { BoardUserI } from '@shared/models/interfaces/board-user.interface';
 import { LastBoardI } from '@layouts/auth/interfaces/last-boards.interface';
+import { RoutingService } from '@services/routing.service';
 
 @Component({
   selector: 'app-task',
@@ -16,16 +17,18 @@ import { LastBoardI } from '@layouts/auth/interfaces/last-boards.interface';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TaskComponent {
-  task$: Observable<TaskI | null> = this.taskSandbox.task$;
-  board$: Observable<LastBoardI | null> = this.taskSandbox.boardInfo$;
-  assignee$: Observable<BoardUserI | null> = this.taskSandbox.assignee$;
-  assignUserOptions$: Observable<{ id: string, text: string, img?: string }[]> = this.taskSandbox.assignUserOptions$;
+  readonly boardsLink: string = this.routingService.routes.boards;
+  readonly task$: Observable<TaskI | null> = this.taskSandbox.task$;
+  readonly board$: Observable<LastBoardI | null> = this.taskSandbox.boardInfo$;
+  readonly assignee$: Observable<BoardUserI | null> = this.taskSandbox.assignee$;
+  readonly assignUserOptions$: Observable<{ id: string, text: string, img?: string }[]> = this.taskSandbox.assignUserOptions$;
 
   constructor(
     private readonly taskSandbox: TaskSandbox,
     private readonly boardService: BoardService,
     private readonly route: ActivatedRoute,
-    private readonly title: Title
+    private readonly title: Title,
+    private readonly routingService: RoutingService
   ) {
     const id = this.route.snapshot.paramMap.get('taskId') as string;
     this.taskSandbox.fetchTask(id);

@@ -11,7 +11,7 @@
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef> {{ 'auth.boardModal.Name' | transloco }} </th>
     <td mat-cell *matCellDef="let element">
-      <a [routerLink]="element._id">{{element.name}} </a>
+      <a [routerLink]="element._id | boardRoute">{{element.name}} </a>
     </td>
   </ng-container>
 
@@ -41,7 +41,7 @@
   <ng-container matColumnDef="actions">
      <th mat-header-cell *matHeaderCellDef> {{ 'auth.Actions' | transloco }} </th>
     <td mat-cell *matCellDef="let element">
-      <a [routerLink]="element._id">
+      <a [routerLink]="element | boardRoute">
         {{ 'auth.Join' | transloco }}
       </a>
     </td>

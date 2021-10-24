@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { CanLoad, Route, Router, UrlSegment, UrlTree } from '@angular/router';
+import { CanLoad, Route, UrlSegment, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UserService } from '@services/user.service';
+import { RoutingService } from '@services/routing.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { UserService } from '@services/user.service';
 export class AuthGuard implements CanLoad {
   constructor(
     private readonly userService: UserService,
-    private readonly router: Router
+    private readonly routingService: RoutingService
   ) {}
 
   canLoad(
@@ -20,7 +21,7 @@ export class AuthGuard implements CanLoad {
       return true;
     }
 
-    this.router.navigate(['guest']);
+    this.routingService.goTo('guest');
     return false;
   }
 }

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { BoardI } from '../../../../../layouts/auth/interfaces/board.interface';
+import { BoardI } from '@layouts/auth/interfaces/board.interface';
 import { BoardsSandbox } from '../../store/boards.sandbox';
 
 @Component({

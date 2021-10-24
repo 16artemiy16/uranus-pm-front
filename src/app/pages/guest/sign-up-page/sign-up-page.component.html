@@ -38,7 +38,7 @@
     (click)="signUp()"
   ></button>
   <div class="or" transloco="guest.OR"></div>
-  <a routerLink="../sign-in">
+  <a [routerLink]="signInLink">
     <button mat-raised-button color="primary" transloco="guest.SignIn"></button>
   </a>
 </form>

@@ -11,6 +11,7 @@ import { UserService } from '@services/user.service';
 import { SnackService } from '@shared/services/snack/snack.service';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { RoutingService } from '@services/routing.service';
 
 @Component({
   selector: 'app-sign-up-page',
@@ -19,6 +20,7 @@ import { Title } from '@angular/platform-browser';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SignUpPageComponent {
+  readonly signInLink: string = this.routingService.routes.signIn;
   readonly signUpForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
@@ -82,7 +84,8 @@ export class SignUpPageComponent {
     private readonly userService: UserService,
     private readonly snack: SnackService,
     private readonly router: Router,
-    private readonly title: Title
+    private readonly title: Title,
+    private readonly routingService: RoutingService
   ) {
     this.title.setTitle('Sign Up')
   }

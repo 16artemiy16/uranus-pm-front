@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { AuthUserSandbox } from '../../../store/auth-user.sandbox';
+import { AuthUserSandbox } from '../store/auth-user.sandbox';
 import { Observable } from 'rxjs';
-import { LastTaskI } from '../../../interfaces/last-task.interface';
+import { LastTaskI } from '../interfaces/last-task.interface';
+import { RoutingService } from '@services/routing.service';
 
 @Component({
   selector: 'app-navigation-tasks',
@@ -16,7 +17,7 @@ import { LastTaskI } from '../../../interfaces/last-task.interface';
       <button
         *ngFor="let task of lastTasks$ | async"
         mat-menu-item
-        [routerLink]="['/', task.boardId, 'task', task.boardId + '-' + task.number]"
+        [routerLink]="task | taskRoute"
       >
         {{ task.title }}
       </button>
