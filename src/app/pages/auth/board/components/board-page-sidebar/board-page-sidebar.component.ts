@@ -1,15 +1,15 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { TaskI } from '@layouts/auth/interfaces/task.interface';
 import { BoardUserI } from '@shared/models/interfaces/board-user.interface';
 import { BoardSandbox } from '../../store/board.sandbox';
 
-// TODO: make onPush STRATEGY!!!
 @Component({
   selector: 'app-board-page-sidebar',
   templateUrl: './board-page-sidebar.component.html',
-  styleUrls: ['./board-page-sidebar.component.scss']
+  styleUrls: ['./board-page-sidebar.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BoardPageSidebarComponent {
   selectedTask$: Observable<TaskI | null> = this.boardSandbox.activeTask$;

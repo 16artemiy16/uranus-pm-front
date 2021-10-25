@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { BoardService } from '@services/board.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateBoardComponent } from './components/create-board/create-board.component';
@@ -11,7 +11,8 @@ import { BoardsSandbox } from './store/boards.sandbox';
 @Component({
   selector: 'app-boards-page',
   templateUrl: './boards-page.component.html',
-  styleUrls: ['./boards-page.component.scss']
+  styleUrls: ['./boards-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BoardsPageComponent {
   boards$: Observable<BoardI[]> = this.boardsSandbox.boards$;

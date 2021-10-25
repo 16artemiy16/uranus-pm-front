@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '@services/user.service';
 import { Title } from '@angular/platform-browser';
@@ -7,7 +7,8 @@ import { RoutingService } from '@services/routing.service';
 @Component({
   selector: 'app-sign-in-page',
   templateUrl: './sign-in-page.component.html',
-  styleUrls: ['./sign-in-page.component.scss']
+  styleUrls: ['./sign-in-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SignInPageComponent {
   readonly signUpLink = this.routingService.routes.signUp;

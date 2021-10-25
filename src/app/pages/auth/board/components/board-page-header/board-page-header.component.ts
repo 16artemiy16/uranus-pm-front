@@ -1,13 +1,13 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TeamManagementComponent } from '../team-management/team-management.component';
 import { MatDialog } from '@angular/material/dialog';
 import { BoardSandbox } from '../../store/board.sandbox';
 import { RoutingService } from '@services/routing.service';
 
-// TODO: set onPush STRATEGY!!!
 @Component({
   selector: 'app-board-page-header',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <a mat-button mat-stroked-button color="primary" [routerLink]="boardsLink" class="back-btn"><--</a>
     <div class="board-name">{{ boardName$ | async }}</div>

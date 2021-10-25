@@ -1,15 +1,15 @@
-import { Component, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
-import { BoardUserI } from '../../../../../shared/models/interfaces/board-user.interface';
+import { BoardUserI } from '@shared/models/interfaces/board-user.interface';
 import { BoardSandbox } from '../../store/board.sandbox';
 
-// TODO: make OnPush STRATEGY!!!
 @Component({
   selector: 'app-board-page-top-bar',
   templateUrl: './board-page-top-bar.component.html',
-  styleUrls: ['./board-page-top-bar.component.scss']
+  styleUrls: ['./board-page-top-bar.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BoardPageTopBarComponent implements OnDestroy {
   readonly filterTextControl = this.fb.control('');

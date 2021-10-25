@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { BoardI } from '../../../../../layouts/auth/interfaces/board.interface';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { BoardI } from '@layouts/auth/interfaces/board.interface';
 import { BoardsSandbox } from '../../store/boards.sandbox';
 
 @Component({
@@ -9,7 +9,8 @@ import { BoardsSandbox } from '../../store/boards.sandbox';
       <mat-icon class="fav-icon" [class.active]="board.isFavourite">star_rate</mat-icon>
     </button>
   `,
-  styleUrls: ['./board-favourite-btn.component.scss']
+  styleUrls: ['./board-favourite-btn.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BoardFavouriteBtnComponent {
   @Input() board: BoardI | undefined;

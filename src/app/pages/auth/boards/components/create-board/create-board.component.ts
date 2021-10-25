@@ -5,10 +5,13 @@ import { BoardKeyValidator } from './validators/board-key.validator';
 import { TranslocoService } from '@ngneat/transloco';
 import { BoardsSandbox } from '../../store/boards.sandbox';
 
+// eslint-disable-next-line @angular-eslint/prefer-on-push-component-change-detection
 @Component({
   selector: 'app-create-board',
   templateUrl: './create-board.component.html',
-  styleUrls: ['./create-board.component.scss']
+  styleUrls: ['./create-board.component.scss'],
+  // TODO: think about an Angular issue. invalid and pending + onPush not working
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreateBoardComponent {
   readonly boardForm = this.fb.group({
